@@ -1,0 +1,72 @@
+{
+  "kind": "collectionType",
+  "collectionName": "diningwednesdays",
+  "info": {
+    "singularName": "diningwednesday",
+    "pluralName": "diningwednesdays",
+    "displayName": "diningwednesday",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "typeEn": {
+      "type": "string"
+    },
+    "serviceEn": {
+      "type": "string"
+    },
+    "hourStart": {
+      "type": "string"
+    },
+    "hourEnd": {
+      "type": "string"
+    },
+    "membersEn": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "diningImg": {
+      "type": "string"
+    },
+    "serviceEs": {
+      "type": "string"
+    },
+    "typeEs": {
+      "type": "string"
+    },
+    "membersEs": {
+      "type": "string"
+    },
+    "menuImgEn": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "menuImgEs": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "descEn": {
+      "type": "text"
+    },
+    "descEs": {
+      "type": "text"
+    }
+  }
+}

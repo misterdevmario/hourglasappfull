@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bartuestadies",
+  "info": {
+    "singularName": "bartuestady",
+    "pluralName": "bartuestadies",
+    "displayName": "bartuesday",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "hourStart": {
+      "type": "string"
+    },
+    "hourEnd": {
+      "type": "string"
+    },
+    "barImg": {
+      "type": "string"
+    },
+    "menuImgEn": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "menuImgEs": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "descEn": {
+      "type": "text"
+    },
+    "descEs": {
+      "type": "text"
+    }
+  }
+}
