@@ -1,4 +1,5 @@
 'use client'
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   getActivities,
   getActivtiesGallery,
@@ -25,7 +26,8 @@ import {
   getFlyersTitle,
   putFlyersTitle
 } from "@/lib/api";
-import { createContext, useContext, useEffect, useState } from "react";
+
+
 
 const infoContext = createContext();
 
@@ -59,9 +61,19 @@ export const Provider = ({ children }) => {
   });
 
 
+  const [daysweek, setDaysWeek] = useState(
+    {
+      mondayActivitiies:[]
+    }
+  )
+
 
   useEffect(() => {
     (async () => {
+
+
+      const activitiesMondayResponse = await getMondayActivities()
+
       //Activities
 
       const activitiesResponse = await getActivities();
@@ -98,6 +110,7 @@ export const Provider = ({ children }) => {
 
 
       setInfo({
+        mondayActivitiies: activitiesMondayResponse,
         activities: activitiesResponse.data,
         activitiesGallery: images.toString().split(","),
         staff: staffResponse.data,
@@ -194,6 +207,7 @@ export const Provider = ({ children }) => {
     const res = deleteFlyers(id);
     setActivityGallery(res);
   };
+
 
   return (
     <infoContext.Provider

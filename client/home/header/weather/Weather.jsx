@@ -64,6 +64,7 @@ const Weather = () => {
               alt="weather"
               width={100}
               height={100}
+              priority
             />
           </div>
           <div className={styles.temmaxmin}>
