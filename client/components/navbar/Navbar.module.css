@@ -11,9 +11,19 @@
   color: #fff;
 }
 
+.container select{
+  background-color: var(--secondary-color);
+}
+
+.container option {
+  font-weight: bolder;
+}
+
+
 .logo {
   width: 10%;
   height: auto;
+  display: flex;
 }
 .logo img {
   height: 8vh;

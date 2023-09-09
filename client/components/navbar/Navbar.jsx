@@ -1,14 +1,15 @@
-  "use client";
+"use client";
 
 import Link from "next/link";
 import styles from "./Navbar.module.css";
-import { usePathname,useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { FaRegHourglass } from "react-icons/fa";
 import { useState } from "react";
 import { BsMenuDown, BsMenuUp } from "react-icons/bs";
 import axios from "axios";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const links = [
   "ACTIVIDADES",
@@ -18,27 +19,57 @@ const links = [
   "BARS",
   "FLYERS",
 ];
+const days = [
+  "LUNES",
+  "MARTES",
+  "MIERCOLES",
+  "JUEVES",
+  "VIERNES",
+  "SABADO",
+  "DOMINGO",
+];
 
 const Navbar = () => {
-  const navigate=useRouter()
+  const navigate = useRouter();
   const router = usePathname();
   const [toggle, setToggle] = useState(false);
 
-const logOut = async() => {
-const response =  await axios.post('/api/logout')
-navigate.push('/login')
-}
+  const logOut = async () => {
+    const response = await axios.post("/api/logout");
+    navigate.push("/login");
+  };
+  let selectedDay = router
+    .replace("/editar/actividades/", "")
+    .toLocaleUpperCase();
 
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
         <Image src="/logo.svg" alt="logo" width={120} height={120} priority />
+        <select
+          name="s"
+          id="s"
+          onChange={(e) =>
+            navigate.push(
+              `/editar/actividades/${e.target.value.toLocaleLowerCase()}`
+            )
+          }
+        >
+          <option value="selected">{selectedDay}</option>
+          {days.map((item, i) => (
+            <option key={i} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
       </div>
       <div className={styles.toogle_navbar_container}>
-      <div className={styles.logo_toggle}>
-        <Image src="/logo.svg" alt="logo" width={50} height={50} priority />
-      </div>
-        <div className={styles.toggle_tittle}>{router.replace("/editar/", "")}</div>
+        <div className={styles.logo_toggle}>
+          <Image src="/logo.svg" alt="logo" width={50} height={50} priority />
+        </div>
+        <div className={styles.toggle_tittle}>
+          {router.replace("/editar/", "")}
+        </div>
         {!toggle ? (
           <BsMenuUp onClick={() => setToggle(true)} size={30} />
         ) : (
@@ -62,10 +93,10 @@ navigate.push('/login')
       </div>
       <div className={styles.outlinks}>
         <div className={styles.home}>
-          <FaRegHourglass size={40} onClick={()=>navigate.push('/')}/>
+          <FaRegHourglass size={40} onClick={() => navigate.push("/")} />
         </div>
         <div className={styles.logout}>
-          <RiLogoutCircleRLine size={40} onClick={()=>logOut()} />
+          <RiLogoutCircleRLine size={40} onClick={() => logOut()} />
         </div>
       </div>
 
@@ -82,17 +113,19 @@ navigate.push('/login')
                   : `${null}`
               }
               href={`/editar/${item.toLowerCase()}`}
-              onClick={()=>{setToggle(false)}}
+              onClick={() => {
+                setToggle(false);
+              }}
             >
               {item}
             </Link>
           ))}
           <div className={styles.toggle_outlinks}>
             <div className={styles.home}>
-              <FaRegHourglass size={40} onClick={()=>navigate.push('/')} />
+              <FaRegHourglass size={40} onClick={() => navigate.push("/")} />
             </div>
-            <div className={styles.logout} >
-              <RiLogoutCircleRLine size={40} onClick={()=>logOut()} />
+            <div className={styles.logout}>
+              <RiLogoutCircleRLine size={40} onClick={() => logOut()} />
             </div>
           </div>
         </div>

@@ -6,6 +6,8 @@ import { Provider } from "@/context/Context";
 import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useInfo } from "@/context/Context";
+
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -19,9 +19,7 @@ export default function Page() {
     <main>
       <Transition />
       <div className={show}>
-        <HeaderRender />
-        <Activities />
-        <FooterRender />
+      
       </div>
     </main>
   );
