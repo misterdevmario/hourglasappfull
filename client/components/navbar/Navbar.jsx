@@ -42,16 +42,16 @@ const Navbar = () => {
     .replace("/editar/actividades/", "")
     .toLocaleUpperCase();
 
+const selectedPath = router.replace("/editar/","").replace(`/${selectedDay.toLocaleLowerCase()}`,"")
+
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
         <Image src="/logo.svg" alt="logo" width={120} height={120} priority />
         <select
-          name="s"
-          id="s"
           onChange={(e) =>
             navigate.push(
-              `/editar/actividades/${e.target.value.toLocaleLowerCase()}`
+              `/editar/${selectedPath}/${e.target.value.toLocaleLowerCase()}`
             )
           }
         >
@@ -63,12 +63,29 @@ const Navbar = () => {
           ))}
         </select>
       </div>
+
       <div className={styles.toogle_navbar_container}>
         <div className={styles.logo_toggle}>
           <Image src="/logo.svg" alt="logo" width={50} height={50} priority />
+          <select
+            onChange={(e) =>
+              navigate.push(
+                `/editar/${selectedPath}/${e.target.value.toLocaleLowerCase()}`
+              )
+            }
+          >
+            <option value="selected">{selectedDay}</option>
+            {days.map((item, i) => (
+                <option className={styles.option} key={i} value={item}>
+                  {item}
+                </option>
+            ))}
+          </select>
         </div>
         <div className={styles.toggle_tittle}>
-          {router.replace("/editar/", "")}
+          {router
+            .replace("/editar/", "")
+            .replace(`/${selectedDay.toLocaleLowerCase()}`, "")}
         </div>
         {!toggle ? (
           <BsMenuUp onClick={() => setToggle(true)} size={30} />
@@ -85,7 +102,7 @@ const Navbar = () => {
                 ? `${styles.active}`
                 : `${null}`
             }
-            href={`/editar/${item.toLowerCase()}`}
+            href={`/editar/${item.toLowerCase()}/${selectedDay.toLocaleLowerCase()}`}
           >
             {item}
           </Link>
@@ -112,7 +129,7 @@ const Navbar = () => {
                   ? `${styles.active}`
                   : `${null}`
               }
-              href={`/editar/${item.toLowerCase()}`}
+              href={`/editar/${item.toLowerCase()}/${selectedDay.toLocaleLowerCase()}`}
               onClick={() => {
                 setToggle(false);
               }}

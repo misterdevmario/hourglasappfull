@@ -91,7 +91,8 @@
     display: none;
   }
   .logo_toggle{
-    display: block;
+    display: flex;
+    width: 14vw;
   }
   .links_container,
   .outlinks {
@@ -104,8 +105,20 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .toogle_navbar_container select{
+    width: 20vw;
+    font-size: .7rem;
+    z-index: 2;
+  }
+  .option {
+    width: 100vw;
+    height: 100vh;
+  }
+  
+
   .toggle_tittle {
-    width: 90%;
+    width:60vw;
     display: flex;
     justify-content: center;
     align-items: center;

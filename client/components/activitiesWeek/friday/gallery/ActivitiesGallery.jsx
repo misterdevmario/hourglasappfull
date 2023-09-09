@@ -5,7 +5,7 @@ import Image from "next/image";
 import styles from "./ActivitiesGallery.module.css";
 
 const ActivitiesGallery = ({id, closeModal}) => {
-  const {info, updateActivity,handleImage } = useInfo();
+  const {info, updateActivityFriday,handleImage } = useInfo();
 
 
   return (
@@ -20,7 +20,7 @@ const ActivitiesGallery = ({id, closeModal}) => {
             width={100}
             height={200}
             priority
-            onClick={() => {{id !== null ? updateActivity({activitieImage: item}, id): handleImage(item);}; closeModal(); }}
+            onClick={() => {{id !== null ? updateActivityFriday({activitieImage: item}, id): handleImage(item);}; closeModal(); }}
           />
         ))}
       </div>

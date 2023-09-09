@@ -1,9 +1,17 @@
-import React from 'react'
+'use client'
+import Activities from "@/components/activitiesWeek/monday/Activities";
+import { useInfo } from "@/context/Context";
 
-const page = () => {
+
+
+const Lunes = () => {
+ const { info } = useInfo();
+
   return (
-    <div>page</div>
+    <div>
+        <Activities activities = {info.activitiesMonday}/>
+    </div>
   )
 }
 
-export default page
+export default Lunes

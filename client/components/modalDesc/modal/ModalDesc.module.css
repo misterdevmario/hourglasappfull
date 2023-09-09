@@ -32,8 +32,8 @@
 
 .modal_close {
   position: sticky;
-  top: 5%;
-  left: 75%;
+  top: 0;
+  left: 85%;
 }
 
 @media screen and (max-width: 1400px) {
@@ -50,11 +50,16 @@
 @media screen and (max-width: 528px) {
   .modal_close {
     top: 0;
-    left: 80vw;
+    left: 60vw;
   }
   .modal_container {
-    max-height: 790px;
+    max-height: 700px;
     width: 100vw;
     padding: 5vh;
   }
+
+  .modal {
+    width: 90vw;
+  }
+
 }

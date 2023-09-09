@@ -10,8 +10,8 @@ import { useEffect, useState } from "react";
 import { RiImageAddLine } from "react-icons/ri";
 import ActivitiesGallery from "./gallery/ActivitiesGallery";
 import { time } from "@/lib/language";
-import styles from "../Carousel.module.css";
 import ModalDesc from "@/components/modalDesc/modal/ModalDesc";
+import styles from "../Carousel.module.css";
 
 const validation = Yup.object().shape({
   activitieEn: Yup.string()
@@ -77,8 +77,8 @@ const Carousel = ({ activities }) => {
     setDesc(description);
   };
   //console.log(hoursUppercase.map((item) => item.attributes.descEn));
-  //  console.log(id);
-  //  console.log(desc);
+   console.log(id);
+   console.log(desc);
   return (
     <div className={styles.container}>
       {hoursUppercase.map((item) => (
@@ -91,8 +91,6 @@ const Carousel = ({ activities }) => {
             hourEnd: item.attributes.hourEnd.toUpperCase(),
             spotEn: item.attributes.spotEn.toUpperCase(),
             spotEs: item.attributes.spotEs.toUpperCase(),
-         
-          
           }}
           validationSchema={validation}
           onSubmit={async (data, actions) => {
@@ -143,15 +141,15 @@ const Carousel = ({ activities }) => {
                     className={styles.error}
                     name="spotEn"
                   />
-                  <Field name="spotEs" placeholder="Locacion Español"  />
+                  <Field name="spotEs" placeholder="Locacion Español" />
                   <ErrorMessage
                     component="p"
                     className={styles.error}
                     name="spotEs"
                   />
                   <Field
-                  value={item.attributes.descEn}
-                  name='descEn'
+                    value={item.attributes.descEn}
+                    name="descEn"
                     placeholder="Descripcion Ingles"
                     onClick={() => {
                       handleDescEn();
@@ -159,7 +157,6 @@ const Carousel = ({ activities }) => {
                     }}
                     onMouseEnter={() => setId(item.id)}
                   />
-                
 
                   <Field
                     value={item.attributes.descEs}
@@ -171,7 +168,7 @@ const Carousel = ({ activities }) => {
                     }}
                     onMouseEnter={() => setId(item.id)}
                   />
-                
+
                   <button className={styles.save} type="submit">
                     Guardar
                   </button>
@@ -205,11 +202,14 @@ const Carousel = ({ activities }) => {
       ))}
       <ModalDesc isOpen={isOpenModalDescEn} En closeModal={closeModalDescEn}>
         <div className={styles.description}>
-          <input
+          <textarea
             name="descEn"
             type="textarea"
             onChange={(e) => setDesc(e.target.value)}
             value={desc}
+            maxLength="120"
+            cols="30"
+            rows="5"
           />
           <button
             onClick={() => {
@@ -225,11 +225,14 @@ const Carousel = ({ activities }) => {
       </ModalDesc>
       <ModalDesc isOpen={isOpenModalDescEs} closeModal={closeModalDescEs}>
         <div className={styles.description}>
-          <input
+          <textarea
             name="descEn"
             type="textarea"
             onChange={(e) => setDesc(e.target.value)}
             value={desc}
+            maxLength="120"
+            cols="30"
+            rows="5"
           />
           <button
             onClick={() => {

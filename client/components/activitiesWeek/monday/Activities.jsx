@@ -1,80 +1,128 @@
+"use client";
+
 import Image from "next/image";
-import styles from "./Carousel.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useInfo } from "@/context/Context";
-import Modal from "../modal/Modal";
-import { useModal } from "../modal/useModal";
-import { useState } from "react";
+import Modal from "@/components/modal/Modal";
+import { useModal } from "@/components/modal/useModal";
+import { useEffect, useState } from "react";
 import { RiImageAddLine } from "react-icons/ri";
 import ActivitiesGallery from "./gallery/ActivitiesGallery";
 import { time } from "@/lib/language";
+import ModalDesc from "@/components/modalDesc/modal/ModalDesc";
+import styles from "../Carousel.module.css";
 
 const validation = Yup.object().shape({
   activitieEn: Yup.string()
     .required("*Campo requerido")
-    .max(19, "La longitud maxima es de 19 letras!"),
+    .max(22, "La longitud maxima es de 22 letras!"),
   activitieEs: Yup.string()
     .required("*Campo requerido")
-    .max(19, "La longitud maxima es de 19 letras!"),
+    .max(22, "La longitud maxima es de 22 letras!"),
 
-  hours: Yup.string()
-    .required("*Campo requerido")
-    .max(19, "La longitud maxima es de 19 letras!"),
+  hourStart: Yup.string().required("*Campo requerido"),
+  hourEnd: Yup.string().required("*Campo requerido"),
+
   spotEn: Yup.string()
     .required("*Campo requerido")
-    .max(19, "La longitud maxima es de 19 letras!"),
+    .max(22, "La longitud maxima es de 22 letras!"),
   spotEs: Yup.string()
     .required("*Campo requerido")
-    .max(19, "La longitud maxima es de 19 letras!"),
+    .max(22, "La longitud maxima es de 22 letras!"),
+
 });
 
 const Carousel = ({ activities }) => {
-  const { updateActivity, image, postActivity, deleteActivity } = useInfo();
+  const {
+    updateActivityMonday,
+    image,
+    postActivityMonday,
+    deleteActivityMonday,
+    handleDescription,
+  } = useInfo();
   const [id, setId] = useState("");
+  const [desc, setDesc] = useState("");
   const [isOpenGallery, openGallery, closeGallery] = useModal(true);
-  const hoursUppercase = [];
-  for (let i = 0; i < time.length; i++) {
-    for (let j = 0; j < activities.length; j++) {
-      if (
-        time[i] ==
-        activities[j].attributes.hours.toLocaleLowerCase().replace(" ", "")
-      )
-        hoursUppercase.push(activities[j]);
-    }
-  }
+  const [isOpenModalDescEn, openModalDescEn, closeModalDescEn] = useModal(true);
+  const [isOpenModalDescEs, openModalDescEs, closeModalDescEs] = useModal(true);
+  const [hoursUppercase, sethoursUppercase] = useState([]);
 
+  useEffect(() => {
+    const hoursUppercase = [];
+    for (let i = 0; i < time.length; i++) {
+      for (let j = 0; j < activities.length; j++) {
+        if (
+          time[i] ==
+          activities[j].attributes.hourStart
+            .toLocaleLowerCase()
+            .replace(" ", "")
+        )
+          hoursUppercase.push(activities[j]);
+      }
+    }
+    sethoursUppercase(hoursUppercase);
+  }, [activities, desc]);
+
+  const handleDescEn = () => {
+    const description = hoursUppercase
+      .filter((item) => item.id == id)
+      .map((item) => item.attributes.descEn);
+    setDesc(description);
+  };
+  const handleDescEs = () => {
+    const description = hoursUppercase
+      .filter((item) => item.id == id)
+      .map((item) => item.attributes.descEs);
+    setDesc(description);
+  };
+  //console.log(hoursUppercase.map((item) => item.attributes.descEn));
+   console.log(id);
+   console.log(desc);
   return (
     <div className={styles.container}>
-      {hoursUppercase.map((item, i) => (
+      {hoursUppercase.map((item) => (
         <Formik
           key={item.id}
           initialValues={{
             activitieEn: item.attributes.activitieEn.toUpperCase(),
             activitieEs: item.attributes.activitieEs.toUpperCase(),
-            hours: item.attributes.hours.toUpperCase(),
+            hourStart: item.attributes.hourStart.toUpperCase(),
+            hourEnd: item.attributes.hourEnd.toUpperCase(),
             spotEn: item.attributes.spotEn.toUpperCase(),
             spotEs: item.attributes.spotEs.toUpperCase(),
           }}
           validationSchema={validation}
           onSubmit={async (data, actions) => {
-            await updateActivity(data, item.id);
+            await updateActivityMonday(data, item.id);
           }}
         >
           {({ handleSubmit }) => (
             <div>
               <Form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.inputs}>
-                  <Field as="select" name="hours" placeholder={"Horario"}>
-                    <option value="defaultValue">
-                      {item.attributes.hours}
-                    </option>
-                    {time.map((item, i) => (
-                      <option key={i} value={item} >
-                        {item}
+                  <div className={styles.hours}>
+                    <Field as="select" name="hourStart" placeholder={"Inicio"}>
+                      <option value="defaultValue">
+                        {item.attributes.hourStart}
                       </option>
-                    ))}
-                  </Field>
+                      {time.map((item, i) => (
+                        <option key={i} value={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </Field>
+                    <Field as="select" name="hourEnd" placeholder={"Termino"}>
+                      <option value="defaultValue">
+                        {item.attributes.hourEnd}
+                      </option>
+                      {time.map((item, i) => (
+                        <option key={i} value={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </Field>
+                  </div>
                   <Field name="activitieEn" placeholder="Actividad Ingles" />
                   <ErrorMessage
                     component="p"
@@ -99,14 +147,37 @@ const Carousel = ({ activities }) => {
                     className={styles.error}
                     name="spotEs"
                   />
+                  <Field
+                    value={item.attributes.descEn}
+                    name="descEn"
+                    placeholder="Descripcion Ingles"
+                    onClick={() => {
+                      handleDescEn();
+                      openModalDescEn();
+                    }}
+                    onMouseEnter={() => setId(item.id)}
+                  />
+
+                  <Field
+                    value={item.attributes.descEs}
+                    id={item.id}
+                    placeholder="Descripcion Español"
+                    onClick={() => {
+                      handleDescEs();
+                      openModalDescEs();
+                    }}
+                    onMouseEnter={() => setId(item.id)}
+                  />
+
                   <button className={styles.save} type="submit">
                     Guardar
                   </button>
-                  {activities.length > 14 ? (
+                  {activities.length > 12 ? (
                     <button
-                      disabled={activities.length <= 14}
+                      type="submit"
+                      disabled={activities.length <= 12}
                       className={styles.delete}
-                      onClick={() => deleteActivity(item.id)}
+                      onClick={() => deleteActivityMonday(item.id)}
                     >
                       Eliminar
                     </button>
@@ -129,20 +200,69 @@ const Carousel = ({ activities }) => {
           )}
         </Formik>
       ))}
+      <ModalDesc isOpen={isOpenModalDescEn} En closeModal={closeModalDescEn}>
+        <div className={styles.description}>
+          <textarea
+            name="descEn"
+            type="textarea"
+            onChange={(e) => setDesc(e.target.value)}
+            value={desc}
+            maxLength="120"
+            cols="30"
+            rows="5"
+          />
+          <button
+            onClick={() => {
+              handleDescription(desc);
+              updateActivityMonday({ descEn: desc }, id);
+              closeModalDescEn();
+            }}
+            disabled={!desc}
+          >
+            Guardar
+          </button>
+        </div>
+      </ModalDesc>
+      <ModalDesc isOpen={isOpenModalDescEs} closeModal={closeModalDescEs}>
+        <div className={styles.description}>
+          <textarea
+            name="descEn"
+            type="textarea"
+            onChange={(e) => setDesc(e.target.value)}
+            value={desc}
+            maxLength="120"
+            cols="30"
+            rows="5"
+          />
+          <button
+            onClick={() => {
+              handleDescription(desc);
+              updateActivityMonday({ descEs: desc }, id);
+              closeModalDescEs();
+            }}
+            disabled={!desc}
+          >
+            Guardar
+          </button>
+        </div>
+      </ModalDesc>
 
       <Formik
         initialValues={{
           activitieEn: "",
           activitieEs: "",
           activitieImage: "",
-          hours: "",
+          hourStart: "",
+          hourEnd: "",
           spotEn: "",
           spotEs: "",
+          descEn: "",
+          descEs: "",
         }}
         validationSchema={validation}
         onSubmit={async (data, { resetForm }) => {
           data.activitieImage = image;
-          await postActivity(data);
+          await postActivityMonday(data);
           resetForm({ values: "" });
         }}
       >
@@ -150,14 +270,24 @@ const Carousel = ({ activities }) => {
           <div>
             <Form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.inputs}>
-                <Field as ="select" name="hours" placeholder="Horario">
-                  <option value="defaultValue">horario</option>
-                  {time.map((item, i) => (
-                    <option key={i} value={item} >
-                      {item}
-                    </option>
-                  ))}
-                </Field>
+                <div className={styles.hours}>
+                  <Field as="select" name="hourStart" placeholder="Inicio">
+                    <option value="defaultValue">Inicio</option>
+                    {time.map((item, i) => (
+                      <option key={i} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </Field>
+                  <Field as="select" name="hourEnd" placeholder="Termino">
+                    <option value="defaultValue">termino</option>
+                    {time.map((item, i) => (
+                      <option key={i} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </Field>
+                </div>
 
                 <Field name="activitieEn" placeholder="Actividad Ingles" />
                 <ErrorMessage
@@ -182,6 +312,19 @@ const Carousel = ({ activities }) => {
                   component="p"
                   className={styles.error}
                   name="spotEs"
+                />
+                <Field name="descEn" placeholder="Descripcion ingles" />
+                <ErrorMessage
+                  component="p"
+                  className={styles.error}
+                  name="descEn"
+                />
+
+                <Field name="descEs" placeholder="Descripcion Español" />
+                <ErrorMessage
+                  component="p"
+                  className={styles.error}
+                  name="descEs"
                 />
                 <button className={styles.save} disabled={!image} type="submit">
                   Guardar

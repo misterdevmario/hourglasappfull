@@ -35,10 +35,10 @@ const validation = Yup.object().shape({
 
 const Carousel = ({ activities }) => {
   const {
-    updateActivityFriday,
+    updateActivityThursday,
     image,
-    postActivityFriday,
-    deleteActivityFriday,
+    postActivityThursday,
+    deleteActivityThursday,
     handleDescription,
   } = useInfo();
   const [id, setId] = useState("");
@@ -94,7 +94,7 @@ const Carousel = ({ activities }) => {
           }}
           validationSchema={validation}
           onSubmit={async (data, actions) => {
-            await updateActivityFriday(data, item.id);
+            await updateActivityThursday(data, item.id);
           }}
         >
           {({ handleSubmit }) => (
@@ -177,7 +177,7 @@ const Carousel = ({ activities }) => {
                       type="submit"
                       disabled={activities.length <= 12}
                       className={styles.delete}
-                      onClick={() => deleteActivityFriday(item.id)}
+                      onClick={() => deleteActivityThursday(item.id)}
                     >
                       Eliminar
                     </button>
@@ -214,7 +214,7 @@ const Carousel = ({ activities }) => {
           <button
             onClick={() => {
               handleDescription(desc);
-              updateActivityFriday({ descEn: desc }, id);
+              updateActivityThursday({ descEn: desc }, id);
               closeModalDescEn();
             }}
             disabled={!desc}
@@ -237,7 +237,7 @@ const Carousel = ({ activities }) => {
           <button
             onClick={() => {
               handleDescription(desc);
-              updateActivityFriday({ descEs: desc }, id);
+              updateActivityThursday({ descEs: desc }, id);
               closeModalDescEs();
             }}
             disabled={!desc}
@@ -262,7 +262,7 @@ const Carousel = ({ activities }) => {
         validationSchema={validation}
         onSubmit={async (data, { resetForm }) => {
           data.activitieImage = image;
-          await postActivityFriday(data);
+          await postActivityThursday(data);
           resetForm({ values: "" });
         }}
       >

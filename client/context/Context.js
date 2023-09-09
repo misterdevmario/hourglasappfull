@@ -265,7 +265,6 @@ console.log(desc)
   useEffect(() => {
     (async () => {
       //Activities
-      const activitiesResponse = await getActivities();
 
       const activitiesResponseMonday = await getActivitiesMonday();
       const activitiesResponseTuesday = await getActivitiesTuesday();
@@ -276,7 +275,6 @@ console.log(desc)
       const activitiesResponseSunday = await getActivitiesSunday();
 
       //Staff
-      const staffResponse = await getStaff();
 
       const staffResponseMonday = await getStaffMonday();
       const staffResponseTuesday = await getStaffTuesday();
@@ -289,7 +287,6 @@ console.log(desc)
       //RESTAURANTS AND BARS
 
       //Dining
-      const dinningResponse = await getDinning();
 
       const dinningResponseMonday = await getDinningMonday();
       const dinningResponseTuesday = await getDinningTuesday();
@@ -300,7 +297,6 @@ console.log(desc)
       const dinningResponseSunday = await getDinningSunday();
 
       //Breakfast
-      const breakfastResponse = await getBreakfast();
 
       const breakfastResponseMonday = await getBreakfastMonday();
       const breakfastResponseTuesday = await getBreakfastTuesday();
@@ -310,7 +306,6 @@ console.log(desc)
       const breakfastResponseSaturday = await getBreakfastSaturday();
       const breakfastResponseSunday = await getBreakfastSunday();
       //Bars
-      const barsResponse = await getBars();
 
       const barsResponseMonday = await getBarsMonday();
       const barsResponseTuesday = await getBarsTuesday();
@@ -321,7 +316,6 @@ console.log(desc)
       const barsResponseSunday = await getBarsSunday();
 
       //flyers
-      const flyersResponse = await getFlyers();
 
       const flyersResponseMonday = await getFlyersMonday();
       const flyersResponseTuesday = await getFlyersTuesday();
@@ -332,7 +326,6 @@ console.log(desc)
       const flyersResponseSunday = await getFlyersSunday();
 
       //flyers titles
-      const flyersTitleResponse = await getFlyersTitle();
 
       const flyersTitleResponseMonday = await getFlyersTitleMonday();
       const flyersTitleResponseTuesday = await getFlyersTitleTuesday();
@@ -369,7 +362,6 @@ console.log(desc)
       );
 
       setInfo({
-        activities: activitiesResponse.data,
         activitiesMonday: activitiesResponseMonday.data,
         activitiesTuesday: activitiesResponseTuesday.data,
         activitiesWednesday: activitiesResponseWednesday.data,
@@ -378,7 +370,6 @@ console.log(desc)
         activitiesSaturday: activitiesResponseSaturday.data,
         activitiesSunday: activitiesResponseSunday.data,
 
-        staff: staffResponse.data,
         staffMonday: staffResponseMonday.data,
         staffTuesday: staffResponseTuesday.data,
         staffWednesday: staffResponseWednesday.data,
@@ -386,7 +377,7 @@ console.log(desc)
         staffFriday: staffResponseFriday.data,
         staffSaturday: staffResponseSaturday.data,
         staffSunday: staffResponseSunday.data,
-        dinning: dinningResponse.data,
+        
         dinningMonday: dinningResponseMonday.data,
         dinningTuesday: dinningResponseTuesday.data,
         dinningWednesday: dinningResponseWednesday.data,
@@ -395,7 +386,6 @@ console.log(desc)
         dinningSaturday: dinningResponseSaturday.data,
         dinningSunday: dinningResponseSunday.data,
 
-        breakfast: breakfastResponse.data,
         breakfastMonday: breakfastResponseMonday.data,
         breakfastTuesday: breakfastResponseTuesday.data,
         breakfastWednesday: breakfastResponseWednesday.data,
@@ -404,7 +394,6 @@ console.log(desc)
         breakfastSaturday: breakfastResponseSaturday.data,
         breakfastSunday: breakfastResponseSunday.data,
 
-        bars: barsResponse.data,
         barsMonday: barsResponseMonday.data,
         barsTuesday: barsResponseTuesday.data,
         barsWednesday: barsResponseWednesday.data,
@@ -413,7 +402,6 @@ console.log(desc)
         barsSaturday: barsResponseSaturday.data,
         barsSunday: barsResponseSunday.data,
 
-        flyers: flyersResponse.data,
         flyersMonday: flyersResponseMonday.data,
         flyersTuesday: flyersResponseTuesday.data,
         flyersWednesday: flyersResponseWednesday.data,
@@ -422,7 +410,6 @@ console.log(desc)
         flyersSaturday: flyersResponseSaturday.data,
         flyersSunday: flyersResponseSunday.data,
 
-        flyersTitle: flyersTitleResponse.data,
         flyersTitleMonday: flyersTitleResponseMonday.data,
         flyersTitleTuesday: flyersTitleResponseTuesday.data,
         flyersTitleWednesday: flyersTitleResponseWednesday.data,
@@ -430,6 +417,7 @@ console.log(desc)
         flyersTitleFriday: flyersTitleResponseFriday.data,
         flyersTitleSaturday: flyersTitleResponseSaturday.data,
         flyersTitleSunday: flyersTitleResponseSunday.data,
+
         activitiesGallery: images.toString().split(","),
         staffGallery: staffImages.toString().split(","),
         barsrestaurantsGallery: restaurantsBarsImages.toString().split(","),
@@ -525,6 +513,90 @@ console.log(desc)
 
   //MONDAY
   //Activities
+  const updateActivityMonday = async (data, id) => {
+    const res = await putActivitiesMonday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  const postActivityMonday = async (data) => {
+    const res = await postActivitiesMonday({ data });
+    setActivityGallery(res.data);
+    setImage(null);
+  };
+  const deleteActivityMonday = async (id) => {
+    const res = await deleteActivitiesMonday(id);
+    setActivityGallery(res);
+  };
+
+  const updateActivityTuesday = async (data, id) => {
+    const res = await putActivitiesTuesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  const postActivityTuesday = async (data) => {
+    const res = await postActivitiesTuesday({ data });
+    setActivityGallery(res.data);
+    setImage(null);
+  };
+  const deleteActivityTuesday = async (id) => {
+    const res = await deleteActivitiesTuesday(id);
+    setActivityGallery(res);
+  };
+
+  const updateActivityWednesday = async (data, id) => {
+    const res = await putActivitiesWednesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  const postActivityWednesday = async (data) => {
+    const res = await postActivitiesWednesday({ data });
+    setActivityGallery(res.data);
+    setImage(null);
+  };
+  const deleteActivityWednesday = async (id) => {
+    const res = await deleteActivitiesWednesday(id);
+    setActivityGallery(res);
+  };
+
+  const updateActivityThursday = async (data, id) => {
+    const res = await putActivitiesThursday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  const postActivityThursday = async (data) => {
+    const res = await postActivitiesThursday({ data });
+    setActivityGallery(res.data);
+    setImage(null);
+  };
+  const deleteActivityThursday = async (id) => {
+    const res = await deleteActivitiesThursday(id);
+    setActivityGallery(res);
+  };
+
+  const updateActivityFriday = async (data, id) => {
+    const res = await putActivitiesFriday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  const postActivityFriday = async (data) => {
+    const res = await postActivitiesFriday({ data });
+    setActivityGallery(res.data);
+    setImage(null);
+  };
+  const deleteActivityFriday = async (id) => {
+    const res = await deleteActivitiesFriday(id);
+    setActivityGallery(res);
+  };
+
+  const updateActivitySaturday = async (data, id) => {
+    const res = await putActivitiesSaturday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  const postActivitySaturday = async (data) => {
+    const res = await postActivitiesSaturday({ data });
+    setActivityGallery(res.data);
+    setImage(null);
+  };
+  const deleteActivitySaturday = async (id) => {
+    const res = await deleteActivitiesSaturday(id);
+    setActivityGallery(res);
+ };
+
   const updateActivitySunday = async (data, id) => {
     const res = await putActivitiesSunday({ data }, id);
     setActivityGallery(res.data);
@@ -539,6 +611,9 @@ console.log(desc)
     setActivityGallery(res);
   };
 
+  
+  
+  
   // const updateBar = async (data, id) => {
   //   const res = await putBars({ data }, id);
   //   setActivityGallery(res.data);
@@ -585,32 +660,59 @@ console.log(desc)
     <infoContext.Provider
       value={{
         info,
-        updateActivity,
+        //Activities
+        updateActivityMonday,
+        postActivityMonday,
+        deleteActivityMonday,
+
+        updateActivityTuesday,
+        postActivityTuesday,
+        deleteActivityTuesday,
+
+        updateActivityWednesday,
+        postActivityWednesday,
+        deleteActivityWednesday,
+
+        updateActivityThursday,
+        postActivityThursday,
+        deleteActivityThursday,
+
+        updateActivityFriday,
+        postActivityFriday,
+        deleteActivityFriday,
+
+        updateActivitySaturday,
+        postActivitySaturday,
+        deleteActivitySaturday,
+
         updateActivitySunday,
         postActivitySunday,
         deleteActivitySunday,
-        activityGallery,
-        handleImage,
-        image,
-        handleStaffImage,
-        staffImage,
-        postActivity,
-        deleteActivity,
+     
         updateBar,
         updateDinning,
         updateBrakfast,
         updateStaff,
         postStaff,
         deleteStaff,
-        handleFlyerImage,
-        flyerImage,
         updateFlyer,
         postFlyer,
         deleteFlyer,
+
+        //Language
         language,
         languageMobile,
         changeLanguageMobile,
-        handleDescription
+
+        //Update triggers
+        handleFlyerImage,
+        flyerImage,
+        handleImage,
+        image,
+        handleStaffImage,
+        staffImage,
+        handleDescription,
+        activityGallery
       }}
     >
       {children}
