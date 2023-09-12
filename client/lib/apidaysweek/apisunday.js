@@ -54,7 +54,7 @@ export async function getActivitiesSunday() {
   //STAFF!!!!!!!
   
   //Method GET
-  export async function getStaffSunday() {
+  export async function getStaffsSunday() {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL2}/staffsundays`
     );
@@ -78,7 +78,7 @@ export async function getActivitiesSunday() {
   }
   
   //Method PUT
-  export async function putStaffSunday(data, id) {
+  export async function putStaffsSunday(data, id) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL2}/staffsundays/${id}`,
       {
@@ -94,7 +94,7 @@ export async function getActivitiesSunday() {
   }
   
   //Method DELETE
-  export async function deleteStaffSunday(id) {
+  export async function deleteStaffsSunday(id) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL2}/staffsundays/${id}`,
       {

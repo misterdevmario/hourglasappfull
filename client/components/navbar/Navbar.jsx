@@ -38,11 +38,24 @@ const Navbar = () => {
     const response = await axios.post("/api/logout");
     navigate.push("/login");
   };
-  let selectedDay = router
-    .replace("/editar/actividades/", "")
-    .toLocaleUpperCase();
 
-const selectedPath = router.replace("/editar/","").replace(`/${selectedDay.toLocaleLowerCase()}`,"")
+  const selectedDay = router.includes("actividades")
+    ? router.replace("/editar/actividades/", "").toLocaleUpperCase()
+    : router.includes("bars")
+    ? router.replace("/editar/bars/", "").toLocaleUpperCase()
+    : router.includes("staff")
+    ? router.replace("/editar/staff/", "").toLocaleUpperCase()
+    : router.includes("breakfast")
+    ? router.replace("/editar/dining/", "").toLocaleUpperCase()
+    : router.includes("breakfast")
+    ? router.replace("/editar/breakfast/", "").toLocaleUpperCase()
+    : router.includes("flyers")
+    ? router.replace("/editar/flyers/", "").toLocaleUpperCase()
+    : null;
+  const selectedItem = router.replace();
+  const selectedPath = router
+    .replace("/editar/", "")
+    .replace(`/${selectedDay.toLocaleLowerCase()}`, "");
 
   return (
     <div className={styles.container}>
@@ -76,9 +89,9 @@ const selectedPath = router.replace("/editar/","").replace(`/${selectedDay.toLoc
           >
             <option value="selected">{selectedDay}</option>
             {days.map((item, i) => (
-                <option className={styles.option} key={i} value={item}>
-                  {item}
-                </option>
+              <option className={styles.option} key={i} value={item}>
+                {item}
+              </option>
             ))}
           </select>
         </div>
@@ -110,10 +123,10 @@ const selectedPath = router.replace("/editar/","").replace(`/${selectedDay.toLoc
       </div>
       <div className={styles.outlinks}>
         <div className={styles.home}>
-          <FaRegHourglass size={40} onClick={() => navigate.push("/")} />
+          <FaRegHourglass size={35} onClick={() => navigate.push("/")} />
         </div>
         <div className={styles.logout}>
-          <RiLogoutCircleRLine size={40} onClick={() => logOut()} />
+          <RiLogoutCircleRLine size={35} onClick={() => logOut()} />
         </div>
       </div>
 

@@ -4,7 +4,7 @@
   "info": {
     "singularName": "breakfastwednesday",
     "pluralName": "breakfastwednesdays",
-    "displayName": "Breakfastwednesday",
+    "displayName": "breakfastwednesday",
     "description": ""
   },
   "options": {
@@ -43,24 +43,26 @@
       "type": "string"
     },
     "menuImgEn": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "menuImgEs": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "descEn": {
       "type": "text"

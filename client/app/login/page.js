@@ -32,7 +32,7 @@ const Login = () => {
             );
             if (userAuth.status === 200) {
               const response = await axios.post("/api/login", data);
-              router.push('/editar/actividades')
+              router.push('/editar/actividades/lunes')
             }
           } catch (error) {
             alert("Usuario o contraseña incorrecto");

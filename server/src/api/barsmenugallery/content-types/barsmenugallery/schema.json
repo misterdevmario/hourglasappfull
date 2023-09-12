@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "barsmenugalleries",
+  "info": {
+    "singularName": "barsmenugallery",
+    "pluralName": "barsmenugalleries",
+    "displayName": "barsmenugallery"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "menu": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

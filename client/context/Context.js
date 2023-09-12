@@ -27,10 +27,10 @@ import {
   postActivitiesFriday,
   putActivitiesFriday,
   deleteActivitiesFriday,
-  getStaffFriday,
+  getStaffsFriday,
   postStaffsFriday,
-  putStaffFriday,
-  deleteStaffFriday,
+  putStaffsFriday,
+  deleteStaffsFriday,
   getDinningFriday,
   putDinningFriday,
   getBreakfastFriday,
@@ -50,10 +50,10 @@ import {
   postActivitiesMonday,
   putActivitiesMonday,
   deleteActivitiesMonday,
-  getStaffMonday,
+  getStaffsMonday,
   postStaffsMonday,
-  putStaffMonday,
-  deleteStaffMonday,
+  putStaffsMonday,
+  deleteStaffsMonday,
   getDinningMonday,
   putDinningMonday,
   getBreakfastMonday,
@@ -73,10 +73,10 @@ import {
   postActivitiesSaturday,
   putActivitiesSaturday,
   deleteActivitiesSaturday,
-  getStaffSaturday,
+  getStaffsSaturday,
   postStaffsSaturday,
-  putStaffSaturday,
-  deleteStaffSaturday,
+  putStaffsSaturday,
+  deleteStaffsSaturday,
   getDinningSaturday,
   putDinningSaturday,
   getBreakfastSaturday,
@@ -96,10 +96,10 @@ import {
   postActivitiesSunday,
   putActivitiesSunday,
   deleteActivitiesSunday,
-  getStaffSunday,
+  getStaffsSunday,
   postStaffsSunday,
-  putStaffSunday,
-  deleteStaffSunday,
+  putStaffsSunday,
+  deleteStaffsSunday,
   getDinningSunday,
   putDinningSunday,
   getBreakfastSunday,
@@ -119,10 +119,10 @@ import {
   postActivitiesThursday,
   putActivitiesThursday,
   deleteActivitiesThursday,
-  getStaffThursday,
+  getStaffsThursday,
   postStaffsThursday,
-  putStaffThursday,
-  deleteStaffThursday,
+  putStaffsThursday,
+  deleteStaffsThursday,
   getDinningThursday,
   putDinningThursday,
   getBreakfastThursday,
@@ -142,10 +142,10 @@ import {
   postActivitiesTuesday,
   putActivitiesTuesday,
   deleteActivitiesTuesday,
-  getStaffTuesday,
+  getStaffsTuesday,
   postStaffsTuesday,
-  putStaffTuesday,
-  deleteStaffTuesday,
+  putStaffsTuesday,
+  deleteStaffsTuesday,
   getDinningTuesday,
   putDinningTuesday,
   getBreakfastTuesday,
@@ -165,10 +165,10 @@ import {
   postActivitiesWednesday,
   putActivitiesWednesday,
   deleteActivitiesWednesday,
-  getStaffWednesday,
+  getStaffsWednesday,
   postStaffsWednesday,
-  putStaffWednesday,
-  deleteStaffWednesday,
+  putStaffsWednesday,
+  deleteStaffsWednesday,
   getDinningWednesday,
   putDinningWednesday,
   getBreakfastWednesday,
@@ -276,13 +276,13 @@ console.log(desc)
 
       //Staff
 
-      const staffResponseMonday = await getStaffMonday();
-      const staffResponseTuesday = await getStaffTuesday();
-      const staffResponseWednesday = await getStaffWednesday();
-      const staffResponseThursday = await getStaffThursday();
-      const staffResponseFriday = await getStaffFriday();
-      const staffResponseSaturday = await getStaffSaturday();
-      const staffResponseSunday = await getStaffSunday();
+      const staffResponseMonday = await getStaffsMonday();
+      const staffResponseTuesday = await getStaffsTuesday();
+      const staffResponseWednesday = await getStaffsWednesday();
+      const staffResponseThursday = await getStaffsThursday();
+      const staffResponseFriday = await getStaffsFriday();
+      const staffResponseSaturday = await getStaffsSaturday();
+      const staffResponseSunday = await getStaffsSunday();
 
       //RESTAURANTS AND BARS
 
@@ -455,19 +455,6 @@ console.log(desc)
     setDesc(desc);
   };
 
-  const updateActivity = async (data, id) => {
-    const res = await putActivities({ data }, id);
-    setActivityGallery(res.data);
-  };
-  const postActivity = async (data) => {
-    const res = await postActivities({ data });
-    setActivityGallery(res.data);
-    setImage(null);
-  };
-  const deleteActivity = async (id) => {
-    const res = await deleteActivities(id);
-    setActivityGallery(res);
-  };
 
   const updateBar = async (data, id) => {
     const res = await putBars({ data }, id);
@@ -511,8 +498,9 @@ console.log(desc)
     setActivityGallery(res);
   };
 
-  //MONDAY
-  //Activities
+  
+  //ACTIVITIES
+  //monday
   const updateActivityMonday = async (data, id) => {
     const res = await putActivitiesMonday({ data }, id);
     setActivityGallery(res.data);
@@ -526,7 +514,7 @@ console.log(desc)
     const res = await deleteActivitiesMonday(id);
     setActivityGallery(res);
   };
-
+//tuesday
   const updateActivityTuesday = async (data, id) => {
     const res = await putActivitiesTuesday({ data }, id);
     setActivityGallery(res.data);
@@ -540,7 +528,7 @@ console.log(desc)
     const res = await deleteActivitiesTuesday(id);
     setActivityGallery(res);
   };
-
+//wednesday
   const updateActivityWednesday = async (data, id) => {
     const res = await putActivitiesWednesday({ data }, id);
     setActivityGallery(res.data);
@@ -554,7 +542,7 @@ console.log(desc)
     const res = await deleteActivitiesWednesday(id);
     setActivityGallery(res);
   };
-
+//thursday
   const updateActivityThursday = async (data, id) => {
     const res = await putActivitiesThursday({ data }, id);
     setActivityGallery(res.data);
@@ -568,7 +556,7 @@ console.log(desc)
     const res = await deleteActivitiesThursday(id);
     setActivityGallery(res);
   };
-
+//friday
   const updateActivityFriday = async (data, id) => {
     const res = await putActivitiesFriday({ data }, id);
     setActivityGallery(res.data);
@@ -582,7 +570,7 @@ console.log(desc)
     const res = await deleteActivitiesFriday(id);
     setActivityGallery(res);
   };
-
+//saturday
   const updateActivitySaturday = async (data, id) => {
     const res = await putActivitiesSaturday({ data }, id);
     setActivityGallery(res.data);
@@ -596,7 +584,7 @@ console.log(desc)
     const res = await deleteActivitiesSaturday(id);
     setActivityGallery(res);
  };
-
+//sunday
   const updateActivitySunday = async (data, id) => {
     const res = await putActivitiesSunday({ data }, id);
     setActivityGallery(res.data);
@@ -611,50 +599,148 @@ console.log(desc)
     setActivityGallery(res);
   };
 
+  //STAFF
+  //monday
+  const updateStaffMonday = async (data, id) => {
+    const res = await putStaffsMonday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  const postStaffMonday = async (data) => {
+    const res = await postStaffsMonday({ data });
+    setActivityGallery(res.data);
+    setStaffImage(null);
+  };
+  const deleteStaffMonday = async (id) => {
+    const res = deleteStaffsMonday(id);
+    setActivityGallery(res);
+  };
+
+//tuesday
+  const updateStaffTuesday = async (data, id) => {
+    const res = await putStaffsTuesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  const postStaffTuesday = async (data) => {
+    const res = await postStaffsTuesday({ data });
+    setActivityGallery(res.data);
+    setStaffImage(null);
+  };
+  const deleteStaffTuesday = async (id) => {
+    const res = deleteStaffsTuesday(id);
+    setActivityGallery(res);
+  };
+  //wednesday
+  const updateStaffWednesday = async (data, id) => {
+    const res = await putStaffsWednesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  const postStaffWednesday = async (data) => {
+    const res = await postStaffsWednesday({ data });
+    setActivityGallery(res.data);
+    setStaffImage(null);
+  };
+  const deleteStaffWednesday = async (id) => {
+    const res = deleteStaffsWednesday(id);
+    setActivityGallery(res);
+  };
+  //thursday
+  const updateStaffThursday = async (data, id) => {
+    const res = await putStaffsThursday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  const postStaffThursday = async (data) => {
+    const res = await postStaffsThursday({ data });
+    setActivityGallery(res.data);
+    setStaffImage(null);
+  };
+  const deleteStaffThursday = async (id) => {
+    const res = deleteStaffsThursday(id);
+    setActivityGallery(res);
+  };
+//friday
+const updateStaffFriday = async (data, id) => {
+  const res = await putStaffsFriday({ data }, id);
+  setActivityGallery(res.data);
+};
+
+const postStaffFriday = async (data) => {
+  const res = await postStaffsFriday({ data });
+  setActivityGallery(res.data);
+  setStaffImage(null);
+};
+const deleteStaffFriday = async (id) => {
+  const res = deleteStaffsFriday(id);
+  setActivityGallery(res);
+};
+//saturday
+  const updateStaffSaturday = async (data, id) => {
+    const res = await putStaffsSaturday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  const postStaffSaturday = async (data) => {
+    const res = await postStaffsSaturday({ data });
+    setActivityGallery(res.data);
+    setStaffImage(null);
+  };
+  const deleteStaffSaturday = async (id) => {
+    const res = deleteStaffsSaturday(id);
+    setActivityGallery(res);
+  };
+  //sunday
+  const updateStaffSunday = async (data, id) => {
+    const res = await putStaffsSunday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  const postStaffSunday = async (data) => {
+    const res = await postStaffsSunday({ data });
+    setActivityGallery(res.data);
+    setStaffImage(null);
+  };
+  const deleteStaffSunday = async (id) => {
+    const res = deleteStaffsSunday(id);
+    setActivityGallery(res);
+  };
+
+  //Bars
+  const updateBarMonday = async (data, id) => {
+    const res = await putBarsMonday({ data }, id);
+    setActivityGallery(res.data);
+  };
+   const updateBarTuesday = async (data, id) => {
+    const res = await putBarsTuesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  const updateBarWednesday = async (data, id) => {
+    const res = await putBarsWednesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  const updateBarThursday = async (data, id) => {
+    const res = await putBarsThursday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  const updateBarFriday = async (data, id) => {
+    const res = await putBarsFriday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  const updateBarSaturday = async (data, id) => {
+    const res = await putBarsSaturday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  const updateBarSunday = async (data, id) => {
+    const res = await putBarSunnday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
   
   
   
-  // const updateBar = async (data, id) => {
-  //   const res = await putBars({ data }, id);
-  //   setActivityGallery(res.data);
-  // };
-  // const updateDinning = async (data, id) => {
-  //   const res = await putDinning({ data }, id);
-  //   setActivityGallery(res.data);
-  // };
-  // const updateBrakfast = async (data, id) => {
-  //   const res = await putBreakfast({ data }, id);
-  //   setActivityGallery(res.data);
-  // };
-  // const updateStaff = async (data, id) => {
-  //   const res = await putStaff({ data }, id);
-  //   setActivityGallery(res.data);
-  // };
 
-  // const postStaff = async (data) => {
-  //   const res = await postStaffs({ data });
-  //   setActivityGallery(res.data);
-  //   setStaffImage(null);
-  // };
-  // const deleteStaff = async (id) => {
-  //   const res = deleteStaffs(id);
-  //   setActivityGallery(res);
-  // };
-
-  // const updateFlyer = async (data, id) => {
-  //   const res = await putFlyers({ data }, id);
-  //   setActivityGallery(res.data);
-  // };
-
-  // const postFlyer = async (data) => {
-  //   const res = await postFlyers({ data });
-  //   setActivityGallery(res.data);
-  //   setFlyerImage(null);
-  // };
-  // const deleteFlyer = async (id) => {
-  //   const res = deleteFlyers(id);
-  //   setActivityGallery(res);
-  // };
 
   return (
     <infoContext.Provider
@@ -688,8 +774,47 @@ console.log(desc)
         updateActivitySunday,
         postActivitySunday,
         deleteActivitySunday,
+
+        //STAFF
+        updateStaffMonday,
+        postStaffMonday,
+        deleteStaffMonday,
+
+        updateStaffTuesday,
+        postStaffTuesday,
+        deleteStaffTuesday,
+
+        updateStaffWednesday,
+        postStaffWednesday,
+        deleteStaffWednesday,
+
+        updateStaffThursday,
+        postStaffThursday,
+        deleteStaffThursday,
+
+        updateStaffFriday,
+        postStaffFriday,
+        deleteStaffFriday,
+
+        updateStaffSaturday,
+        postStaffSaturday,
+        deleteStaffSaturday,
+
+        updateStaffMonday,
+        postStaffMonday,
+        deleteStaffMonday,
+
+        //BARS
      
         updateBar,
+        updateBarMonday,
+        updateBarTuesday,
+        updateBarWednesday,
+        updateBarThursday,
+        updateBarFriday,
+        updateBarSaturday,
+        updateBarSunday,
+        
         updateDinning,
         updateBrakfast,
         updateStaff,
