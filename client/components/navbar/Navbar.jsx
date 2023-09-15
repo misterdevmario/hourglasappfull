@@ -45,14 +45,13 @@ const Navbar = () => {
     ? router.replace("/editar/bars/", "").toLocaleUpperCase()
     : router.includes("staff")
     ? router.replace("/editar/staff/", "").toLocaleUpperCase()
-    : router.includes("breakfast")
-    ? router.replace("/editar/dining/", "").toLocaleUpperCase()
+    : router.includes("dinning")
+    ? router.replace("/editar/dinning/", "").toLocaleUpperCase()
     : router.includes("breakfast")
     ? router.replace("/editar/breakfast/", "").toLocaleUpperCase()
     : router.includes("flyers")
     ? router.replace("/editar/flyers/", "").toLocaleUpperCase()
     : null;
-  const selectedItem = router.replace();
   const selectedPath = router
     .replace("/editar/", "")
     .replace(`/${selectedDay.toLocaleLowerCase()}`, "");

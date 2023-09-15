@@ -5,7 +5,7 @@ import Image from "next/image";
 import styles from "./StaffGallery.module.css";
 
 const StaffGallery = ({ id, closeModal }) => {
-  const { info, updateStaff, handleStaffImage } = useInfo();
+  const { info, updateStaffSaturday, handleStaffImage } = useInfo();
   return (
     <div className={styles.container}>
       <h1>Elige una imagen</h1>
@@ -21,7 +21,7 @@ const StaffGallery = ({ id, closeModal }) => {
             onClick={() => {
               {
                 id !== null
-                  ? updateStaff({ staffImg: item }, id)
+                  ? updateStaffSaturday({ staffImg: item }, id)
                   : handleStaffImage(item);
               }
               closeModal();

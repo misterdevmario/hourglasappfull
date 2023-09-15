@@ -3,7 +3,7 @@
  */
 
 "use client";
-import styles from "./Modal.module.css";
+import styles from "./styles.module.css";
 import { RiCloseCircleLine } from "react-icons/ri";
 
 const Modal = ({ children, isOpen, closeModal }) => {

@@ -62,33 +62,30 @@ export async function getActivitiesThursday() {
     return res.json();
   }
   
-  //Method POST
   export async function postStaffsThursday(data) {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL2}staffthuesdays`,
+      `${process.env.NEXT_PUBLIC_STRAPI_URL2}/staffthuesdays`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       }
     );
-    res.ok ? alert("Staff agregado exitosamente") : null;
+    res.ok ? alert("Actividad agregada exitosamente") : null;
     if (!res.ok) throw new Error("Failed to update data");
     return res.json();
   }
-  
   //Method PUT
   export async function putStaffsThursday(data, id) {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL2}staffthuesdays/${id}`,
+      `${process.env.NEXT_PUBLIC_STRAPI_URL2}/staffthuesdays/${id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       }
     );
-    res.ok ? alert("Staff actualizado exitosamente") : null;
-  
+    res.ok ? alert("Actividad actualizada exitosamente") : null;
     if (!res.ok) throw new Error("Failed to update data");
     return res.json();
   }
@@ -96,12 +93,12 @@ export async function getActivitiesThursday() {
   //Method DELETE
   export async function deleteStaffsThursday(id) {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL2}staffthuesdays/${id}`,
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/staffthuesdays/${id}`,
       {
         method: "DELETE",
       }
     );
-    res.ok ? alert("Staff eliminado exitosamente") : null;
+    res.ok ? alert("Actividad eliminada exitosamente") : null;
     if (!res.ok) throw new Error("Failed to update data");
     return res.json();
   }

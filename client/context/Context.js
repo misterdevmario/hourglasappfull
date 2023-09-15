@@ -261,7 +261,7 @@ export const Provider = ({ children }) => {
     barsrestaurantsGallery: [],
     flyersGallery: [],
   });
-console.log(desc)
+
   useEffect(() => {
     (async () => {
       //Activities
@@ -737,11 +737,42 @@ const deleteStaffFriday = async (id) => {
     setActivityGallery(res.data);
   };
 
-  
-  
-  
-
-
+  //DINING
+  //monday
+  const updateDinningMonday = async (data, id) => {
+    const res = await putDinningMonday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //tuesday
+  const updateDinningTuesday = async (data, id) => {
+    const res = await putDinningTuesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //wednesday
+  const updateDinningWednesday = async (data, id) => {
+    const res = await putDinningWednesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //thursday
+  const updateDinningThursday = async (data, id) => {
+    const res = await putDinningThursday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //friday
+  const updateDinningFriday = async (data, id) => {
+    const res = await putDinningFriday({ data }, id);
+    setActivityGallery(res.data);
+  };
+//saturday
+const updateDinningSaturday = async (data, id) => {
+  const res = await putDinningSaturday({ data }, id);
+  setActivityGallery(res.data);
+};
+//sunday
+const updateDinningSunday = async (data, id) => {
+  const res = await putDinningSunday({ data }, id);
+  setActivityGallery(res.data);
+};
   return (
     <infoContext.Provider
       value={{
@@ -800,11 +831,19 @@ const deleteStaffFriday = async (id) => {
         postStaffSaturday,
         deleteStaffSaturday,
 
-        updateStaffMonday,
-        postStaffMonday,
-        deleteStaffMonday,
+        updateStaffSunday,
+        postStaffSunday,
+        deleteStaffSunday,
 
         //BARS
+
+        updateDinningMonday,
+        updateDinningTuesday,
+        updateDinningThursday,
+        updateDinningWednesday,
+        updateDinningFriday,
+        updateDinningSaturday,
+        updateDinningSunday,
      
         updateBar,
         updateBarMonday,
@@ -815,7 +854,7 @@ const deleteStaffFriday = async (id) => {
         updateBarSaturday,
         updateBarSunday,
         
-        updateDinning,
+       
         updateBrakfast,
         updateStaff,
         postStaff,

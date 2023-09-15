@@ -1,9 +1,12 @@
+import Staff from '@/components/staffWeek/tuesday/Staff'
 import React from 'react'
 
-const page = () => {
+const Martes = () => {
   return (
-    <div>page</div>
+    <div>
+      <Staff/>
+    </div>
   )
 }
 
-export default page
+export default Martes

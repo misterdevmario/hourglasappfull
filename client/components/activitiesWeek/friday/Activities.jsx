@@ -6,11 +6,12 @@ import * as Yup from "yup";
 import { useInfo } from "@/context/Context";
 import Modal from "@/components/modal/Modal";
 import { useModal } from "@/components/modal/useModal";
+import { useModalDesc} from "@/components/modalDesc/useModalDesc"
 import { useEffect, useState } from "react";
 import { RiImageAddLine } from "react-icons/ri";
 import ActivitiesGallery from "./gallery/ActivitiesGallery";
 import { time } from "@/lib/language";
-import ModalDesc from "@/components/modalDesc/modal/ModalDesc";
+import ModalDesc from "@/components/modalDesc/ModalDesc";
 import styles from "../Carousel.module.css";
 
 const validation = Yup.object().shape({
@@ -44,8 +45,8 @@ const Carousel = ({ activities }) => {
   const [id, setId] = useState("");
   const [desc, setDesc] = useState("");
   const [isOpenGallery, openGallery, closeGallery] = useModal(true);
-  const [isOpenModalDescEn, openModalDescEn, closeModalDescEn] = useModal(true);
-  const [isOpenModalDescEs, openModalDescEs, closeModalDescEs] = useModal(true);
+  const [isOpenModalDescEn, openModalDescEn, closeModalDescEn] = useModalDesc(true);
+  const [isOpenModalDescEs, openModalDescEs, closeModalDescEs] = useModalDesc(true);
   const [hoursUppercase, sethoursUppercase] = useState([]);
 
   useEffect(() => {
@@ -77,8 +78,7 @@ const Carousel = ({ activities }) => {
     setDesc(description);
   };
   //console.log(hoursUppercase.map((item) => item.attributes.descEn));
-   console.log(id);
-   console.log(desc);
+   ;
   return (
     <div className={styles.container}>
       {hoursUppercase.map((item) => (

@@ -1,15 +1,17 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useInfo } from "@/context/Context";
-import { useModal } from "../../modal/useModal";
-import { useState } from "react";
-import Modal from "../../Modal/Modal";
 import StaffGallery from "./gallery/StaffGallery";
 import { RiImageAddLine } from "react-icons/ri";
 import styles from "../Staff.module.css";
+import ModalDesc from "@/components/modalDesc/ModalDesc";
+import Modal from "../../Modal/Modal";
+import { useModal } from "@/components/modal/useModal";
+import { useModalDesc } from "@/components/modalDesc/useModalDesc";
 
 const validation = Yup.object().shape({
   name: Yup.string()
@@ -21,6 +23,12 @@ const validation = Yup.object().shape({
   positionEs: Yup.string()
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
+  // bioEn: Yup.string()
+  //   .required("*Campo requerido")
+  //   .max(19, "La longitud maxima es de 19 letras!"),
+  // bioEs: Yup.string()
+  //   .required("*Campo requerido")
+  //   .max(19, "La longitud maxima es de 19 letras!"),
 });
 
 const Staff = () => {
@@ -30,21 +38,45 @@ const Staff = () => {
     postStaffFriday,
     deleteStaffFriday,
     staffImage,
+    handleDescription,
   } = useInfo();
   const [id, setId] = useState("");
+  const [desc, setDesc] = useState("");
   const [isOpenGallery, openGallery, closeGallery] = useModal(true);
-console.log(info.staffFriday)
+  const [isOpenModalBioEn, openModalBioEn, closeModalBioEn] =
+    useModalDesc(true);
+  const [isOpenModalBioEs, openModalBioEs, closeModalBioEs] =
+    useModalDesc(true);
+  const [staff, setStaff] = useState([]);
+
+  useEffect(() => {
+    setStaff(info.staffFriday);
+  }, [info.staffFriday, desc]);
+
+  const handleBioEn = () => {
+    const description = info.staffFriday
+      .filter((item) => item.id == id)
+      .map((item) => item.attributes.bioEn);
+    setDesc(description);
+  };
+  const handleBioEs = () => {
+    const description = info.staffFriday
+      .filter((item) => item.id == id)
+      .map((item) => item.attributes.bioEs);
+    setDesc(description);
+  };
+
+  console.log(typeof desc)
+
   return (
     <div className={styles.container}>
-      {info.staffFriday.map((item, i) => (
+      {staff.map((item, i) => (
         <Formik
           key={item.id}
           initialValues={{
             name: item.attributes.name,
             positionEn: item.attributes.positionEn,
             positionEs: item.attributes.positionEs,
-            bioEs: item.attributes.bioEs,
-            bioEn: item.attributes.bioEn,
           }}
           validationSchema={validation}
           onSubmit={async (data, actions) => {
@@ -74,17 +106,24 @@ console.log(info.staffFriday)
                     className={styles.error}
                   />
 
-                  <Field name="bioEn" placeholder="bio ingles" />
-                  <ErrorMessage
-                    name="bioEn"
-                    component="p"
-                    className={styles.error}
+                  <Field
+                    value={item.attributes.bioEn}
+                    placeholder="bio ingles"
+                    onClick={() => {
+                      handleBioEn();
+                      openModalBioEn();
+                    }}
+                    onMouseEnter={() => setId(item.id)}
                   />
-                  <Field name="bioEs" placeholder="bio español" />
-                  <ErrorMessage
-                    name="bioEs"
-                    component="p"
-                    className={styles.error}
+
+                  <Field
+                    value={item.attributes.bioEs}
+                    placeholder="bio español"
+                    onClick={() => {
+                      handleBioEs();
+                      openModalBioEs();
+                    }}
+                    onMouseEnter={() => setId(item.id)}
                   />
 
                   <button className={styles.save} type="submit">
@@ -117,7 +156,50 @@ console.log(info.staffFriday)
           )}
         </Formik>
       ))}
-
+      <ModalDesc isOpen={isOpenModalBioEn} En closeModal={closeModalBioEn}>
+        <div className={styles.bio}>
+          <textarea
+            type="textarea"
+            onChange={(e) => setDesc(e.target.value)}
+            value={desc}
+            maxLength="120"
+            cols="30"
+            rows="5"
+          />
+          <button
+            onClick={() => {
+              handleDescription(desc);
+              updateStaffFriday({ bioEn: desc }, id);
+              closeModalBioEn();
+            }}
+            disabled={!desc}
+          >
+            Guardar
+          </button>
+        </div>
+      </ModalDesc>
+      <ModalDesc isOpen={isOpenModalBioEs} closeModal={closeModalBioEs}>
+        <div className={styles.bio}>
+          <textarea
+            type="textarea"
+            onChange={(e) => setDesc(e.target.value)}
+            value={desc}
+            maxLength="120"
+            cols="30"
+            rows="5"
+          />
+          <button
+            onClick={() => {
+              handleDescription(desc);
+              updateStaffFriday({ bioEs: desc }, id);
+              closeModalBioEs();
+            }}
+            disabled={!desc}
+          >
+            Guardar
+          </button>
+        </div>
+      </ModalDesc>
       <Formik
         initialValues={{
           name: "",
