@@ -40,6 +40,7 @@
 .active {
   font-weight: bolder;
   font-size: var(--font-lg);
+  text-decoration: underline;
 }
 
 .outlinks {

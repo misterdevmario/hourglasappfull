@@ -110,7 +110,8 @@ const Navbar = () => {
           <Link
             key={i}
             className={
-              router.replace("/editar/", "") == item.toLowerCase()
+              selectedPath
+               == item.toLowerCase()
                 ? `${styles.active}`
                 : `${null}`
             }

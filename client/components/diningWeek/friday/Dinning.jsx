@@ -4,9 +4,11 @@ import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useInfo } from "@/context/Context";
 import { useModal } from "@/components/modal/useModal";
+import { useModalDesc } from "@/components/modalDesc/useModalDesc";
+import Modal from "@/components/modal/Modal";
+import ModalDesc from "@/components/modalDesc/ModalDesc";
 import { useState } from "react";
 import RestaurantsGallery from "./gallery/DinningGallery";
-import Modal from "@/components/modal/Modal";
 import { time } from "@/lib/language";
 import styles from "../Dinning.module.css";
 
@@ -14,9 +16,8 @@ const validation = Yup.object().shape({
   name: Yup.string()
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
-  hours: Yup.string()
-    .required("*Campo requerido")
-    .max(19, "La longitud maxima es de 19 letras!"),
+  hourStart: Yup.string().required("*Campo requerido"),
+  hourEnd: Yup.string().required("*Campo requerido"),
   membersEn: Yup.string()
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
@@ -38,13 +39,29 @@ const validation = Yup.object().shape({
   typeEs: Yup.string()
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
-
 });
 
 const Dinning = () => {
-  const { info, updateDinningFriday } = useInfo();
+  const { info, updateDinningFriday, handleDescription } = useInfo();
   const [id, setId] = useState("");
+  const [desc, setDesc] = useState("");
   const [isOpenGallery, openGallery, closeGallery] = useModal(true);
+  const [isOpenMenuEn, openMenuEn, closeMenuEn] = useModalDesc(true);
+  const [isOpenMenuEs, openMenuEs, closeMenuEs] = useModalDesc(true);
+
+  const handleDescEn = () => {
+    const description = info.dinningFriday
+      .filter((item) => item.id == id)
+      .map((item) => item.attributes.descEn);
+    setDesc(description);
+  };
+  const handleDescEs = () => {
+    const description = info.dinningFriday
+      .filter((item) => item.id == id)
+      .map((item) => item.attributes.descEs);
+    setDesc(description);
+  };
+console.log(id, desc)
   return (
     <div className={styles.container}>
       <div className={styles.form_container}>
@@ -61,10 +78,6 @@ const Dinning = () => {
               serviceEs: item.attributes.serviceEs,
               typeEn: item.attributes.typeEn,
               typeEs: item.attributes.typeEs,
-              descEn: item.attributes.descEn,
-              descEs: item.attributes.descEs,
-              menuImgEn: item.attributes.menuImgEn,
-              menuImgEn: item.attributes.menuImgEn,
             }}
             validationSchema={validation}
             onSubmit={async (data, actions) => {
@@ -138,17 +151,27 @@ const Dinning = () => {
                     component="p"
                     className={styles.error}
                   />
-                  <Field name="descEn" placeholder="descripcion ingles" />
-                  <ErrorMessage
+                  <Field
+                    value={item.attributes.descEn}
                     name="descEn"
-                    component="p"
-                    className={styles.error}
+                    placeholder="Descripcion Ingles"
+                    onClick={() => {
+                      setId(item.id)
+                      handleDescEn();
+                      openMenuEn();
+                    }}
+                    onMouseEnter={() => setId(item.id)}
                   />
-                  <Field name="descEs" placeholder="descripcion español" />
-                  <ErrorMessage
-                    name="descEs"
-                    component="p"
-                    className={styles.error}
+
+                  <Field
+                    value={item.attributes.descEs}
+                    id={item.id}
+                    placeholder="Descripcion Español"
+                    onClick={() => {
+                      handleDescEs();
+                      openMenuEs();
+                    }}
+                    onMouseEnter={() => setId(item.id)}
                   />
                   <button className={styles.save} type="submit">
                     Guardar
@@ -176,7 +199,6 @@ const Dinning = () => {
                       height={250}
                       priority
                       onClick={() => {
-                        
                         setId(item.id);
                       }}
                     />{" "}
@@ -187,7 +209,6 @@ const Dinning = () => {
                       height={250}
                       priority
                       onClick={() => {
-                        
                         setId(item.id);
                       }}
                     />
@@ -200,6 +221,55 @@ const Dinning = () => {
         <Modal isOpen={isOpenGallery} closeModal={closeGallery}>
           <RestaurantsGallery id={id} closeModal={closeGallery} />
         </Modal>
+        <ModalDesc isOpen={isOpenMenuEn} closeModal={closeMenuEn}>
+          <div className={styles.description}>
+            <h1>descripcion ingles</h1>
+            <textarea
+              name="descEn"
+              type="textarea"
+              onChange={(e) => setDesc(e.target.value)}
+              value={desc}
+              maxLength="120"
+              cols="30"
+              rows="5"
+            />
+            <button
+              onClick={() => {
+                handleDescription(desc);
+                updateDinningFriday({ descEn: desc }, id);
+                closeMenuEn();
+              }}
+              disabled={!desc}
+            >
+              Guardar
+            </button>
+          </div>
+        </ModalDesc>
+        <ModalDesc isOpen={isOpenMenuEs} closeModal={closeMenuEs}>
+          <div className={styles.description}>
+          descripcion Español
+
+            <textarea
+              name="descEn"
+              type="textarea"
+              onChange={(e) => setDesc(e.target.value)}
+              value={desc}
+              maxLength="120"
+              cols="30"
+              rows="5"
+            />
+            <button
+              onClick={() => {
+                handleDescription(desc);
+                updateDinningFriday({ descEs: desc }, id);
+                closeMenuEs();
+              }}
+              disabled={!desc}
+            >
+              Guardar
+            </button>
+          </div>
+        </ModalDesc>
       </div>
     </div>
   );
