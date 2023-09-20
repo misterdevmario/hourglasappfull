@@ -1,25 +1,32 @@
 .container {
+  margin-top: 9vh;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 2vh;
+  padding: 2vh;
+  color: var(--secondary-color);
 }
 
-.form_container {
-  width: 100%;
-  height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2vh;
-  margin-top: 5vh;
+.error {
+  font-size: 9px;
+  color: red;
+  margin: 0;
+  padding: 0;
 }
+
+.form_image,
+.post_form_image {
+  height: 100%;
+  width: auto;
+  border-radius: var(--border-radius);
+}
+
 .form {
-  width: 450px;
-  min-height: 350px;
+  width: 500px;
+  height: 380px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,14 +37,17 @@
 }
 
 .inputs {
+  width: 50%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  text-transform: uppercase;
 }
 
-.form input {
-  width: 90%;
+.inputs input {
+  width: 80%;
   height: 10%;
   text-align: center;
   margin: 1vh;
@@ -46,13 +56,7 @@
   border-radius: var(--border-radius);
   font-weight: 700;
   text-transform: uppercase;
-}
-
-.error {
-  font-size: 9px;
-  color: red;
-  margin: 0;
-  padding: 0;
+  color: var(--secondary-color);
 }
 
 .hours {
@@ -87,42 +91,9 @@
   overflow: hidden;
 }
 
-.images {
-  width: 50%;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.diningimg {
-  width: 100%;
-  min-height: 175px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
-.diningimg img {
-  width: 70%;
-  height: auto;
-}
-
-.menus {
-  width: 100%;
-  min-height: 175px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.menus img {
-  width: 40%;
-  height: auto;
-}
 .save {
   width: 50%;
-  height: 12%;
+  height: 10%;
   text-align: center;
   margin: 1vh;
   font-size: var(--font-m);
@@ -147,9 +118,8 @@
   flex-direction: column;
   background-color: #fff;
   border-radius: 5px;
+  text-transform: uppercase;
   color: var(--secondary-color);
-
-
 }
 .description textarea {
   resize: none;
@@ -158,7 +128,6 @@
   font-size: 2vh;
   word-wrap: break-word;
   text-transform: uppercase;
-  color: var(--secondary-color);
 }
 
 .description textarea:focus {
@@ -180,23 +149,98 @@
   text-align: center;
 }
 
+.delete {
+  background-color: red;
+  width: 50%;
+  height: 10%;
+  text-align: center;
+  margin: 1vh;
+  font-size: var(--font-m);
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+
+.delete:hover {
+  background-color: rgb(114, 7, 7);
+}
+
+.toast-container {
+  width: 18rem;
+  height: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  font-size: 0.5rem;
+  background-color: var(--bg-main);
+}
+
+.toast_container-text {
+  width: 18rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.toast_container-text-name {
+  text-align: center;
+}
+.toast_container-btn {
+  width: 18rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toast_container-btn-delete {
+  background-color: rgb(247, 70, 70);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  border: none;
+  color: #fff;
+  height: 2rem;
+  width: 5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+.toast_container-btn-cancel {
+  background-color: green;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  border: none;
+  color: #fff;
+  height: 2rem;
+  width: 5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+.toast_container-btn-delete:hover {
+  transform: scale(1.1);
+}
+.toast_container-btn-cancel:hover {
+  transform: scale(1.1);
+}
 
 @media screen and (max-width: 1400px) {
-  .container {
-    min-height: 100vh;
-  }
   .form {
-    width: 330px;
-    height: 230px;
-  }
-  .form input {
+    width: 300px;
+    height: 200px;
     font-size: var(--font-sm);
   }
-  .form img {
-    width: 30%;
-    height: auto;
+  .inputs input {
+    font-size: var(--font-sm);
   }
   .save {
+    font-size: var(--font-sm);
+  }
+  .delete {
+    height: 8%;
     font-size: var(--font-sm);
   }
 }
@@ -204,7 +248,7 @@
 @media screen and (max-width: 425px) {
   .form {
     width: 370px;
-    height: 300px;
+    height: 290px;
     font-size: var(--font-sm);
   }
   .save {

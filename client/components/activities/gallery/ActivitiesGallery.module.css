@@ -16,7 +16,7 @@
 }
 .image_container{
     width: 55vw;
-    min-height: 70vh;
+    min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
     gap: 1vh;
@@ -25,10 +25,9 @@
 }
 
 .image_container img{
-    width: auto;
-    height: 35vh;
+    width: 8vw;
+    height: auto;
     border-radius: 5px;
-    background-color: #fff;
 }
 
 @media screen and (max-width:425px) {

@@ -1,41 +1,128 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useInfo } from "@/context/Context";
-import { useModal } from "../modal/useModal";
-import { useState } from "react";
-import Modal from "../modal/Modal";
 import StaffGallery from "./gallery/StaffGallery";
 import { RiImageAddLine } from "react-icons/ri";
 import styles from "./Staff.module.css";
+import ModalDesc from "@/components/modalDesc/ModalDesc";
+import Modal from "@/components/modal/Modal";
+import { useModal } from "@/components/modal/useModal";
+import { useModalDesc } from "@/components/modalDesc/useModalDesc";
+import { usePathname } from "next/navigation";
 
 const validation = Yup.object().shape({
   name: Yup.string()
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
-  position: Yup.string()
+  positionEn: Yup.string()
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
+  positionEs: Yup.string()
+    .required("*Campo requerido")
+    .max(19, "La longitud maxima es de 19 letras!"),
+  // bioEn: Yup.string()
+  //   .required("*Campo requerido")
+  //   .max(19, "La longitud maxima es de 19 letras!"),
+  // bioEs: Yup.string()
+  //   .required("*Campo requerido")
+  //   .max(19, "La longitud maxima es de 19 letras!"),
 });
 
-const Staff = () => {
-  const { info, updateStaff, postStaff, deleteStaff, staffImage } = useInfo();
+const Staff = ({ staffInfo }) => {
+  const {
+    updateStaffMonday,
+    postStaffMonday,
+    deleteStaffMonday,
+
+    updateStaffTuesday,
+    postStaffTuesday,
+    deleteStaffTuesday,
+
+    updateStaffWednesday,
+    postStaffWednesday,
+    deleteStaffWednesday,
+
+    updateStaffThursday,
+    postStaffThursday,
+    deleteStaffThursday,
+
+    updateStaffFriday,
+    postStaffFriday,
+    deleteStaffFriday,
+
+    updateStaffSaturday,
+    postStaffSaturday,
+    deleteStaffSaturday,
+
+    updateStaffSunday,
+    postStaffSunday,
+    deleteStaffSunday,
+
+    staffImage,
+    handleDescription,
+  } = useInfo();
   const [id, setId] = useState("");
+  const [desc, setDesc] = useState("");
   const [isOpenGallery, openGallery, closeGallery] = useModal(true);
+  const [isOpenModalBioEn, openModalBioEn, closeModalBioEn] =
+    useModalDesc(true);
+  const [isOpenModalBioEs, openModalBioEs, closeModalBioEs] =
+    useModalDesc(true);
+  const [staff, setStaff] = useState([]);
+  const router = usePathname();
+  const selectedDay = router.includes("actividades")
+    ? router.replace("/editar/actividades/", "")
+    : router.includes("bars")
+    ? router.replace("/editar/bars/", "")
+    : router.includes("staff")
+    ? router.replace("/editar/staff/", "")
+    : router.includes("dinning")
+    ? router.replace("/editar/dinning/", "")
+    : router.includes("breakfast")
+    ? router.replace("/editar/breakfast/", "")
+    : router.includes("flyers")
+    ? router.replace("/editar/flyers/", "")
+    : null;
+  useEffect(() => {
+    setStaff(staffInfo);
+  }, [staffInfo, desc]);
+
+  const handleBioEn = () => {
+    const description = staffInfo
+      .filter((item) => item.id == id)
+      .map((item) => item.attributes.bioEn);
+    setDesc(description);
+  };
+  const handleBioEs = () => {
+    const description = staffInfo
+      .filter((item) => item.id == id)
+      .map((item) => item.attributes.bioEs);
+    setDesc(description);
+  };
+
   return (
     <div className={styles.container}>
-      {info.staff.map((item, i) => (
+      {staff?.map((item, i) => (
         <Formik
           key={item.id}
           initialValues={{
             name: item.attributes.name,
-            position: item.attributes.position,
+            positionEn: item.attributes.positionEn,
+            positionEs: item.attributes.positionEs,
           }}
           validationSchema={validation}
           onSubmit={async (data, actions) => {
-            await updateStaff(data, item.id);
+            if (selectedDay == "lunes") await updateStaffMonday(data, item.id);
+            if (selectedDay == "martes") await updateStaffTuesday(data, item.id);
+            if (selectedDay == "miercoles") await updateStaffThursday(data, item.id);
+            if (selectedDay == "jueves") await updateStaffWednesday(data, item.id);
+            if (selectedDay == "viernes") await updateStaffFriday(data, item.id);
+            if (selectedDay == "sabado") await updateStaffSaturday(data, item.id);
+            if (selectedDay == "domingo") await updateStaffSunday(data, item.id);
           }}
         >
           {({ handlesubmit }) => (
@@ -48,9 +135,44 @@ const Staff = () => {
                     component="p"
                     className={styles.error}
                   />
-                  <Field name="position" placeholder="posición" />
+                  <Field name="positionEn" placeholder="posición ingles" />
                   <ErrorMessage
-                    name="position"
+                    name="positionEn"
+                    component="p"
+                    className={styles.error}
+                  />
+                  <Field name="positionEs" placeholder="posición español" />
+                  <ErrorMessage
+                    name="positionEs"
+                    component="p"
+                    className={styles.error}
+                  />
+
+                  <Field
+                    value={item.attributes.bioEn}
+                    placeholder="bio ingles"
+                    onClick={() => {
+                      handleBioEn();
+                      openModalBioEn();
+                    }}
+                    onMouseEnter={() => setId(item.id)}
+                  />
+                  <ErrorMessage
+                    name="bioEn"
+                    component="p"
+                    className={styles.error}
+                  />
+                  <Field
+                    value={item.attributes.bioEs}
+                    placeholder="bio español"
+                    onClick={() => {
+                      handleBioEs();
+                      openModalBioEs();
+                    }}
+                    onMouseEnter={() => setId(item.id)}
+                  />
+                  <ErrorMessage
+                    name="bioEs"
                     component="p"
                     className={styles.error}
                   />
@@ -58,11 +180,25 @@ const Staff = () => {
                   <button className={styles.save} type="submit">
                     Guardar
                   </button>
-                  {info.staff.length > 1 ? (
+                  {staffInfo.length > 1 ? (
                     <button
                       type="button"
                       className={styles.delete}
-                      onClick={() => deleteStaff(item.id)}
+                      onClick={() => {
+                        if (selectedDay == "lunes") deleteStaffMonday(item.id);
+                        if (selectedDay == "martes")
+                          deleteStaffTuesday(item.id);
+                        if (selectedDay == "miercoles")
+                          deleteStaffWednesday(item.id);
+                        if (selectedDay == "jueves")
+                          deleteStaffThursday(item.id);
+                        if (selectedDay == "viernes")
+                          deleteStaffFriday(item.id);
+                        if (selectedDay == "sabado")
+                          deleteStaffSaturday(item.id);
+                        if (selectedDay == "domingo")
+                          deleteStaffSunday(item.id);
+                      }}
                     >
                       Eliminar
                     </button>
@@ -85,16 +221,94 @@ const Staff = () => {
           )}
         </Formik>
       ))}
-
+      <ModalDesc isOpen={isOpenModalBioEn} En closeModal={closeModalBioEn}>
+        <div className={styles.bio}>
+          <textarea
+            type="textarea"
+            onChange={(e) => setDesc(e.target.value)}
+            value={desc}
+            maxLength="120"
+            cols="30"
+            rows="5"
+          />
+          <button
+            onClick={() => {
+              handleDescription(desc);
+              if (selectedDay == "lunes")
+                updateStaffMonday({ bioEn: desc }, id);
+              if (selectedDay == "martes")
+                updateStaffTuesday({ bioEn: desc }, id);
+              if (selectedDay == "miercoles")
+                updateStaffWednesday({ bioEn: desc }, id);
+              if (selectedDay == "jueves")
+                updateStaffThursday({ bioEn: desc }, id);
+              if (selectedDay == "viernes")
+                updateStaffFriday({ bioEn: desc }, id);
+              if (selectedDay == "sabado")
+                updateStaffSaturday({ bioEn: desc }, id);
+              if (selectedDay == "domingo")
+                updateStaffSunday({ bioEn: desc }, id);
+              closeModalBioEn();
+            }}
+            disabled={!desc}
+          >
+            Guardar
+          </button>
+        </div>
+      </ModalDesc>
+      <ModalDesc isOpen={isOpenModalBioEs} closeModal={closeModalBioEs}>
+        <div className={styles.bio}>
+          <textarea
+            type="textarea"
+            onChange={(e) => setDesc(e.target.value)}
+            value={desc}
+            maxLength="120"
+            cols="30"
+            rows="5"
+          />
+          <button
+            onClick={() => {
+              handleDescription(desc);
+              if (selectedDay == "lunes")
+                updateStaffMonday({ bioEs: desc }, id);
+              if (selectedDay == "martes")
+                updateStaffTuesday({ bioEs: desc }, id);
+              if (selectedDay == "miercoles")
+                updateStaffWednesday({ bioEs: desc }, id);
+              if (selectedDay == "jueves")
+                updateStaffThursday({ bioEs: desc }, id);
+              if (selectedDay == "viernes")
+                updateStaffFriday({ bioEs: desc }, id);
+              if (selectedDay == "sabado")
+                updateStaffSaturday({ bioEs: desc }, id);
+              if (selectedDay == "domingo")
+                updateStaffSunday({ bioEs: desc }, id);
+              closeModalBioEs();
+            }}
+            disabled={!desc}
+          >
+            Guardar
+          </button>
+        </div>
+      </ModalDesc>
       <Formik
         initialValues={{
           name: "",
-          position: "",
+          positionEn: "",
+          positionEs: "",
+          bioEn: "",
+          bioEs: "",
         }}
         validationSchema={validation}
         onSubmit={async (data, { resetForm }) => {
           data.staffImg = staffImage;
-          await postStaff(data);
+           if (selectedDay == "lunes") await postStaffMonday(data);
+            if (selectedDay == "martes") await postStaffTuesday(data);
+            if (selectedDay == "miercoles") await postStaffThursday(data);
+            if (selectedDay == "jueves") await postStaffWednesday(data);
+            if (selectedDay == "viernes") await postStaffFriday(data);
+            if (selectedDay == "sabado") await postStaffSaturday(data);
+            if (selectedDay == "domingo") await postStaffSunday(data);
           resetForm({ values: "" });
         }}
       >
@@ -108,9 +322,28 @@ const Staff = () => {
                   className={styles.error}
                   name="name"
                 />
-                <Field name="position" placeholder="posición" />
+                <Field name="positionEn" placeholder="posición ingles" />
                 <ErrorMessage
-                  name="position"
+                  name="positionEn"
+                  component="p"
+                  className={styles.error}
+                />
+                <Field name="positionEs" placeholder="posición español" />
+                <ErrorMessage
+                  name="positionEs"
+                  component="p"
+                  className={styles.error}
+                />
+
+                <Field name="bioEn" placeholder="bio ingles" />
+                <ErrorMessage
+                  name="bioEn"
+                  component="p"
+                  className={styles.error}
+                />
+                <Field name="bioEs" placeholder="bio español" />
+                <ErrorMessage
+                  name="bioEs"
                   component="p"
                   className={styles.error}
                 />

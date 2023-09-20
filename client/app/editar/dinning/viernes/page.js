@@ -41,7 +41,6 @@ const Viernes = () => {
     info.dinningSunday,
     selectedDay,
   ]);
-  console.log(dinngInfo);
   return (
     <div>
       <Dinning dinngInfo={dinngInfo} />

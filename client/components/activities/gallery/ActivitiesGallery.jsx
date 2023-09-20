@@ -2,20 +2,20 @@
 
 import { useInfo } from "@/context/Context";
 import Image from "next/image";
-import styles from "./StaffGallery.module.css";
+import styles from "./ActivitiesGallery.module.css";
 import { usePathname } from "next/navigation";
 
-const StaffGallery = ({ id, closeModal }) => {
+const ActivitiesGallery = ({ id, closeModal }) => {
   const {
     info,
-    updateStaffMonday,
-    updateStaffTuesday,
-    updateStaffWednesday,
-    updateStaffThursday,
-    updateStaffFriday,
-    updateStaffSaturday,
-    updateStaffSunday,
-    handleStaffImage,
+    updateActivityMonday,
+    updateActivityTuesday,
+    updateActivityWednesday,
+    updateActivityThursday,
+    updateActivityFriday,
+    updateActivitySaturday,
+    updateActivitySunday,
+    handleImage,
   } = useInfo();
   const router = usePathname();
   const selectedDay = router.includes("actividades")
@@ -31,42 +31,42 @@ const StaffGallery = ({ id, closeModal }) => {
     : router.includes("flyers")
     ? router.replace("/editar/flyers/", "")
     : null;
+
   return (
     <div className={styles.container}>
       <h1>Elige una imagen</h1>
       <div className={styles.image_container}>
-        {info.staffGallery.map((item, i) => (
+        {info?.activitiesGallery.map((item, i) => (
           <Image
             key={i}
             src={item}
-            alt="staff"
-            width={250}
-            height={500}
+            alt="activity"
+            width={100}
+            height={200}
             priority
             onClick={() => {
               if (selectedDay == "lunes" && id !== null) {
-                updateStaffMonday({ staffImg: item }, id);
+                updateActivityMonday({ activitieImage: item }, id);
               }
               if (selectedDay == "martes" && id !== null) {
-                updateStaffTuesday({ staffImg: item }, id);
+                updateActivityTuesday({ activitieImage: item }, id);
               }
               if (selectedDay == "miercoles" && id !== null) {
-                updateStaffWednesday({ staffImg: item }, id);
+                updateActivityWednesday({ activitieImage: item }, id);
               }
               if (selectedDay == "jueves" && id !== null) {
-                updateStaffThursday({ staffImg: item }, id);
+                updateActivityThursday({ activitieImage: item }, id);
               }
               if (selectedDay == "viernes" && id !== null) {
-                updateStaffFriday({ staffImg: item }, id);
+                updateActivityFriday({ activitieImage: item }, id);
               }
               if (selectedDay == "sabado" && id !== null) {
-                updateStaffSaturday({ staffImg: item }, id);
+                updateActivitySaturday({ activitieImage: item }, id);
               }
               if (selectedDay == "domingo" && id !== null) {
-                updateStaffSunday({ staffImg: item }, id);
+                updateActivitySunday({ activitieImage: item }, id);
               }
-              if (id == null) handleStaffImage(item);
-
+              if (id == null) handleImage(item);
               closeModal();
             }}
           />
@@ -76,4 +76,4 @@ const StaffGallery = ({ id, closeModal }) => {
   );
 };
 
-export default StaffGallery;
+export default ActivitiesGallery;

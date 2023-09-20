@@ -19,7 +19,7 @@
 }
 .form {
   width: 450px;
-  min-height: 350px;
+  min-height: 300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -101,28 +101,42 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .diningimg img {
   width: 70%;
   height: auto;
+  cursor: pointer;
 }
 
 .menus {
   width: 100%;
-  min-height: 175px;
+  min-height: 190px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  gap:2px;
 }
-.menus img {
-  width: 40%;
-  height: auto;
+.menuitem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 14px;
+  
+}
+.menuitem label{
+  margin-bottom: 10px;
+}
+
+.menuitem img {
+  width: auto;
+  height: 17vh;
+  cursor: pointer;
 }
 .save {
-  width: 50%;
-  height: 12%;
+  width: 70%;
+  height: 30px;
   text-align: center;
   margin: 1vh;
   font-size: var(--font-m);
@@ -148,8 +162,6 @@
   background-color: #fff;
   border-radius: 5px;
   color: var(--secondary-color);
-
-
 }
 .description textarea {
   resize: none;
@@ -180,7 +192,7 @@
   text-align: center;
 }
 
-.menuLg{
+.menuLg {
   width: 100%;
   height: 100%;
   display: flex;

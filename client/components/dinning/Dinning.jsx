@@ -55,8 +55,8 @@ const Dinning = ({ dinngInfo }) => {
   } = useInfo();
   const [id, setId] = useState("");
   const [desc, setDesc] = useState();
-  const [menuLgEn, setMenuLgEn] = useState();
-  const [menuLgEs, setMenuLgEs] = useState();
+  const [menuLgEn, setMenuLgEn] = useState("");
+  const [menuLgEs, setMenuLgEs] = useState("");
   const [isOpenGallery, openGallery, closeGallery] = useModal(true);
   const [isOpenMenuEn, openMenuEn, closeMenuEn] = useModalDesc(true);
   const [isOpenMenuEs, openMenuEs, closeMenuEs] = useModalDesc(true);
@@ -76,7 +76,9 @@ const Dinning = ({ dinngInfo }) => {
     : router.includes("flyers")
     ? router.replace("/editar/flyers/", "")
     : null;
-  console.log(menuLgEn);
+
+ 
+
   const handleDescEn = () => {
     const description = dinngInfo
       .filter((item) => item.id == id)
@@ -92,14 +94,14 @@ const Dinning = ({ dinngInfo }) => {
   const handleMenuLgEn = () => {
     const description = dinngInfo
       .filter((item) => item.id == id)
-      .map((item) => item.attributes.menuImgEn);
-    setMenuLgEn(description);
+      .map((item) => item.attributes?.menuImgEn);
+    setMenuLgEn(description.toString());
   };
   const handleMenuLgEs = () => {
     const description = dinngInfo
       .filter((item) => item.id == id)
-      .map((item) => item.attributes.menuImgEs);
-    setMenuLgEs(description);
+      .map((item) => item.attributes?.menuImgEs);
+    setMenuLgEs(description.toString());
   };
   return (
     <div className={styles.container}>
@@ -244,30 +246,36 @@ const Dinning = ({ dinngInfo }) => {
                     />
                   </div>
                   <div className={styles.menus}>
-                    <Image
-                      src={item.attributes.menuImgEn}
-                      alt="bar"
-                      width={200}
-                      height={250}
-                      priority
-                      onClick={() => {
-                        setId(item.id);
-                        handleMenuLgEn();
-                        openMenuLgEn();
-                      }}
-                    />{" "}
-                    <Image
-                      src={item.attributes.menuImgEs}
-                      alt="bar"
-                      width={200}
-                      height={250}
-                      priority
-                      onClick={() => {
-                        setId(item.id);
-                        handleMenuLgEs();
-                        openMenuLgEs();
-                      }}
-                    />
+                    <div className={styles.menuitem}>
+                      <label htmlFor="">Menu ingles</label>
+                      <Image
+                        src={item.attributes.menuImgEn}
+                        alt="bar"
+                        width={200}
+                        height={250}
+                        priority
+                        onClick={() => {
+                          setId(item.id);
+                          handleMenuLgEn();
+                          openMenuLgEn();
+                        }}
+                      />{" "}
+                    </div>
+                    <div className={styles.menuitem}>
+                      <label htmlFor="">menu español</label>
+                      <Image
+                        src={item.attributes.menuImgEs}
+                        alt="bar"
+                        width={200}
+                        height={250}
+                        priority
+                        onClick={() => {
+                          setId(item.id);
+                          handleMenuLgEs();
+                          openMenuLgEs();
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </Form>
@@ -279,27 +287,25 @@ const Dinning = ({ dinngInfo }) => {
         </Modal>
         <Modal isOpen={isOpenMenuLgEn} closeModal={closeMenuLgEn}>
           <div className={styles.menuLg} onClick={() => menuLgEn()}>
-          <h1>Menu ingles</h1>
+            <h1>Menu ingles</h1>
             <Image
-              src={menuLgEn[0]}
+              src={menuLgEn}
               alt="Menu"
               width={1000}
               height={1980}
               priority
-           
             />
           </div>
         </Modal>
         <Modal isOpen={isOpenMenuLgEs} closeModal={closeMenuLgEs}>
           <div className={styles.menuLg} onClick={() => menuLgEs()}>
-         <h1> Menu español</h1>
+            <h1> Menu español</h1>
             <Image
-              src={menuLgEn[0]}
+              src={menuLgEs}
               alt="Menu"
               width={1000}
               height={1980}
               priority
-        
             />
           </div>
           <div className={styles.menuLgEn} onClick={() => menuLgEn()}></div>
