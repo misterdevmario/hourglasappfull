@@ -377,7 +377,7 @@ export const Provider = ({ children }) => {
         staffFriday: staffResponseFriday.data,
         staffSaturday: staffResponseSaturday.data,
         staffSunday: staffResponseSunday.data,
-        
+
         dinningMonday: dinningResponseMonday.data,
         dinningTuesday: dinningResponseTuesday.data,
         dinningWednesday: dinningResponseWednesday.data,
@@ -424,7 +424,6 @@ export const Provider = ({ children }) => {
         flyersGallery: flyerImage.toString().split(","),
       });
     })();
-
   }, [activityGallery, image, staffImage, flyerImage, desc]);
 
   useEffect(() => {
@@ -454,7 +453,6 @@ export const Provider = ({ children }) => {
   const handleDescription = (desc) => {
     setDesc(desc);
   };
-
 
   const updateBar = async (data, id) => {
     const res = await putBars({ data }, id);
@@ -498,7 +496,6 @@ export const Provider = ({ children }) => {
     setActivityGallery(res);
   };
 
-  
   //ACTIVITIES
   //monday
   const updateActivityMonday = async (data, id) => {
@@ -514,7 +511,7 @@ export const Provider = ({ children }) => {
     const res = await deleteActivitiesMonday(id);
     setActivityGallery(res);
   };
-//tuesday
+  //tuesday
   const updateActivityTuesday = async (data, id) => {
     const res = await putActivitiesTuesday({ data }, id);
     setActivityGallery(res.data);
@@ -528,7 +525,7 @@ export const Provider = ({ children }) => {
     const res = await deleteActivitiesTuesday(id);
     setActivityGallery(res);
   };
-//wednesday
+  //wednesday
   const updateActivityWednesday = async (data, id) => {
     const res = await putActivitiesWednesday({ data }, id);
     setActivityGallery(res.data);
@@ -542,7 +539,7 @@ export const Provider = ({ children }) => {
     const res = await deleteActivitiesWednesday(id);
     setActivityGallery(res);
   };
-//thursday
+  //thursday
   const updateActivityThursday = async (data, id) => {
     const res = await putActivitiesThursday({ data }, id);
     setActivityGallery(res.data);
@@ -556,7 +553,7 @@ export const Provider = ({ children }) => {
     const res = await deleteActivitiesThursday(id);
     setActivityGallery(res);
   };
-//friday
+  //friday
   const updateActivityFriday = async (data, id) => {
     const res = await putActivitiesFriday({ data }, id);
     setActivityGallery(res.data);
@@ -570,7 +567,7 @@ export const Provider = ({ children }) => {
     const res = await deleteActivitiesFriday(id);
     setActivityGallery(res);
   };
-//saturday
+  //saturday
   const updateActivitySaturday = async (data, id) => {
     const res = await putActivitiesSaturday({ data }, id);
     setActivityGallery(res.data);
@@ -583,8 +580,8 @@ export const Provider = ({ children }) => {
   const deleteActivitySaturday = async (id) => {
     const res = await deleteActivitiesSaturday(id);
     setActivityGallery(res);
- };
-//sunday
+  };
+  //sunday
   const updateActivitySunday = async (data, id) => {
     const res = await putActivitiesSunday({ data }, id);
     setActivityGallery(res.data);
@@ -616,7 +613,7 @@ export const Provider = ({ children }) => {
     setActivityGallery(res);
   };
 
-//tuesday
+  //tuesday
   const updateStaffTuesday = async (data, id) => {
     const res = await putStaffsTuesday({ data }, id);
     setActivityGallery(res.data);
@@ -661,22 +658,22 @@ export const Provider = ({ children }) => {
     const res = deleteStaffsThursday(id);
     setActivityGallery(res);
   };
-//friday
-const updateStaffFriday = async (data, id) => {
-  const res = await putStaffsFriday({ data }, id);
-  setActivityGallery(res.data);
-};
+  //friday
+  const updateStaffFriday = async (data, id) => {
+    const res = await putStaffsFriday({ data }, id);
+    setActivityGallery(res.data);
+  };
 
-const postStaffFriday = async (data) => {
-  const res = await postStaffsFriday({ data });
-  setActivityGallery(res.data);
-  setStaffImage(null);
-};
-const deleteStaffFriday = async (id) => {
-  const res = deleteStaffsFriday(id);
-  setActivityGallery(res);
-};
-//saturday
+  const postStaffFriday = async (data) => {
+    const res = await postStaffsFriday({ data });
+    setActivityGallery(res.data);
+    setStaffImage(null);
+  };
+  const deleteStaffFriday = async (id) => {
+    const res = deleteStaffsFriday(id);
+    setActivityGallery(res);
+  };
+  //saturday
   const updateStaffSaturday = async (data, id) => {
     const res = await putStaffsSaturday({ data }, id);
     setActivityGallery(res.data);
@@ -712,7 +709,7 @@ const deleteStaffFriday = async (id) => {
     const res = await putBarsMonday({ data }, id);
     setActivityGallery(res.data);
   };
-   const updateBarTuesday = async (data, id) => {
+  const updateBarTuesday = async (data, id) => {
     const res = await putBarsTuesday({ data }, id);
     setActivityGallery(res.data);
   };
@@ -733,7 +730,7 @@ const deleteStaffFriday = async (id) => {
     setActivityGallery(res.data);
   };
   const updateBarSunday = async (data, id) => {
-    const res = await putBarSunnday({ data }, id);
+    const res = await putBarsSunday({ data }, id);
     setActivityGallery(res.data);
   };
 
@@ -763,16 +760,55 @@ const deleteStaffFriday = async (id) => {
     const res = await putDinningFriday({ data }, id);
     setActivityGallery(res.data);
   };
-//saturday
-const updateDinningSaturday = async (data, id) => {
-  const res = await putDinningSaturday({ data }, id);
-  setActivityGallery(res.data);
-};
-//sunday
-const updateDinningSunday = async (data, id) => {
-  const res = await putDinningSunday({ data }, id);
-  setActivityGallery(res.data);
-};
+  //saturday
+  const updateDinningSaturday = async (data, id) => {
+    const res = await putDinningSaturday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //sunday
+  const updateDinningSunday = async (data, id) => {
+    const res = await putDinningSunday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  //BREAKFAST
+
+  //monday
+  const updateBreakfastMonday = async (data, id) => {
+    const res = await putBreakfastMonday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //tuesday
+  const updateBreakfastTuesday = async (data, id) => {
+    const res = await putBreakfastTuesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //wednesday
+  const updateBreakfastWednesday = async (data, id) => {
+    const res = await putBreakfastWednesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //thursday
+  const updateBreakfastThursday = async (data, id) => {
+    const res = await putBreakfastThursday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //friday
+  const updateBreakfastFriday = async (data, id) => {
+    const res = await putBreakfastFriday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //saturday
+  const updateBreakfastSaturday = async (data, id) => {
+    const res = await putBreakfastSaturday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //sunday
+  const updateBreakfastSunday = async (data, id) => {
+    const res = await putBreakfastSunday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
   return (
     <infoContext.Provider
       value={{
@@ -835,8 +871,7 @@ const updateDinningSunday = async (data, id) => {
         postStaffSunday,
         deleteStaffSunday,
 
-        //BARS
-
+        //DINING
         updateDinningMonday,
         updateDinningTuesday,
         updateDinningThursday,
@@ -844,8 +879,8 @@ const updateDinningSunday = async (data, id) => {
         updateDinningFriday,
         updateDinningSaturday,
         updateDinningSunday,
-     
-        updateBar,
+
+        //BARS
         updateBarMonday,
         updateBarTuesday,
         updateBarWednesday,
@@ -853,8 +888,16 @@ const updateDinningSunday = async (data, id) => {
         updateBarFriday,
         updateBarSaturday,
         updateBarSunday,
-        
-       
+
+        //BREAKFAST
+        updateBreakfastMonday,
+        updateBreakfastTuesday,
+        updateBreakfastWednesday,
+        updateBreakfastThursday,
+        updateBreakfastFriday,
+        updateBreakfastSaturday,
+        updateBreakfastSunday,
+
         updateBrakfast,
         updateStaff,
         postStaff,
@@ -876,7 +919,7 @@ const updateDinningSunday = async (data, id) => {
         handleStaffImage,
         staffImage,
         handleDescription,
-        activityGallery
+        activityGallery,
       }}
     >
       {children}

@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -7,7 +8,6 @@ import { useModal } from "@/components/modal/useModal";
 import { useModalDesc } from "@/components/modalDesc/useModalDesc";
 import Modal from "@/components/modal/Modal";
 import ModalDesc from "@/components/modalDesc/ModalDesc";
-import { useEffect, useState } from "react";
 import RestaurantsGallery from "./gallery/DinningGallery";
 import { time } from "@/lib/language";
 import styles from "./Dinning.module.css";

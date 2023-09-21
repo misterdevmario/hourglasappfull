@@ -170,7 +170,7 @@ export async function getActivitiesSunday() {
     return res.json();
   }
   
-  export async function putBarsSaturday(data, id) {
+  export async function putBarsSunday(data, id) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL2}/barsundays/${id}`,
       {
