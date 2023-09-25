@@ -30,6 +30,7 @@ const BarsGallery = ({ id, closeModal }) => {
     : router.includes("flyers")
     ? router.replace("/editar/flyers/", "")
     : null;
+    
   return (
     <div className={styles.container}>
       <h1>Elige una imagen</h1>

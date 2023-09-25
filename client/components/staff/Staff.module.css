@@ -60,7 +60,6 @@
 
 
 
-
 .save  {
   width: 50%;
   height:10%;
@@ -100,6 +99,9 @@ background-color: #9f9b9b;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
+  background-color: #fff;
+  color: var(--secondary-color);
+
 }
 .bio textarea {
   resize: none;

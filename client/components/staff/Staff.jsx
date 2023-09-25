@@ -24,12 +24,8 @@ const validation = Yup.object().shape({
   positionEs: Yup.string()
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
-  // bioEn: Yup.string()
-  //   .required("*Campo requerido")
-  //   .max(19, "La longitud maxima es de 19 letras!"),
-  // bioEs: Yup.string()
-  //   .required("*Campo requerido")
-  //   .max(19, "La longitud maxima es de 19 letras!"),
+
+
 });
 
 const Staff = ({ staffInfo }) => {
@@ -223,6 +219,8 @@ const Staff = ({ staffInfo }) => {
       ))}
       <ModalDesc isOpen={isOpenModalBioEn} En closeModal={closeModalBioEn}>
         <div className={styles.bio}>
+        <div>descripción ingles</div>
+
           <textarea
             type="textarea"
             onChange={(e) => setDesc(e.target.value)}
@@ -258,6 +256,7 @@ const Staff = ({ staffInfo }) => {
       </ModalDesc>
       <ModalDesc isOpen={isOpenModalBioEs} closeModal={closeModalBioEs}>
         <div className={styles.bio}>
+          <div>descripción español</div>
           <textarea
             type="textarea"
             onChange={(e) => setDesc(e.target.value)}

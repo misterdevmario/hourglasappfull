@@ -398,7 +398,7 @@ export const Provider = ({ children }) => {
         barsTuesday: barsResponseTuesday.data,
         barsWednesday: barsResponseWednesday.data,
         barsThursday: barsResponseThursday.data,
-        barFriday: barsResponseFriday.data,
+        barsFriday: barsResponseFriday.data,
         barsSaturday: barsResponseSaturday.data,
         barsSunday: barsResponseSunday.data,
 
@@ -452,48 +452,6 @@ export const Provider = ({ children }) => {
 
   const handleDescription = (desc) => {
     setDesc(desc);
-  };
-
-  const updateBar = async (data, id) => {
-    const res = await putBars({ data }, id);
-    setActivityGallery(res.data);
-  };
-  const updateDinning = async (data, id) => {
-    const res = await putDinning({ data }, id);
-    setActivityGallery(res.data);
-  };
-  const updateBrakfast = async (data, id) => {
-    const res = await putBreakfast({ data }, id);
-    setActivityGallery(res.data);
-  };
-  const updateStaff = async (data, id) => {
-    const res = await putStaff({ data }, id);
-    setActivityGallery(res.data);
-  };
-
-  const postStaff = async (data) => {
-    const res = await postStaffs({ data });
-    setActivityGallery(res.data);
-    setStaffImage(null);
-  };
-  const deleteStaff = async (id) => {
-    const res = deleteStaffs(id);
-    setActivityGallery(res);
-  };
-
-  const updateFlyer = async (data, id) => {
-    const res = await putFlyers({ data }, id);
-    setActivityGallery(res.data);
-  };
-
-  const postFlyer = async (data) => {
-    const res = await postFlyers({ data });
-    setActivityGallery(res.data);
-    setFlyerImage(null);
-  };
-  const deleteFlyer = async (id) => {
-    const res = deleteFlyers(id);
-    setActivityGallery(res);
   };
 
   //ACTIVITIES
@@ -809,6 +767,113 @@ export const Provider = ({ children }) => {
     setActivityGallery(res.data);
   };
 
+  //FLYERS
+
+  //monday
+  const updateFlyerMonday = async (data, id) => {
+    const res = await putFlyersMonday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  const postFlyerMonday = async (data) => {
+    const res = await postFlyersMonday({ data });
+    setActivityGallery(res.data);
+    setFlyerImage(null);
+  };
+  const deleteFlyerMonday = async (id) => {
+    const res = deleteFlyersMonday(id);
+    setActivityGallery(res);
+  };
+  //tuesday
+  const updateFlyerTuesday = async (data, id) => {
+    const res = await putFlyersTuesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  const postFlyerTuesday = async (data) => {
+    const res = await postFlyersTuesday({ data });
+    setActivityGallery(res.data);
+    setFlyerImage(null);
+  };
+  const deleteFlyerTuesday = async (id) => {
+    const res = deleteFlyersTuesday(id);
+    setActivityGallery(res);
+  };
+  //wednesday
+  const updateFlyerWednesday = async (data, id) => {
+    const res = await putFlyersWednesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  const postFlyerWednesday = async (data) => {
+    const res = await postFlyersWednesday({ data });
+    setActivityGallery(res.data);
+    setFlyerImage(null);
+  };
+  const deleteFlyerWednesday = async (id) => {
+    const res = deleteFlyersWednesday(id);
+    setActivityGallery(res);
+  };
+  //thursday
+  const updateFlyerThursday = async (data, id) => {
+    const res = await putFlyersThursday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  const postFlyerThursday = async (data) => {
+    const res = await postFlyersThursday({ data });
+    setActivityGallery(res.data);
+    setFlyerImage(null);
+  };
+  const deleteFlyerThursday = async (id) => {
+    const res = deleteFlyersThursday(id);
+    setActivityGallery(res);
+  };
+  //friday
+  const updateFlyerFriday = async (data, id) => {
+    const res = await putFlyersFriday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  const postFlyerFriday = async (data) => {
+    const res = await postFlyersFriday({ data });
+    setActivityGallery(res.data);
+    setFlyerImage(null);
+  };
+  const deleteFlyerFriday = async (id) => {
+    const res = deleteFlyersFriday(id);
+    setActivityGallery(res);
+  };
+  //saturday
+  const updateFlyerSaturday = async (data, id) => {
+    const res = await putFlyersSaturday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  const postFlyerSaturday = async (data) => {
+    const res = await postFlyersSaturday({ data });
+    setActivityGallery(res.data);
+    setFlyerImage(null);
+  };
+  const deleteFlyerSaturday = async (id) => {
+    const res = deleteFlyersSaturday(id);
+    setActivityGallery(res);
+  };
+  //sunday
+  const updateFlyerSunday = async (data, id) => {
+    const res = await putFlyersSunday({ data }, id);
+    setActivityGallery(res.data);
+  };
+
+  const postFlyerSunday = async (data) => {
+    const res = await postFlyersSunday({ data });
+    setActivityGallery(res.data);
+    setFlyerImage(null);
+  };
+  const deleteFlyerSunday = async (id) => {
+    const res = deleteFlyersSunday(id);
+    setActivityGallery(res);
+  };
   return (
     <infoContext.Provider
       value={{
@@ -898,13 +963,34 @@ export const Provider = ({ children }) => {
         updateBreakfastSaturday,
         updateBreakfastSunday,
 
-        updateBrakfast,
-        updateStaff,
-        postStaff,
-        deleteStaff,
-        updateFlyer,
-        postFlyer,
-        deleteFlyer,
+        //FLYERS
+        updateFlyerMonday,
+        postFlyerMonday,
+        deleteFlyerMonday,
+
+        updateFlyerTuesday,
+        postFlyerTuesday,
+        deleteFlyerTuesday,
+
+        updateFlyerWednesday,
+        postFlyerWednesday,
+        deleteFlyerWednesday,
+
+        updateFlyerThursday,
+        postFlyerThursday,
+        deleteFlyerThursday,
+
+        updateFlyerFriday,
+        postFlyerFriday,
+        deleteFlyerFriday,
+
+        updateFlyerSaturday,
+        postFlyerSaturday,
+        deleteFlyerSaturday,
+
+        updateFlyerSunday,
+        postFlyerSunday,
+        deleteFlyerSunday,
 
         //Language
         language,

@@ -1,4 +1,4 @@
-.container{
+.container {
   margin-top: 9vh;
   width: 100%;
   min-height: 100vh;
@@ -23,15 +23,15 @@
 }
 
 .form {
-  width: 400px;
-  height: 270px;
+  width: 500px;
+  height:380px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: var(--font-sm);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-background-color: #fff;
+  background-color: #fff;
 }
 
 .inputs {
@@ -55,14 +55,67 @@ background-color: #fff;
   text-transform: uppercase;
 }
 
+.hours {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-
-
-
-
-.save  {
+.hours select {
   width: 50%;
-  height:10%;
+  height: 70%;
+  text-align: center;
+  margin: 1vh;
+  font-size: var(--font-m);
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hours option {
+  width: 100%;
+  height: 10%;
+  text-align: center;
+  margin: 1vh;
+  font-size: var(--font-m);
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 700;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.description {
+  width: 450px;
+  height: 400px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 5px;
+  color: var(--secondary-color);
+}
+.description textarea {
+  resize: none;
+  border: 3px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  font-size: 2vh;
+  word-wrap: break-word;
+  text-transform: uppercase;
+  color: var(--secondary-color);
+}
+
+.description textarea:focus {
+  resize: none;
+  outline: 5px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+}
+.description button {
+  width: 50%;
+  height: 10%;
   text-align: center;
   margin: 1vh;
   font-size: var(--font-m);
@@ -70,49 +123,62 @@ background-color: #fff;
   border-radius: var(--border-radius);
   font-weight: 700;
   background-color: var(--secondary-color);
-  color:#fff;
+  color: #fff;
   text-align: center;
 }
 
-.save:hover{
-background-color: #9f9b9b;
-}
-
-.delete {
-  background-color: red;
+.save {
   width: 50%;
-  height:10%;
+  height: 10%;
   text-align: center;
   margin: 1vh;
   font-size: var(--font-m);
   border: none;
   border-radius: var(--border-radius);
   font-weight: 700;
-  color:#fff;
+  background-color: var(--secondary-color);
+  color: #fff;
   text-align: center;
 }
-@media screen and (max-width:1400px) {
-  .form{
+
+.save:hover {
+  background-color: #9f9b9b;
+}
+
+.delete {
+  background-color: red;
+  width: 50%;
+  height: 10%;
+  text-align: center;
+  margin: 1vh;
+  font-size: var(--font-m);
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+@media screen and (max-width: 1400px) {
+  .form {
     width: 300px;
     height: 200px;
     font-size: var(--font-sm);
   }
-  .inputs input{
+  .inputs input {
     font-size: var(--font-sm);
   }
   .save {
     font-size: var(--font-sm);
   }
-  .delete{
+  .delete {
     height: 8%;
     font-size: var(--font-sm);
   }
 }
-@media screen and (max-width:768px) {
-  .form{
+@media screen and (max-width: 768px) {
+  .form {
     width: 370px;
     height: 280px;
     font-size: var(--font-sm);
   }
-
 }

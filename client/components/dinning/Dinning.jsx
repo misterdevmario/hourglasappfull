@@ -207,7 +207,6 @@ const Dinning = ({ dinngInfo }) => {
                   />
                   <Field
                     value={item.attributes.descEn}
-                    name="descEn"
                     placeholder="Descripcion Ingles"
                     onClick={() => {
                       setId(item.id);

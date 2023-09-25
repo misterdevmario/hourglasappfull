@@ -169,7 +169,7 @@ export async function getActivitiesFriday() {
     if (!res.ok) throw new Error("Failed to fetch data");
     return res.json();
   }
-  
+  //Method PUT
   export async function putBarsFriday(data, id) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL2}/barfridays/${id}`,

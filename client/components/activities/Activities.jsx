@@ -32,6 +32,7 @@ const validation = Yup.object().shape({
   spotEs: Yup.string()
     .required("*Campo requerido")
     .max(22, "La longitud maxima es de 22 letras!"),
+
 });
 
 const Carousel = ({ activities }) => {
@@ -230,19 +231,19 @@ const Carousel = ({ activities }) => {
                       className={styles.delete}
                       onClick={() => {
                         if (selectedDay == "lunes")
-                          deleteActivityMonday(data, item.id);
+                          deleteActivityMonday(item.id);
                         if (selectedDay == "martes")
-                          deleteActivityTuesday(data, item.id);
+                          deleteActivityTuesday(item.id);
                         if (selectedDay == "miercoles")
-                          deleteActivityThursday(data, item.id);
+                          deleteActivityThursday(item.id);
                         if (selectedDay == "jueves")
-                          deleteActivityWednesday(data, item.id);
+                          deleteActivityWednesday(item.id);
                         if (selectedDay == "viernes")
-                          deleteActivityFriday(data, item.id);
+                          deleteActivityFriday(item.id);
                         if (selectedDay == "sabado")
-                          deleteActivitySaturday(data, item.id);
+                          deleteActivitySaturday(item.id);
                         if (selectedDay == "domingo")
-                          deleteActivitySunday(data, item.id);
+                          deleteActivitySunday(item.id);
                       }}
                     >
                       Eliminar
@@ -268,6 +269,7 @@ const Carousel = ({ activities }) => {
       ))}
       <ModalDesc isOpen={isOpenModalDescEn} En closeModal={closeModalDescEn}>
         <div className={styles.description}>
+        <div>descripción ingles</div>
           <textarea
             name="descEn"
             type="textarea"
@@ -304,6 +306,7 @@ const Carousel = ({ activities }) => {
       </ModalDesc>
       <ModalDesc isOpen={isOpenModalDescEs} closeModal={closeModalDescEs}>
         <div className={styles.description}>
+          <div>descripción español</div>
           <textarea
             name="descEn"
             type="textarea"
