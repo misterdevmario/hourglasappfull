@@ -3,6 +3,7 @@
   height: 100vh;
   display: flex;
   margin-top: 9vh;
+  color: var(--secondary-color);
 
 }
 
@@ -223,11 +224,28 @@
 @media screen and (max-width: 425px) {
   .form {
     width: 370px;
-    height: 300px;
+    height: 380px;
     font-size: var(--font-sm);
   }
   .save {
     height: 3vh;
     font-size: var(--font-sm);
   }
+  .description{
+    width: 95vw;
+  }
+  
+  .diningimg img{
+    height: 14vh;
+    width: auto;
+  }
+  .menuitem{
+    font-size: var(--font-m);
+  }
+  
+  .menuitem img{
+    height: 15vh;
+    width: auto;
+  }
+  
 }

@@ -5,6 +5,8 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  color: var(--secondary-color);
+
 }
 
 .form_container {
@@ -60,6 +62,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--secondary-color);
 }
 
 .inputs select {
@@ -72,6 +75,8 @@
   border-radius: var(--border-radius);
   font-weight: 700;
   text-transform: uppercase;
+  color: var(--secondary-color);
+
 }
 
 .inputs option {
@@ -85,6 +90,8 @@
   font-weight: 700;
   text-transform: uppercase;
   overflow: hidden;
+  color: var(--secondary-color);
+
 }
 
 .images {
@@ -101,6 +108,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .diningimg img {
@@ -225,11 +233,28 @@
 @media screen and (max-width: 425px) {
   .form {
     width: 370px;
-    height: 300px;
+    height: 380px;
     font-size: var(--font-sm);
   }
   .save {
     height: 3vh;
     font-size: var(--font-sm);
   }
+.description{
+  width: 95vw;
+}
+
+.diningimg img{
+  height: 14vh;
+  width: auto;
+}
+.menuitem{
+  font-size: var(--font-m);
+}
+
+.menuitem img{
+  height: 15vh;
+  width: auto;
+}
+
 }

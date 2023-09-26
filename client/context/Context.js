@@ -1,26 +1,6 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
-import {
-  getActivities,
-  getStaff,
-  getDinning,
-  getBreakfast,
-  getBars,
-  getFlyers,
-  putBars,
-  putDinning,
-  putBreakfast,
-  putActivities,
-  putStaff,
-  putFlyers,
-  postActivities,
-  postStaffs,
-  postFlyers,
-  deleteActivities,
-  deleteStaffs,
-  deleteFlyers,
-  getFlyersTitle,
-} from "@/lib/api";
+
 
 import {
   getActivitiesFriday,
@@ -874,6 +854,44 @@ export const Provider = ({ children }) => {
     const res = deleteFlyersSunday(id);
     setActivityGallery(res);
   };
+
+  //FLYER TITLE
+
+  //monday
+  const updateFlyerTitleMonday = async (data, id) => {
+    const res = await putFlyersTitleMonday({ data }, id);
+    setActivityGallery(res.data);
+  };
+//tuesday
+const updateFlyerTitleTuesday = async (data, id) => {
+  const res = await putFlyersTitleTuesday({ data }, id);
+  setActivityGallery(res.data);
+};
+//wednesday
+const updateFlyerTitleWednesday = async (data, id) => {
+  const res = await putFlyersTitleWednesday({ data }, id);
+  setActivityGallery(res.data);
+};
+//thursday
+const updateFlyerTitleThursday = async (data, id) => {
+  const res = await putFlyersTitleThursday({ data }, id);
+  setActivityGallery(res.data);
+};
+//friday
+const updateFlyerTitleFriday = async (data, id) => {
+  const res = await putFlyersTitleFriday({ data }, id);
+  setActivityGallery(res.data);
+};
+//saturday
+const updateFlyerTitleSaturday = async (data, id) => {
+  const res = await putFlyersTitleSaturday({ data }, id);
+  setActivityGallery(res.data);
+};
+//sunday
+const updateFlyerTitleSunday = async (data, id) => {
+  const res = await putFlyersTitleSunday({ data }, id);
+  setActivityGallery(res.data);
+};
   return (
     <infoContext.Provider
       value={{
@@ -991,6 +1009,15 @@ export const Provider = ({ children }) => {
         updateFlyerSunday,
         postFlyerSunday,
         deleteFlyerSunday,
+
+        //Flyers Title
+        updateFlyerTitleMonday,
+        updateFlyerTitleTuesday,
+        updateFlyerTitleWednesday,
+        updateFlyerTitleThursday,
+        updateFlyerTitleFriday,
+        updateFlyerTitleSaturday,
+        updateFlyerTitleSunday,
 
         //Language
         language,

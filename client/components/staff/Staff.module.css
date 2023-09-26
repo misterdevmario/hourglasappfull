@@ -7,6 +7,8 @@
   justify-content: center;
   gap: 2vh;
   padding: 2vh;
+  color: var(--secondary-color);
+
 }
 .error {
   font-size: 9px;
@@ -155,5 +157,8 @@ background-color: #9f9b9b;
     width: 370px;
     height: 250px;
     font-size: var(--font-sm);
+  }
+  .bio{
+    width: 95vw;
   }
 }

@@ -9,6 +9,7 @@ const Domingo = () => {
   const { info } = useInfo();
   const router = usePathname();
   const [flyerInfo, setFlyersInfo] = useState();
+  const [flyerTitleInfo, setFlyerTitleInfo] = useState();
   const selectedDay = router.includes("actividades")
     ? router.replace("/editar/actividades/", "")
     : router.includes("bars")
@@ -24,13 +25,13 @@ const Domingo = () => {
     : null;
 
   useEffect(() => {
-    if (selectedDay == "lunes") setFlyersInfo(info?.flyersMonday);
-    if (selectedDay == "martes") setFlyersInfo(info?.flyersTuesday);
-    if (selectedDay == "miercoles") setFlyersInfo(info?.flyersWednesday);
-    if (selectedDay == "jueves") setFlyersInfo(info?.flyersThursday);
-    if (selectedDay == "viernes") setFlyersInfo(info?.flyersFriday);
-    if (selectedDay == "sabado") setFlyersInfo(info?.flyersSaturday);
-    if (selectedDay == "domingo") setFlyersInfo(info?.flyersSunday);
+    if (selectedDay == "lunes") {setFlyersInfo(info?.flyersMonday);setFlyerTitleInfo(info?.flyersTitleMonday)}
+    if (selectedDay == "martes") {setFlyersInfo(info?.flyersTuesday);setFlyerTitleInfo(info?.flyersTitleTuesday)}
+    if (selectedDay == "miercoles") {setFlyersInfo(info?.flyersWednesday);setFlyerTitleInfo(info?.flyersTitleWednesday)}
+    if (selectedDay == "jueves") {setFlyersInfo(info?.flyersThursday);setFlyerTitleInfo(info?.flyersTitleThursday)}
+    if (selectedDay == "viernes") {setFlyersInfo(info?.flyersFriday);setFlyerTitleInfo(info?.flyersTitleFriday)}
+    if (selectedDay == "sabado") {setFlyersInfo(info?.flyersSaturday);setFlyerTitleInfo(info?.flyersTitleSaturday)}
+    if (selectedDay == "domingo") {setFlyersInfo(info?.flyersSunday);setFlyerTitleInfo(info?.flyersTitleSunday)}
   }, [
     info.flyersTuesday,
     info.flyersMonday,
@@ -39,11 +40,20 @@ const Domingo = () => {
     info.flyersFriday,
     info.flyersSaturday,
     info.flyersSunday,
+    info?.flyersTitleMonday,
+    info?.flyersTitleTuesday,
+    info?.flyersTitleWednesday,
+    info?.flyersTitleThursday,
+    info?.flyersTitleFriday,
+    info?.flyersTitleSaturday,
+    info?.flyersTitleSunday,
     selectedDay,
   ]);
+
+
   return (
     <div>
-      <Flyers flyerInfo={flyerInfo} />
+      <Flyers flyerInfo={flyerInfo} flyerTitleInfo={flyerTitleInfo} />
     </div>
   );
 };

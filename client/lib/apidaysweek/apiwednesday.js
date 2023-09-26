@@ -250,7 +250,7 @@ export async function getActivitiesWednesday() {
   }
   
   //Method PUT
-  export async function puFlyersTitleWednesday(data, id) {
+  export async function putFlyersTitleWednesday(data, id) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL2}/flyertitlewednesdays/${id}`,
       {

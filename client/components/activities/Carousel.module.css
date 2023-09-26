@@ -255,4 +255,7 @@
     height: 3vh;
     font-size: var(--font-sm);
   }
+  .description{
+    width: 95vw;
+  }
 }

@@ -11,14 +11,13 @@
   color: #fff;
 }
 
-.container select{
+.container select {
   background-color: var(--secondary-color);
 }
 
 .container option {
   font-weight: bolder;
 }
-
 
 .logo {
   width: 10%;
@@ -28,6 +27,10 @@
 .logo img {
   height: 8vh;
   width: auto;
+}
+.logo select {
+  font-size: 20px;
+  font-weight: bolder;
 }
 .links_container {
   width: 50%;
@@ -91,7 +94,7 @@
   .logo {
     display: none;
   }
-  .logo_toggle{
+  .logo_toggle {
     display: flex;
     width: 14vw;
   }
@@ -107,22 +110,31 @@
     align-items: center;
   }
 
-  .toogle_navbar_container select{
-    width: 20vw;
-    font-size: .7rem;
+  .toogle_navbar_container select {
+    width: 22vw;
+    font-size: 0.7rem;
     z-index: 2;
   }
   .option {
     width: 100vw;
     height: 100vh;
   }
-  
 
   .toggle_tittle {
-    width:60vw;
+    width: 60vw;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bolder;
+    font-size: 2vh;
+    
+  }
+  .toggle_links_container{
+    font-size: 16px;
+  }
+  .active_toggle{
+    font-weight: bolder;
+    font-size: 2.5vh;
+    text-decoration: underline;
   }
 }

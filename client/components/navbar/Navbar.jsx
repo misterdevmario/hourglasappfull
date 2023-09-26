@@ -55,7 +55,6 @@ const Navbar = () => {
   const selectedPath = router
     .replace("/editar/", "")
     .replace(`/${selectedDay.toLocaleLowerCase()}`, "");
-
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -138,9 +137,10 @@ const Navbar = () => {
             <Link
               key={i}
               className={
-                router.replace("/editar/", "") == item.toLowerCase()
-                  ? `${styles.active}`
-                  : `${null}`
+                selectedPath
+                == item.toLowerCase()
+                 ? `${styles.active_toggle}`
+                 : `${null}`
               }
               href={`/editar/${item.toLowerCase()}/${selectedDay.toLocaleLowerCase()}`}
               onClick={() => {
