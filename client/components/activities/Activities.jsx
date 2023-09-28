@@ -226,7 +226,6 @@ const Carousel = ({ activities }) => {
                   </button>
                   {activities.length > 12 ? (
                     <button
-                      type="submit"
                       disabled={activities.length <= 12}
                       className={styles.delete}
                       onClick={() => {

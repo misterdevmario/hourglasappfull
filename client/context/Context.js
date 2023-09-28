@@ -410,7 +410,7 @@ export const Provider = ({ children }) => {
     const changeLanguage = setInterval(() => {
       if (language == "en") setLanguage("es");
       if (language == "es") setLanguage("en");
-    }, 60000);
+    }, 120000);
     return () => {
       clearInterval(changeLanguage);
     };

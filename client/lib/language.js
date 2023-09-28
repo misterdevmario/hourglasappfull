@@ -123,3 +123,8 @@ export const qr = {
   en:"Scan for mobile version",
   es: "Escanear par version mobil"
 }
+
+export const descriptions = {
+  descEn:"Activity description",
+  descEs:"descripción de la actividad"
+}
