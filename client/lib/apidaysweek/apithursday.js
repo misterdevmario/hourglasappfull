@@ -3,7 +3,7 @@
 //Method GET
 export async function getActivitiesThursday() {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL2}/activitythursdays?pagination[page]=1&pagination[pageSize]=50`
+      `${process.env.NEXT_PUBLIC_STRAPI_URL2}/activitythursdays`
     );
     if (!res.ok) throw new Error("Failed to fetch data");
     return res.json();
@@ -41,7 +41,7 @@ export async function getActivitiesThursday() {
   //Method DELETE
   export async function deleteActivitiesThursday(id) {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/activitythursdays/${id}`,
+      `${process.env.NEXT_PUBLIC_STRAPI_URL2}/activitythursdays/${id}`,
       {
         method: "DELETE",
       }

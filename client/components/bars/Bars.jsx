@@ -16,15 +16,16 @@ const validation = Yup.object().shape({
   name: Yup.string()
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
-    hourStart: Yup.string()
+  hourStart: Yup.string()
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
-    hourEnd: Yup.string()
+  hourEnd: Yup.string()
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
 });
 
 const Bars = ({ barsInfo }) => {
+  console.log(barsInfo);
   const {
     updateBarMonday,
     updateBarTuesday,
@@ -36,6 +37,10 @@ const Bars = ({ barsInfo }) => {
   } = useInfo();
   const [id, setId] = useState("");
   const [isOpenGallery, openGallery, closeGallery] = useModal(true);
+  const [isOpenMenuLgEn, openMenuLgEn, closeMenuLgEn] = useModal(true);
+  const [isOpenMenuLgEs, openMenuLgEs, closeMenuLgEs] = useModal(true);
+  const [menuLgEn, setMenuLgEn] = useState("");
+  const [menuLgEs, setMenuLgEs] = useState("");
 
   const router = usePathname();
   const selectedDay = router.includes("actividades")
@@ -51,6 +56,20 @@ const Bars = ({ barsInfo }) => {
     : router.includes("flyers")
     ? router.replace("/editar/flyers/", "")
     : null;
+
+  const handleMenuLgEn = () => {
+    const description = barsInfo
+      .filter((item) => item.id == id)
+      .map((item) => item.attributes?.menuImgEn);
+    setMenuLgEn(description.toString());
+  };
+  const handleMenuLgEs = () => {
+    const description = barsInfo
+      .filter((item) => item.id == id)
+      .map((item) => item.attributes?.menuImgEs);
+    setMenuLgEs(description.toString());
+  };
+
   return (
     <div className={styles.container}>
       {barsInfo?.map((item) => (
@@ -117,6 +136,38 @@ const Bars = ({ barsInfo }) => {
                     setId(item.id);
                   }}
                 />
+                <div className={styles.menus}>
+                  <div className={styles.menuitem}>
+                    <label htmlFor="">Menu ingles</label>
+                    <Image
+                      src={item.attributes.menuImgEn}
+                      alt="bar"
+                      width={200}
+                      height={250}
+                      priority
+                      onClick={() => {
+                        setId(item.id);
+                        handleMenuLgEn();
+                        openMenuLgEn();
+                      }}
+                    />{" "}
+                  </div>
+                  <div className={styles.menuitem}>
+                    <label htmlFor="">menu español</label>
+                    <Image
+                      src={item.attributes.menuImgEs}
+                      alt="bar"
+                      width={200}
+                      height={250}
+                      priority
+                      onClick={() => {
+                        setId(item.id);
+                        handleMenuLgEs();
+                        openMenuLgEs();
+                      }}
+                    />
+                  </div>
+                </div>
                 <button className={styles.save} type="submit">
                   Guardar
                 </button>
@@ -125,6 +176,30 @@ const Bars = ({ barsInfo }) => {
           )}
         </Formik>
       ))}
+      <Modal isOpen={isOpenMenuLgEn} closeModal={closeMenuLgEn}>
+        <div className={styles.menuLg}>
+          <h1>Menu ingles</h1>
+          <Image
+            src={menuLgEn}
+            alt="Menu"
+            width={1000}
+            height={1980}
+            priority
+          />
+        </div>
+      </Modal>
+      <Modal isOpen={isOpenMenuLgEs} closeModal={closeMenuLgEs}>
+        <div className={styles.menuLg}>
+          <h1> Menu español</h1>
+          <Image
+            src={menuLgEs}
+            alt="Menu"
+            width={1000}
+            height={1980}
+            priority
+          />
+        </div>
+      </Modal>
       <Modal isOpen={isOpenGallery} closeModal={closeGallery}>
         <BarsGallery id={id} closeModal={closeGallery} />
       </Modal>

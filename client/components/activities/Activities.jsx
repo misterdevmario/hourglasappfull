@@ -117,7 +117,7 @@ const Carousel = ({ activities }) => {
       .map((item) => item.attributes.descEs);
     setDesc(description);
   };
-  //console.log(hoursUppercase.map((item) => item.attributes.descEn));
+
   return (
     <div className={styles.container}>
       {hoursUppercase.map((item) => (
@@ -138,9 +138,9 @@ const Carousel = ({ activities }) => {
             if (selectedDay == "martes")
               await updateActivityTuesday(data, item.id);
             if (selectedDay == "miercoles")
-              await updateActivityThursday(data, item.id);
-            if (selectedDay == "jueves")
               await updateActivityWednesday(data, item.id);
+            if (selectedDay == "jueves")
+              await updateActivityThursday(data, item.id);
             if (selectedDay == "viernes")
               await updateActivityFriday(data, item.id);
             if (selectedDay == "sabado")
@@ -151,8 +151,8 @@ const Carousel = ({ activities }) => {
         >
           {({ handleSubmit }) => (
             <div>
-              <Form onSubmit={handleSubmit} className={styles.form}>
-                <div className={styles.inputs}>
+              <Form onSubmit={handleSubmit} className={styles.form} >
+                <div className={styles.inputs} >
                   <div className={styles.hours}>
                     <Field as="select" name="hourStart" placeholder={"Inicio"}>
                       <option value="defaultValue">
@@ -226,7 +226,7 @@ const Carousel = ({ activities }) => {
                   </button>
                   {activities.length > 12 ? (
                     <button
-                      disabled={activities.length <= 12}
+                      type="button"
                       className={styles.delete}
                       onClick={() => {
                         if (selectedDay == "lunes")
@@ -234,9 +234,9 @@ const Carousel = ({ activities }) => {
                         if (selectedDay == "martes")
                           deleteActivityTuesday(item.id);
                         if (selectedDay == "miercoles")
-                          deleteActivityThursday(item.id);
-                        if (selectedDay == "jueves")
                           deleteActivityWednesday(item.id);
+                        if (selectedDay == "jueves")
+                        deleteActivityThursday(item.id);
                         if (selectedDay == "viernes")
                           deleteActivityFriday(item.id);
                         if (selectedDay == "sabado")
@@ -286,9 +286,9 @@ const Carousel = ({ activities }) => {
               if (selectedDay == "martes")
                 updateActivityTuesday({ descEn: desc }, id);
               if (selectedDay == "miercoles")
-                updateActivityThursday({ descEn: desc }, id);
-              if (selectedDay == "jueves")
                 updateActivityWednesday({ descEn: desc }, id);
+              if (selectedDay == "jueves")
+                updateActivityThursday({ descEn: desc }, id);
               if (selectedDay == "viernes")
                 updateActivityFriday({ descEn: desc }, id);
               if (selectedDay == "sabado")
@@ -323,9 +323,9 @@ const Carousel = ({ activities }) => {
               if (selectedDay == "martes")
                 updateActivityTuesday({ descEn: desc }, id);
               if (selectedDay == "miercoles")
-                updateActivityThursday({ descEn: desc }, id);
-              if (selectedDay == "jueves")
                 updateActivityWednesday({ descEn: desc }, id);
+              if (selectedDay == "jueves")
+              updateActivityThursday({ descEn: desc }, id);
               if (selectedDay == "viernes")
                 updateActivityFriday({ descEn: desc }, id);
               if (selectedDay == "sabado")
@@ -361,9 +361,9 @@ const Carousel = ({ activities }) => {
         if (selectedDay == "martes")
           postActivityTuesday(data);
         if (selectedDay == "miercoles")
-          postActivityThursday(data);
-        if (selectedDay == "jueves")
           postActivityWednesday(data);
+        if (selectedDay == "jueves")
+        postActivityThursday(data);
         if (selectedDay == "viernes")
           postActivityFriday(data);
         if (selectedDay == "sabado")

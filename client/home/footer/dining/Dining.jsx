@@ -1,32 +1,57 @@
 import { useInfo } from "@/context/Context";
 import styles from "./Dining.module.css";
 import Image from "next/image";
-import { sectionTitles } from "@/lib/language";
+import { sectionTitles, descriptions } from "@/lib/language";
 import { useModal } from "@/components/modal/useModal";
 import Modal from "@/components/modal/Modal";
-const Dining = () => {
-  const { info, language, languageMobile } = useInfo();
-  const [isOpenDining, openDining, closeDining] = useModal(true);
+import { useState } from "react";
 
+const Dining = ({ info }) => {
+  const { language, languageMobile } = useInfo();
+  const [isOpenDining, openDining, closeDining] = useModal(true);
+  const [isOpenDiningMobile, openDiningMobile, closeDiningMobile] = useModal(true);
+  const [infoDesc, setInfoDesc] = useState();
+
+  const handleImg = (id) => {
+    const infoModal = info.dining
+      .filter((item) => item.id == id)
+      .map((item) => ({
+        menuImgEn: item.attributes.menuImgEn,
+        menuImgEs: item.attributes.menuImgEs,
+      }));
+
+    setInfoDesc(infoModal);
+  };
   return (
     <>
       <div className={styles.container}>
         <div className={styles.title}>
           {language == "en" ? sectionTitles.en.dining : sectionTitles.es.dining}
         </div>
-        <div className={styles.card_container} onClick={() => openDining()}>
+        <div className={styles.card_container}>
           <Modal isOpen={isOpenDining} closeModal={closeDining}>
             <div className={styles.modal_img}>
               <Image
-                src="/menu/menu1.jpg"
+                src={
+                  language == "en"
+                    ? infoDesc?.map((item) => item.menuImgEn).toString()
+                    : infoDesc?.map((item) => item.menuImgEs).toString()
+                }
                 alt="menu"
-                width={1000}
-                height={1500}
+                width={600}
+                height={800}
               />
             </div>
           </Modal>
-          {info.dinning.map((item) => (
-            <div className={styles.card} key={item.id}>
+          {info.dining.map((item) => (
+            <div
+              className={styles.card}
+              key={item.id}
+              onClick={() => {
+                handleImg(item.id);
+                openDining();
+              }}
+            >
               <div className={styles.name}>{item.attributes.name}</div>
               <div className={styles.restaurants_info_container}>
                 <div className={styles.logo}>
@@ -73,7 +98,7 @@ const Dining = () => {
                     </div>
                   </div>
                   <div className={styles.info_container}>
-                    <div className={styles.info}>{item.attributes.hours}</div>
+                    <div className={styles.info}>{item.attributes.hourStart} - {item.attributes.hourEnd}</div>
                     <div className={styles.info}>
                       {language == "en"
                         ? item.attributes.typeEn
@@ -103,19 +128,30 @@ const Dining = () => {
             ? sectionTitles.en.dining
             : sectionTitles.es.dining}
         </div>
-        <div className={styles.card_container} onClick={() => openDining()}>
+        <div className={styles.card_container} >
           <Modal isOpen={isOpenDining} closeModal={closeDining}>
             <div className={styles.modal_img}>
               <Image
-                src="/menu/menu1.jpg"
+                src={
+                  languageMobile == "en"
+                    ? infoDesc?.map((item) => item.menuImgEn).toString()
+                    : infoDesc?.map((item) => item.menuImgEs).toString()
+                }
                 alt="menu"
-                width={1000}
-                height={1500}
+                width={600}
+                height={800}
               />
             </div>
           </Modal>
-          {info.dinning.map((item) => (
-            <div className={styles.card} key={item.id}>
+          {info.dining.map((item) => (
+            <div
+              className={styles.card}
+              key={item.id}
+              onClick={() => {
+                handleImg(item.id);
+                openDining();
+              }}
+            >
               <div className={styles.name}>{item.attributes.name}</div>
               <div className={styles.restaurants_info_container}>
                 <div className={styles.logo}>
@@ -162,7 +198,7 @@ const Dining = () => {
                     </div>
                   </div>
                   <div className={styles.info_container}>
-                    <div className={styles.info}>{item.attributes.hours}</div>
+                    <div className={styles.info}>{item.attributes.hourStart} - {item.attributes.hourEnd}</div>
                     <div className={styles.info}>
                       {languageMobile == "en"
                         ? item.attributes.typeEn
@@ -185,6 +221,20 @@ const Dining = () => {
           ))}
         </div>
       </div>
+      <Modal isOpen={isOpenDining} closeModal={closeDining}>
+            <div className={styles.modal_img}>
+              <Image
+                src={
+                  language == "en"
+                    ? infoDesc?.map((item) => item.menuImgEn).toString()
+                    : infoDesc?.map((item) => item.menuImgEs).toString()
+                }
+                alt="menu"
+                width={600}
+                height={800}
+              />
+            </div>
+          </Modal>
     </>
   );
 };

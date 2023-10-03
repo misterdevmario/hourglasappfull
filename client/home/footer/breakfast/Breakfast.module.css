@@ -125,7 +125,16 @@
     width: auto;
   }
 }
+.modal_img {
+  display: flex;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+}
 
+.modal_img img{
+  border-radius: var(--border-radius);
+}
 @media screen and (max-width: 768px) {
   .container {
     display: none;
@@ -158,5 +167,11 @@
   .icons_container img {
     height: 2.5vh;
     width: auto;
+  }
+  .modal_img {
+    width: 98vw;
+    height: auto;
+    flex-direction: column;
+    min-height: 70vh;
   }
 }

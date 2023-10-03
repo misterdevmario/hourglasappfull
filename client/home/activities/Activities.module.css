@@ -124,6 +124,7 @@
     height: 90vw;
   }
   .hours {
+    width: 90%;
     font-size: 16px;
   }
   .infocard {
@@ -131,17 +132,16 @@
   }
 
   .locationactivity {
-    font-size: 14px;
+    font-size: 13px;
     height: 17%;
   }
-  .modal_img {
-  flex-direction: column;
-  min-height:70vh;
-  }
+
 
   .modal_img{
     width: 80vw;
     height: auto;
+    flex-direction: column;
+    min-height:70vh;
   }
   .modaldesc {
     margin-top: 6vh;

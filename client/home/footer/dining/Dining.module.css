@@ -91,6 +91,20 @@
 .container_sm {
   display: none;
 }
+
+.modal_img {
+  display: flex;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius);
+
+}
+
+.modal_img img{
+  border-radius: var(--border-radius);
+}
+
 @media screen and (max-width: 1280px) {
   .card_container {
     width: 100%;
@@ -154,5 +168,11 @@
   .icons_container img {
     height: 2.5vh;
     width: auto;
+  }
+  .modal_img {
+    width: 98vw;
+    height: auto;
+    flex-direction: column;
+    min-height: 70vh;
   }
 }

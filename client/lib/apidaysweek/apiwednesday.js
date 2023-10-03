@@ -41,7 +41,7 @@ export async function getActivitiesWednesday() {
   //Method DELETE
   export async function deleteActivitiesWednesday(id) {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/activitywednesdays/${id}`,
+      `${process.env.NEXT_PUBLIC_STRAPI_URL2}/activitywednesdays/${id}`,
       {
         method: "DELETE",
       }
@@ -50,7 +50,7 @@ export async function getActivitiesWednesday() {
     if (!res.ok) throw new Error("Failed to update data");
     return res.json();
   }
-  
+
   //STAFF!!!!!!!
   
   //Method GET

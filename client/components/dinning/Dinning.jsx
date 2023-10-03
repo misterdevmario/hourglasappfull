@@ -77,8 +77,6 @@ const Dinning = ({ dinngInfo }) => {
     ? router.replace("/editar/flyers/", "")
     : null;
 
- 
-
   const handleDescEn = () => {
     const description = dinngInfo
       .filter((item) => item.id == id)
@@ -205,7 +203,7 @@ const Dinning = ({ dinngInfo }) => {
                     component="p"
                     className={styles.error}
                   />
-                  <Field
+                  {/* <Field
                     value={item.attributes.descEn}
                     placeholder="Descripcion Ingles"
                     onClick={() => {
@@ -225,7 +223,7 @@ const Dinning = ({ dinngInfo }) => {
                       openMenuEs();
                     }}
                     onMouseEnter={() => setId(item.id)}
-                  />
+                  /> */}
                   <button className={styles.save} type="submit">
                     Guardar
                   </button>
@@ -285,29 +283,28 @@ const Dinning = ({ dinngInfo }) => {
           <RestaurantsGallery id={id} closeModal={closeGallery} />
         </Modal>
         <Modal isOpen={isOpenMenuLgEn} closeModal={closeMenuLgEn}>
-          <div className={styles.menuLg} onClick={() => menuLgEn()}>
+          <div className={styles.menuLg} >
             <h1>Menu ingles</h1>
             <Image
               src={menuLgEn}
               alt="Menu"
-              width={1000}
-              height={1980}
+              width={600}
+              height={800}
               priority
             />
           </div>
         </Modal>
         <Modal isOpen={isOpenMenuLgEs} closeModal={closeMenuLgEs}>
-          <div className={styles.menuLg} onClick={() => menuLgEs()}>
+          <div className={styles.menuLg} >
             <h1> Menu español</h1>
             <Image
               src={menuLgEs}
               alt="Menu"
-              width={1000}
-              height={1980}
+              width={600}
+              height={800}
               priority
             />
           </div>
-          <div className={styles.menuLgEn} onClick={() => menuLgEn()}></div>
         </Modal>
         <ModalDesc isOpen={isOpenMenuEn} closeModal={closeMenuEn}>
           <div className={styles.description}>

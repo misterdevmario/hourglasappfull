@@ -17,7 +17,10 @@ const validation = Yup.object().shape({
   name: Yup.string()
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
-  hours: Yup.string()
+  hourStart: Yup.string()
+    .required("*Campo requerido")
+    .max(19, "La longitud maxima es de 19 letras!"),
+  hourEnd: Yup.string()
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
   membersEn: Yup.string()
@@ -205,7 +208,7 @@ const Breakfast = ({ breakfastInfo }) => {
                   component="p"
                   className={styles.error}
                 />
-                <Field
+                {/* <Field
                   value={item.attributes.descEn}
                   name="descEn"
                   placeholder="Descripcion Ingles"
@@ -226,7 +229,7 @@ const Breakfast = ({ breakfastInfo }) => {
                     openMenuEs();
                   }}
                   onMouseEnter={() => setId(item.id)}
-                />
+                /> */}
                 <button className={styles.save} type="submit">
                   Guardar
                 </button>
@@ -286,29 +289,28 @@ const Breakfast = ({ breakfastInfo }) => {
         <BreakfastGallery id={id} closeModal={closeGallery} />
       </Modal>
       <Modal isOpen={isOpenMenuLgEn} closeModal={closeMenuLgEn}>
-        <div className={styles.menuLg} onClick={() => menuLgEn()}>
+        <div className={styles.menuLg} >
           <h1>Menu ingles</h1>
           <Image
             src={menuLgEn}
             alt="Menu"
-            width={1000}
-            height={1980}
+            width={600}
+            height={800}
             priority
           />
         </div>
       </Modal>
       <Modal isOpen={isOpenMenuLgEs} closeModal={closeMenuLgEs}>
-        <div className={styles.menuLg} onClick={() => menuLgEs()}>
+        <div className={styles.menuLg} >
           <h1> Menu español</h1>
           <Image
             src={menuLgEs}
             alt="Menu"
-            width={1000}
-            height={1980}
+            width={600}
+            height={800}
             priority
           />
         </div>
-        <div className={styles.menuLgEn} onClick={() => menuLgEn()}></div>
       </Modal>
       <ModalDesc isOpen={isOpenMenuEn} closeModal={closeMenuEn}>
         <div className={styles.description}>

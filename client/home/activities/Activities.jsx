@@ -9,7 +9,6 @@ import { time, descriptions } from "@/lib/language";
 import { useInfo } from "@/context/Context";
 import Image from "next/image";
 import styles from "./Activities.module.css";
-import Transition from "../transition/Transition";
 import { useModal } from "@/components/modal/useModal";
 import Modal from "@/components/modal/Modal";
 import { useState } from "react";
@@ -17,7 +16,8 @@ import { useState } from "react";
 const Activities = ({ info }) => {
   const { language, languageMobile } = useInfo();
   const [isOpenActivity, openActivity, closeActivity] = useModal(true);
-  const [infoDesc, setInfoDesc] = useState([]);
+  const [isOpenActivityMobile, openActivityMobile, closeActivityMobile] = useModal(true);
+  const [infoDesc, setInfoDesc] = useState();
 
   const sortedHours = [];
   for (let i = 0; i < time.length; i++) {
@@ -31,36 +31,40 @@ const Activities = ({ info }) => {
         sortedHours.push(info?.activities[j]);
     }
   }
-  console.log(info.activities);
   const handleImg = (id) => {
-    const infoModal = info?.activities
+    const infoModal = sortedHours
       .filter((item) => item.id == id)
       .map((item) => ({
-        img: item.attributes.activitieImage,
         descEn: item.attributes.descEn,
         descEs: item.attributes.descEs,
-      }))
-      .toString();
-    setInfoDesc(infoModal);
-    console.log(infoModal.descEs)
-  };
-  //console.log();
+        img: item.attributes.activitieImage,
+      }));
 
+    setInfoDesc(infoModal);
+  };
   return (
     <>
       <Modal isOpen={isOpenActivity} closeModal={closeActivity}>
         <div className={styles.modal_img}>
-          <Image src={infoDesc?.img} alt="menu" width={600} height={800} />
+          <Image
+            src={infoDesc?.map((item) => item.img).toString()}
+            alt="menu"
+            width={600}
+            height={800}
+          />
           <div className={styles.modaldesc}>
             <div className={styles.modaldesc_item}>
               <div className={styles.modaldesc_desc}>
                 {language == "en"
                   ? descriptions.descEn
                   : descriptions.descEs
-                  ? "hola"
-                  : null}
+                 }
               </div>
-              {/* <div>{language == "en" ? infoDesc.descEn : infoDesc.descEs}</div> */}
+              <div>
+                {language == "en"
+                  ? infoDesc?.map((item) => item.descEn).toString()
+                  : infoDesc?.map((item) => item.descEs).toString()}
+              </div>
             </div>
           </div>
         </div>
@@ -84,7 +88,6 @@ const Activities = ({ info }) => {
               onClick={(id) => {
                 openActivity();
                 handleImg(item.id);
-                console.log(item.id);
               }}
             >
               <div className={styles.card}>
@@ -140,7 +143,14 @@ const Activities = ({ info }) => {
           }}
         >
           {sortedHours.map((item, i) => (
-            <SwiperSlide key={i} className={styles.slide}>
+            <SwiperSlide
+              key={i}
+              className={styles.slide}
+              onClick={(id) => {
+                openActivityMobile();
+                handleImg(item.id);
+              }}
+            >
               <div className={styles.card}>
                 <Image
                   src={item.attributes.activitieImage}
@@ -180,6 +190,31 @@ const Activities = ({ info }) => {
           ))}
         </Swiper>
       </div>
+      <Modal isOpen={isOpenActivityMobile} closeModal={closeActivityMobile}>
+        <div className={styles.modal_img}>
+          <Image
+            src={infoDesc?.map((item) => item.img).toString()}
+            alt="menu"
+            width={600}
+            height={800}
+          />
+          <div className={styles.modaldesc}>
+            <div className={styles.modaldesc_item}>
+              <div className={styles.modaldesc_desc}>
+                {languageMobile == "en"
+                  ? descriptions.descEn
+                  : descriptions.descEs
+                }
+              </div>
+              <div>
+                {languageMobile == "en"
+                  ? infoDesc?.map((item) => item.descEn).toString()
+                  : infoDesc?.map((item) => item.descEs).toString()}
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };

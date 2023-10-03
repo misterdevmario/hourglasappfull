@@ -1,6 +1,7 @@
-'use client'
+"use client";
 
 export const time = [
+  "12:00am",
   "1:00am",
   "2:00am",
   "3:00am",
@@ -24,7 +25,6 @@ export const time = [
   "9:00pm",
   "10:00pm",
   "11:00pm",
-  "12:00pm",
 ];
 
 export const daysEn = [
@@ -34,7 +34,7 @@ export const daysEn = [
   "WEDNESDAY",
   "THURSDAY",
   "FRIDAY",
-  "STURDAY",
+  "SATURDAY",
 ];
 
 export const daysEs = [
@@ -87,7 +87,7 @@ export const weatherDesc = {
     "rain",
     "thunderstorm",
     "mist",
-    "overcast clouds"
+    "overcast clouds",
   ],
   weatherEs: [
     "DESPEJADO",
@@ -98,7 +98,7 @@ export const weatherDesc = {
     "LLUVIA",
     "TORMENTA",
     "NEBLINA",
-    "NUBLADO"
+    "NUBLADO",
   ],
 };
 
@@ -108,23 +108,27 @@ export const sectionTitles = {
     dining: "dining",
     breaknlunch: "breakfast and lunch",
     bars: "bars",
-    flyers:"other activities"
+    flyers: "other activities",
   },
   es: {
     staff: "personal de entretenimiento",
     dining: "cena",
     breaknlunch: "desayuno y comida",
     bars: "bares",
-    flyers:"otras actividades"
+    flyers: "otras actividades",
   },
 };
 
 export const qr = {
-  en:"Scan for mobile version",
-  es: "Escanear par version mobil"
-}
+  en: "Scan for mobile version",
+  es: "Escanear par version mobil",
+};
 
 export const descriptions = {
-  descEn:"Activity description",
-  descEs:"descripción de la actividad"
-}
+  descEn: "Activity description",
+  descEs: "descripción de la actividad",
+  bioEn:"Bio description",
+  bioEs:"Descripcion de la bio",
+  flyerEn: "Description",
+  flyerEs: "descripción",
+};

@@ -202,9 +202,16 @@
     align-items: center;
     justify-content: center;
     font-weight: var(--font-weight);
+    font-size: 16px;
   }
 
   .qr {
     display: none;
+  }
+  .modal_img {
+    width: 98vw;
+    height: auto;
+    flex-direction: column;
+    min-height: 70vh;
   }
 }

@@ -41,7 +41,7 @@ export async function getActivitiesFriday() {
   //Method DELETE
   export async function deleteActivitiesFriday(id) {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/activityfridays/${id}`,
+      `${process.env.NEXT_PUBLIC_STRAPI_URL2}/activityfridays/${id}`,
       {
         method: "DELETE",
       }

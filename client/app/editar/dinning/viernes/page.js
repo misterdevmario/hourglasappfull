@@ -26,8 +26,8 @@ const Viernes = () => {
   useEffect(() => {
     if (selectedDay == "lunes") setDiningInfo(info?.dinningMonday);
     if (selectedDay == "martes") setDiningInfo(info?.dinningTuesday);
-    if (selectedDay == "miercoles") setDiningInfo(info?.dinningThursday);
-    if (selectedDay == "jueves") setDiningInfo(info?.dinningWednesday);
+    if (selectedDay == "miercoles") setDiningInfo(info?.dinningWednesday);
+    if (selectedDay == "jueves") setDiningInfo(info?.dinningThursday);
     if (selectedDay == "viernes") setDiningInfo(info?.dinningFriday);
     if (selectedDay == "sabado") setDiningInfo(info?.dinningSaturday);
     if (selectedDay == "domingo") setDiningInfo(info?.dinningSunday);

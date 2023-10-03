@@ -6,32 +6,50 @@ import { sectionTitles, qr } from "@/lib/language";
 import styles from "./Bars.module.css";
 import Modal from "@/components/modal/Modal";
 import { useModal } from "@/components/modal/useModal";
+import { useState } from "react";
 //import Pdfviewer from "@/home/PDF/PdfViewer";
 
-const Bars = () => {
-  const { info, language, languageMobile } = useInfo();
-  const [isOpenBar, openBar, closeBar] = useModal(true);
+const Bars = ({ info }) => {
+  const { language, languageMobile } = useInfo();
 
+  const [isOpenBar, openBreakfast, closeBar] = useModal(true);
+  const [isOpenBarMobile, openBreakfastMobile, closeBarMobile] =
+    useModal(true);
+  const [infoDesc, setInfoDesc] = useState();
+  const handleImg = (id) => {
+    const infoModal = info.bars
+      .filter((item) => item.id == id)
+      .map((item) => ({
+        menuImgEn: item.attributes.menuImgEn,
+        menuImgEs: item.attributes.menuImgEs,
+      }));
+
+    setInfoDesc(infoModal);
+  };
   return (
     <>
+      <Modal isOpen={isOpenBar} closeModal={closeBar}>
+        <div className={styles.modal_img}>
+          <Image
+            src={
+              language == "en"
+                ? infoDesc?.map((item) => item.menuImgEn).toString()
+                : infoDesc?.map((item) => item.menuImgEs).toString()
+            }
+            alt="menu"
+            width={600}
+            height={800}
+          />
+        </div>
+      </Modal>
       <div className={styles.container}>
         <div className={styles.title}>
           {language == "en" ? sectionTitles?.en.bars : sectionTitles?.es.bars}
         </div>
 
-        <div className={styles.card_container} onClick={() => openBar()}>
-          <Modal isOpen={isOpenBar} closeModal={closeBar}>
-            <div className={styles.modal_img}>
-              <Image
-              src='/menu/menu1.jpg'
-              alt="menu"
-              width={1000}
-              height={1500}
-              />
-            </div>
-          </Modal>
+        <div className={styles.card_container} >
           {info?.bars.map((item, i) => (
-            <div key={i} className={styles.card}>
+            <div key={i} className={styles.card} onClick={()=>{handleImg(item.id); openBreakfast();}}>
               <div className={styles.imginfo}>
                 <Image
                   src={item.attributes.barImg}
@@ -41,7 +59,7 @@ const Bars = () => {
                 />
                 <div className={styles.hours}>
                   <div className={styles.name}>{item.attributes.name}</div>
-                  {item.attributes.hours}
+                  {item.attributes.hourStart} - {item.attributes.hourEnd}
                 </div>
               </div>
             </div>
@@ -61,19 +79,9 @@ const Bars = () => {
             : sectionTitles?.es.bars}
         </div>
 
-        <div className={styles.card_container}onClick={() => openBar()}>
-        <Modal isOpen={isOpenBar} closeModal={closeBar}>
-            <div className={styles.modal_img}>
-              <Image
-              src='/menu/menu1.jpg'
-              alt="menu"
-              width={1000}
-              height={1500}
-              />
-            </div>
-          </Modal>
+        <div className={styles.card_container}>
           {info?.bars.map((item, i) => (
-            <div key={i} className={styles.card}>
+            <div key={i} className={styles.card} onClick={()=>{handleImg(item.id); openBreakfastMobile();}}>
               <div className={styles.imginfo}>
                 <Image
                   src={item.attributes.barImg}
@@ -83,13 +91,27 @@ const Bars = () => {
                 />
                 <div className={styles.hours}>
                   <div className={styles.name}>{item.attributes.name}</div>
-                  {item.attributes.hours}
+                  {item.attributes.hourStart} - {item.attributes.hourEnd}
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
+      <Modal isOpen={isOpenBarMobile} closeModal={closeBarMobile}>
+        <div className={styles.modal_img}>
+          <Image
+            src={
+              languageMobile == "en"
+                ? infoDesc?.map((item) => item.menuImgEn).toString()
+                : infoDesc?.map((item) => item.menuImgEs).toString()
+            }
+            alt="menu"
+            width={600}
+            height={800}
+          />
+        </div>
+      </Modal>
     </>
   );
 };

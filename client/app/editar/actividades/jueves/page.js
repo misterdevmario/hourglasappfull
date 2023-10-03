@@ -25,13 +25,13 @@ const Domingo = () => {
    : null;
 
  useEffect(() => {
-   if (selectedDay == "lunes") setActivitiesInfo(info?.activitiesMonday);
-   if (selectedDay == "martes") setActivitiesInfo(info?.activitiesTuesday);
-   if (selectedDay == "miercoles") setActivitiesInfo(info?.activitiesThursday);
-   if (selectedDay == "jueves") setActivitiesInfo(info?.activitiesWednesday);
-   if (selectedDay == "viernes") setActivitiesInfo(info?.activitiesFriday);
-   if (selectedDay == "sabado") setActivitiesInfo(info?.activitiesSaturday);
-   if (selectedDay == "domingo") setActivitiesInfo(info?.activitiesSunday);
+  if (selectedDay == "lunes") setActivitiesInfo(info?.activitiesMonday);
+  if (selectedDay == "martes") setActivitiesInfo(info?.activitiesTuesday);
+  if (selectedDay == "miercoles") setActivitiesInfo(info?.activitiesWednesday);
+  if (selectedDay == "jueves") setActivitiesInfo(info?.activitiesThursday);
+  if (selectedDay == "viernes") setActivitiesInfo(info?.activitiesFriday);
+  if (selectedDay == "sabado") setActivitiesInfo(info?.activitiesSaturday);
+  if (selectedDay == "domingo") setActivitiesInfo(info?.activitiesSunday);
  }, [
    info.activitiesTuesday,
    info.activitiesMonday,
