@@ -6,6 +6,8 @@ import FooterRender from "@/home/footer/FooterRender";
 import Transition from "@/home/transition/Transition";
 import { useEffect, useState } from "react";
 import Activities from "@/home/activities/Activities";
+import { usePathname, useRouter } from "next/navigation";
+
 
 export default function Page() {
   const { info } = useInfo();
@@ -18,7 +20,7 @@ export default function Page() {
     bars: [],
     flyers: [],
   });
-
+  const router = usePathname();
   const [day, setDay] = useState();
 
   useEffect(() => {

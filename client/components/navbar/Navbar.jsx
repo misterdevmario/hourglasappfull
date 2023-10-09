@@ -9,7 +9,6 @@ import { FaRegHourglass } from "react-icons/fa";
 import { useState } from "react";
 import { BsMenuDown, BsMenuUp } from "react-icons/bs";
 import axios from "axios";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const links = [
   "ACTIVIDADES",
@@ -37,7 +36,7 @@ const Navbar = () => {
 
   const logOut = async () => {
     const response = await axios.post("/api/logout");
-    navigate.push("/login");
+    navigate.push("https://hourglass-strapi.vercel.app/login");
   };
 
   const selectedDay = router.includes("actividades")
@@ -145,7 +144,7 @@ const Navbar = () => {
       </div>
       <div className={styles.outlinks}>
         <div className={styles.home}>
-          <FaRegHourglass size={35} onClick={() => navigate.push("/")} />
+          <FaRegHourglass size={35} onClick={() => navigate.push("https://hourglass-strapi.vercel.app")} />
         </div>
         <div className={styles.logout}>
           <RiLogoutCircleRLine size={35} onClick={() => logOut()} />
@@ -174,7 +173,7 @@ const Navbar = () => {
           ))}
           <div className={styles.toggle_outlinks}>
             <div className={styles.home}>
-              <FaRegHourglass size={40} onClick={() => navigate.push("/")} />
+              <FaRegHourglass size={40} onClick={(event) => {event.stopPropagation();navigate.push("https://hourglass-strapi.vercel.app")}} />
             </div>
             <div className={styles.logout}>
               <RiLogoutCircleRLine size={40} onClick={() => logOut()} />

@@ -1,6 +1,6 @@
 export async function getActivtiesGallery() {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL2}/activitiesgalleries?pagination[page]=0&pagination[pageSize]=120&populate=*`
+      `${process.env.NEXT_PUBLIC_STRAPI_URL2}/activitiesgalleries?populate=*`
     );
     if (!res.ok) throw new Error("Failed to fetch data");
   
