@@ -27,7 +27,7 @@ const Login = () => {
         onSubmit={async (data, actions) => {
           try {
             const userAuth = await axios.post(
-              `${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/local`,
+              `${process.env.NEXT_PUBLIC_STRAPI_URL2}/auth/local`,
               data
             );
             if (userAuth.status === 200) {

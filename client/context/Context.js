@@ -319,9 +319,7 @@ export const Provider = ({ children }) => {
 
       //Activities
       const activitiesGalleryResponse = await getActivtiesGallery();
-      const images = activitiesGalleryResponse.data.map((item) =>
-        item.attributes.activity.data.map((item) => item.attributes.url)
-      );
+      const images = activitiesGalleryResponse.data.map((item) => item.attributes.activity?.data.map(item => item.attributes.url));
       //Staff
       const staffGalleryResponse = await getStaffGallery();
       const staffImages = staffGalleryResponse.data.map((item) =>

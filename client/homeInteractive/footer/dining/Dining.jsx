@@ -102,17 +102,17 @@ const Dining = ({ info }) => {
                     <div className={styles.info}>
                       {language == "en"
                         ? item.attributes.typeEn
-                        : item.attributes.typeEs}
+                        : item.attributes.typeEn}
                     </div>
                     <div className={styles.info}>
                       {language == "en"
                         ? item.attributes.serviceEn
-                        : item.attributes.serviceEs}
+                        : item.attributes.serviceEn}
                     </div>
                     <div className={styles.info}>
                       {language == "en"
                         ? item.attributes.membersEn
-                        : item.attributes.membersEs}
+                        : item.attributes.membersEn}
                     </div>
                   </div>
                 </div>
@@ -202,17 +202,17 @@ const Dining = ({ info }) => {
                     <div className={styles.info}>
                       {languageMobile == "en"
                         ? item.attributes.typeEn
-                        : item.attributes.typeEs}
+                        : item.attributes.typeEn}
                     </div>
                     <div className={styles.info}>
                       {languageMobile == "en"
                         ? item.attributes.serviceEn
-                        : item.attributes.serviceEs}
+                        : item.attributes.serviceEn}
                     </div>
                     <div className={styles.info}>
                       {languageMobile == "en"
                         ? item.attributes.membersEn
-                        : item.attributes.membersEs}
+                        : item.attributes.membersEn}
                     </div>
                   </div>
                 </div>

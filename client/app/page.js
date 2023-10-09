@@ -154,6 +154,7 @@ export default function Page() {
  
   return (
     <main>
+      <Transition/>
       <div className={show}>
         <HeaderRender />
         <Activities info={dayInfo} />

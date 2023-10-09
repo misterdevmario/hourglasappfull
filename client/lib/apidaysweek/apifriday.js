@@ -3,7 +3,7 @@
 //Method GET
 export async function getActivitiesFriday() {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL2}/activityfridays?pagination[page]=1&pagination[pageSize]=50`
+      `${process.env.NEXT_PUBLIC_STRAPI_URL2}/activityfridays?pagination[page]=0&pagination[pageSize]=120`
     );
     if (!res.ok) throw new Error("Failed to fetch data");
     return res.json();

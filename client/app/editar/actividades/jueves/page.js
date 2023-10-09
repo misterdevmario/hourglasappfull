@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 
 
-const Domingo = () => {
+const Jueves = () => {
  const { info } = useInfo();
  const router = usePathname();
  const [activitiesInfo, setActivitiesInfo] = useState();
@@ -42,7 +42,6 @@ const Domingo = () => {
    info.activitiesSunday,
    selectedDay,
  ]);
-console.log(activitiesInfo)
   return (
     <div>
         <Activities activities = {activitiesInfo}/>
@@ -50,4 +49,4 @@ console.log(activitiesInfo)
   )
 }
 
-export default Domingo
+export default Jueves

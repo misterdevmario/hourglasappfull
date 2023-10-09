@@ -42,7 +42,6 @@ const Domingo = () => {
    info.activitiesSunday,
    selectedDay,
  ]);
-console.log(activitiesInfo)
   return (
     <div>
         <Activities activities = {activitiesInfo}/>

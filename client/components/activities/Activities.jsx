@@ -32,7 +32,6 @@ const validation = Yup.object().shape({
   spotEs: Yup.string()
     .required("*Campo requerido")
     .max(22, "La longitud maxima es de 22 letras!"),
-
 });
 
 const Carousel = ({ activities }) => {
@@ -94,17 +93,15 @@ const Carousel = ({ activities }) => {
     for (let i = 0; i < time.length; i++) {
       for (let j = 0; j < activities?.length; j++) {
         if (
-          time[i] ==
+          time[i] ===
           activities[j].attributes.hourStart
             .toLocaleLowerCase()
-            .replace(" ", "")
         )
           hoursUppercase.push(activities[j]);
       }
     }
     sethoursUppercase(hoursUppercase);
   }, [activities, desc]);
-
   const handleDescEn = () => {
     const description = hoursUppercase
       .filter((item) => item.id == id)
@@ -117,10 +114,9 @@ const Carousel = ({ activities }) => {
       .map((item) => item.attributes.descEs);
     setDesc(description);
   };
-
   return (
     <div className={styles.container}>
-      {hoursUppercase.map((item) => (
+      {hoursUppercase?.map((item) => (
         <Formik
           key={item.id}
           initialValues={{
@@ -151,8 +147,8 @@ const Carousel = ({ activities }) => {
         >
           {({ handleSubmit }) => (
             <div>
-              <Form onSubmit={handleSubmit} className={styles.form} >
-                <div className={styles.inputs} >
+              <Form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.inputs}>
                   <div className={styles.hours}>
                     <Field as="select" name="hourStart" placeholder={"Inicio"}>
                       <option value="defaultValue">
@@ -236,7 +232,7 @@ const Carousel = ({ activities }) => {
                         if (selectedDay == "miercoles")
                           deleteActivityWednesday(item.id);
                         if (selectedDay == "jueves")
-                        deleteActivityThursday(item.id);
+                          deleteActivityThursday(item.id);
                         if (selectedDay == "viernes")
                           deleteActivityFriday(item.id);
                         if (selectedDay == "sabado")
@@ -268,7 +264,7 @@ const Carousel = ({ activities }) => {
       ))}
       <ModalDesc isOpen={isOpenModalDescEn} En closeModal={closeModalDescEn}>
         <div className={styles.description}>
-        <div>descripción ingles</div>
+          <div>descripción ingles</div>
           <textarea
             name="descEn"
             type="textarea"
@@ -325,7 +321,7 @@ const Carousel = ({ activities }) => {
               if (selectedDay == "miercoles")
                 updateActivityWednesday({ descEn: desc }, id);
               if (selectedDay == "jueves")
-              updateActivityThursday({ descEn: desc }, id);
+                updateActivityThursday({ descEn: desc }, id);
               if (selectedDay == "viernes")
                 updateActivityFriday({ descEn: desc }, id);
               if (selectedDay == "sabado")
@@ -356,20 +352,13 @@ const Carousel = ({ activities }) => {
         validationSchema={validation}
         onSubmit={async (data, { resetForm }) => {
           data.activitieImage = image;
-          if (selectedDay == "lunes")
-          postActivityMonday(data);
-        if (selectedDay == "martes")
-          postActivityTuesday(data);
-        if (selectedDay == "miercoles")
-          postActivityWednesday(data);
-        if (selectedDay == "jueves")
-        postActivityThursday(data);
-        if (selectedDay == "viernes")
-          postActivityFriday(data);
-        if (selectedDay == "sabado")
-          postActivitySaturday(data);
-        if (selectedDay == "domingo")
-          postActivitySunday(data);
+          if (selectedDay == "lunes") postActivityMonday(data);
+          if (selectedDay == "martes") postActivityTuesday(data);
+          if (selectedDay == "miercoles") postActivityWednesday(data);
+          if (selectedDay == "jueves") postActivityThursday(data);
+          if (selectedDay == "viernes") postActivityFriday(data);
+          if (selectedDay == "sabado") postActivitySaturday(data);
+          if (selectedDay == "domingo") postActivitySunday(data);
           resetForm({ values: "" });
         }}
       >
