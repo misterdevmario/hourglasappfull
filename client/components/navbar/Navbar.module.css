@@ -20,9 +20,11 @@
 }
 
 .logo {
-  width: 10%;
+  width: 15%;
   height: auto;
   display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .logo img {
   height: 8vh;
@@ -39,7 +41,9 @@
   justify-content: space-around;
   align-items: center;
 }
-
+.links_container a:hover {
+  color: var(--hover-color);
+}
 .active {
   font-weight: bolder;
   font-size: var(--font-lg);
@@ -52,6 +56,33 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+}
+
+.selecteday {
+  text-decoration: underline;
+  font-size: var(--font-lg);
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.day_options {
+  position: absolute;
+  top: 8.5vh;
+  left: 8.3vw;
+  background-color: var(--secondary-color);
+  width: 7vw;
+  height: 25vh;
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.day_options :hover {
+  color: var(--hover-color);
 }
 
 .toogle_navbar_container {
@@ -76,6 +107,7 @@
   width: 80vw;
   justify-content: space-around;
 }
+
 @media screen and (max-width: 1400px) {
   .links_container {
     font-size: var(--font-sm);
@@ -125,16 +157,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     font-weight: bolder;
     font-size: 2vh;
-    
   }
-  .toggle_links_container{
+  .toggle_links_container {
     font-size: 16px;
   }
-  .active_toggle{
+  .active_toggle {
     font-weight: bolder;
     font-size: 2.5vh;
     text-decoration: underline;
+  }
+  .selecteday_toggle {
+    font-size: 12px;
+    text-decoration: underline;
+  }
+  .day_options {
+    width: 40vw;
+    left: 34vw;
+    font-size: 12px;
   }
 }

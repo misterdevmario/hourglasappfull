@@ -33,6 +33,7 @@ const Navbar = () => {
   const navigate = useRouter();
   const router = usePathname();
   const [toggle, setToggle] = useState(false);
+  const [toggleDays, setToggleDays] = useState(false);
 
   const logOut = async () => {
     const response = await axios.post("/api/logout");
@@ -59,44 +60,67 @@ const Navbar = () => {
     <div className={styles.container}>
       <div className={styles.logo}>
         <Image src="/logo.svg" alt="logo" width={120} height={120} priority />
-        <select
-          onChange={(e) =>
-            navigate.push(
-              `/editar/${selectedPath}/${e.target.value.toLocaleLowerCase()}`
-            )
+        <div
+          className={styles.selecteday}
+          onClick={() =>
+            toggleDays ? setToggleDays(false) : setToggleDays(true)
           }
         >
-          <option value="selected">{selectedDay}</option>
-          {days.map((item, i) => (
-            <option key={i} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
+          {selectedDay}
+        </div>
+        {toggleDays ? (
+          <div className={styles.day_options}>
+            {days.map((item, i) => (
+              <div
+                key={i}
+                onClick={() => {
+                  navigate.push(
+                    `/editar/${selectedPath}/${item.toLocaleLowerCase()}`
+                  );
+                  setToggleDays(false);
+                }}
+              >
+                {item != selectedDay ? item : null}
+              </div>
+            ))}
+          </div>
+        ) : null}
       </div>
 
       <div className={styles.toogle_navbar_container}>
         <div className={styles.logo_toggle}>
           <Image src="/logo.svg" alt="logo" width={50} height={50} priority />
-          <select
-            onChange={(e) =>
-              navigate.push(
-                `/editar/${selectedPath}/${e.target.value.toLocaleLowerCase()}`
-              )
-            }
-          >
-            <option value="selected">{selectedDay}</option>
-            {days.map((item, i) => (
-              <option className={styles.option} key={i} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
+     
+          {toggleDays ? (
+            <div className={styles.day_options}>
+              {days.map((item, i) => (
+                <div
+                  key={i}
+                  onClick={() => {
+                    navigate.push(
+                      `/editar/${selectedPath}/${item.toLocaleLowerCase()}`
+                    );
+                    setToggleDays(false);
+                  }}
+                >
+                  {item != selectedDay ? item : null}
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
         <div className={styles.toggle_tittle}>
           {router
             .replace("/editar/", "")
             .replace(`/${selectedDay.toLocaleLowerCase()}`, "")}
+                 <div
+            className={styles.selecteday_toggle}
+            onClick={() =>
+              toggleDays ? setToggleDays(false) : setToggleDays(true)
+            }
+          >
+            {selectedDay}
+          </div>
         </div>
         {!toggle ? (
           <BsMenuUp onClick={() => setToggle(true)} size={30} />
@@ -109,8 +133,7 @@ const Navbar = () => {
           <Link
             key={i}
             className={
-              selectedPath
-               == item.toLowerCase()
+              selectedPath == item.toLowerCase()
                 ? `${styles.active}`
                 : `${null}`
             }
@@ -137,10 +160,9 @@ const Navbar = () => {
             <Link
               key={i}
               className={
-                selectedPath
-                == item.toLowerCase()
-                 ? `${styles.active_toggle}`
-                 : `${null}`
+                selectedPath == item.toLowerCase()
+                  ? `${styles.active_toggle}`
+                  : `${null}`
               }
               href={`/editar/${item.toLowerCase()}/${selectedDay.toLocaleLowerCase()}`}
               onClick={() => {

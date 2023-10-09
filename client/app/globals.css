@@ -23,6 +23,7 @@
   --home-shadow: rgba(160, 40, 204, 0.5) 2px 6px 8px;
   --linear-gradient: rgba(28, 27, 29, 0.9);
   --main-color:#5C1E3F;
+  --hover-color:rgb(193, 186, 186);
   --secondary-color:rgb(160, 40, 204);
   --home-linear: linear-gradient(rgb(160, 40, 204), rgb(54, 22, 160));
   --transparency:rgba(119, 41, 236, 0.8);
