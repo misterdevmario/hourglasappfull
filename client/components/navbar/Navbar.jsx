@@ -36,7 +36,7 @@ const Navbar = () => {
 
   const logOut = async () => {
     const response = await axios.post("/api/logout");
-    navigate.push("https://hourglass-strapi.vercel.app/login");
+    navigate.push("/login");
   };
 
   const selectedDay = router.includes("actividades")
@@ -51,10 +51,11 @@ const Navbar = () => {
     ? router.replace("/editar/breakfast/", "").toLocaleUpperCase()
     : router.includes("flyers")
     ? router.replace("/editar/flyers/", "").toLocaleUpperCase()
-    : null;
-  const selectedPath = router
+    : "/";
+  const selectedPath = router.includes("/editar") ? router
     .replace("/editar/", "")
-    .replace(`/${selectedDay.toLocaleLowerCase()}`, "");
+    .replace(`/${selectedDay.toLocaleLowerCase()}`, ""): '/';
+    
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -144,7 +145,7 @@ const Navbar = () => {
       </div>
       <div className={styles.outlinks}>
         <div className={styles.home}>
-          <FaRegHourglass size={35} onClick={() => navigate.push("https://hourglass-strapi.vercel.app")} />
+          <FaRegHourglass size={35} onClick={() => navigate.push("/")} />
         </div>
         <div className={styles.logout}>
           <RiLogoutCircleRLine size={35} onClick={() => logOut()} />
@@ -173,7 +174,7 @@ const Navbar = () => {
           ))}
           <div className={styles.toggle_outlinks}>
             <div className={styles.home}>
-              <FaRegHourglass size={40} onClick={(event) => {event.stopPropagation();navigate.push("https://hourglass-strapi.vercel.app")}} />
+              <FaRegHourglass size={40} onClick={(event) => {event.stopPropagation();navigate.push("/")}} />
             </div>
             <div className={styles.logout}>
               <RiLogoutCircleRLine size={40} onClick={() => logOut()} />
