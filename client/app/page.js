@@ -22,6 +22,11 @@ export default function Page() {
   });
   const router = usePathname();
   const [day, setDay] = useState();
+  const [display, setDisplay] = useState("hide")
+
+  useEffect(()=>{
+info.activitiesMonday.length == 0? setDisplay("hide") : setDisplay("show")
+  },[info.activitiesMonday])
 
   useEffect(() => {
     setDay(new Date().getDay());
@@ -157,7 +162,7 @@ export default function Page() {
   return (
     <main>
       <Transition/>
-      <div className={show}>
+      <div className={display}>
         <HeaderRender />
         <Activities info={dayInfo} />
         <FooterRender info={dayInfo} />
