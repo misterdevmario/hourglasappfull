@@ -376,9 +376,9 @@ const Dinning = () => {
                 if (selectedDay == "martes")
                   updateDinningTuesday({ descEn: desc }, id);
                 if (selectedDay == "miercoles")
-                  updateDinningThursday({ descEn: desc }, id);
+                updateDinningWednesday({ descEn: desc }, id);
                 if (selectedDay == "jueves")
-                  updateDinningWednesday({ descEn: desc }, id);
+                updateDinningThursday({ descEn: desc }, id);
                 if (selectedDay == "viernes")
                   updateDinningFriday({ descEn: desc }, id);
                 if (selectedDay == "sabado")
@@ -413,9 +413,9 @@ const Dinning = () => {
                 if (selectedDay == "martes")
                   updateDinningTuesday({ descEs: desc }, id);
                 if (selectedDay == "miercoles")
-                  updateDinningThursday({ descEs: desc }, id);
+                updateDinningWednesday({ descEs: desc }, id);
                 if (selectedDay == "jueves")
-                  updateDinningWednesday({ descEs: desc }, id);
+                updateDinningThursday({ descEs: desc }, id);
                 if (selectedDay == "viernes")
                   updateDinningFriday({ descEs: desc }, id);
                 if (selectedDay == "sabado")
