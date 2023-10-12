@@ -175,9 +175,9 @@ const Dinning = () => {
               if (selectedDay == "martes")
                 await updateDinningTuesday(data, item.id);
               if (selectedDay == "miercoles")
-                await updateDinningThursday(data, item.id);
-              if (selectedDay == "jueves")
-                await updateDinningWednesday(data, item.id);
+              await updateDinningWednesday(data, item.id);
+            if (selectedDay == "jueves")
+            await updateDinningThursday(data, item.id);
               if (selectedDay == "viernes")
                 await updateDinningFriday(data, item.id);
               if (selectedDay == "sabado")
