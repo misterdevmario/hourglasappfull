@@ -5,12 +5,19 @@ import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useInfo } from "@/context/Context";
 import { useModal } from "../modal/useModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../modal/Modal";
 import styles from "./Bars.module.css";
 import BarsGallery from "./gallery/BarsGallery";
 import { usePathname } from "next/navigation";
 import { time } from "@/lib/language";
+import { getBarsMonday } from "@/lib/apidaysweek/apimonday";
+import { getBarsTuesday } from "@/lib/apidaysweek/apituesday";
+import { getBarsWednesday } from "@/lib/apidaysweek/apiwednesday";
+import { getBarsThursday } from "@/lib/apidaysweek/apithursday";
+import { getBarsFriday } from "@/lib/apidaysweek/apifriday";
+import { getBarsSaturday } from "@/lib/apidaysweek/apisaturday";
+import { getBarsSunday } from "@/lib/apidaysweek/apisunday";
 
 const validation = Yup.object().shape({
   name: Yup.string()
@@ -24,8 +31,8 @@ const validation = Yup.object().shape({
     .max(19, "La longitud maxima es de 19 letras!"),
 });
 
-const Bars = ({ barsInfo }) => {
-  console.log(barsInfo);
+const Bars = () => {
+  const [bars, setBars] = useState();
   const {
     updateBarMonday,
     updateBarTuesday,
@@ -56,15 +63,56 @@ const Bars = ({ barsInfo }) => {
     : router.includes("flyers")
     ? router.replace("/editar/flyers/", "")
     : null;
+  useEffect(() => {
+    (async () => {
+      if (selectedDay == "lunes") {
+        const barsResponseMonday = await getBarsMonday();
+        setBars(barsResponseMonday.data);
+      }
+      if (selectedDay == "martes") {
+        const barsResponseTuesday = await getBarsTuesday();
+        setBars(barsResponseTuesday.data);
+      }
+      if (selectedDay == "miercoles") {
+        const barsResponseWednesday = await getBarsWednesday();
+        setBars(barsResponseWednesday.data);
+      }
+      if (selectedDay == "jueves") {
+        const barsResponseThursday = await getBarsThursday();
+        setBars(barsResponseThursday.data);
+      }
+      if (selectedDay == "viernes") {
+        const barsResponseFriday = await getBarsFriday();
+        setBars(barsResponseFriday.data);
+      }
+      if (selectedDay == "sabado") {
+        const barsResponseSaturday = await getBarsSaturday();
+        setBars(barsResponseSaturday.data);
+      }
+      if (selectedDay == "domingo") {
+        const barsResponseSunday = await getBarsSunday();
+        setBars(barsResponseSunday.data);
+      }
+    })();
+  }, [
+    selectedDay,
+    updateBarMonday,
+    updateBarTuesday,
+    updateBarWednesday,
+    updateBarThursday,
+    updateBarFriday,
+    updateBarSaturday,
+    updateBarSunday,
+  ]);
 
   const handleMenuLgEn = () => {
-    const description = barsInfo
+    const description = bars
       .filter((item) => item.id == id)
       .map((item) => item.attributes?.menuImgEn);
     setMenuLgEn(description.toString());
   };
   const handleMenuLgEs = () => {
-    const description = barsInfo
+    const description = bars
       .filter((item) => item.id == id)
       .map((item) => item.attributes?.menuImgEs);
     setMenuLgEs(description.toString());
@@ -72,7 +120,7 @@ const Bars = ({ barsInfo }) => {
 
   return (
     <div className={styles.container}>
-      {barsInfo?.map((item) => (
+      {bars?.map((item) => (
         <Formik
           key={item.id}
           initialValues={{
@@ -85,9 +133,8 @@ const Bars = ({ barsInfo }) => {
             if (selectedDay == "lunes") await updateBarMonday(data, item.id);
             if (selectedDay == "martes") await updateBarTuesday(data, item.id);
             if (selectedDay == "miercoles")
-              await updateBarThursday(data, item.id);
-            if (selectedDay == "jueves")
               await updateBarWednesday(data, item.id);
+            if (selectedDay == "jueves") await updateBarThursday(data, item.id);
             if (selectedDay == "viernes") await updateBarFriday(data, item.id);
             if (selectedDay == "sabado") await updateBarSaturday(data, item.id);
             if (selectedDay == "domingo") await updateBarSunday(data, item.id);
@@ -179,25 +226,13 @@ const Bars = ({ barsInfo }) => {
       <Modal isOpen={isOpenMenuLgEn} closeModal={closeMenuLgEn}>
         <div className={styles.menuLg}>
           <h1>Menu ingles</h1>
-          <Image
-            src={menuLgEn}
-            alt="Menu"
-            width={1000}
-            height={1980}
-            priority
-          />
+          <Image src={menuLgEn} alt="Menu" width={600} height={800} priority />
         </div>
       </Modal>
       <Modal isOpen={isOpenMenuLgEs} closeModal={closeMenuLgEs}>
         <div className={styles.menuLg}>
           <h1> Menu español</h1>
-          <Image
-            src={menuLgEs}
-            alt="Menu"
-            width={1000}
-            height={1980}
-            priority
-          />
+          <Image src={menuLgEs} alt="Menu" width={600} height={800} priority />
         </div>
       </Modal>
       <Modal isOpen={isOpenGallery} closeModal={closeGallery}>

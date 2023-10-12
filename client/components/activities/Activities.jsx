@@ -14,6 +14,13 @@ import { time } from "@/lib/language";
 import ModalDesc from "@/components/modalDesc/ModalDesc";
 import styles from "./Carousel.module.css";
 import { usePathname } from "next/navigation";
+import { getActivitiesMonday } from "@/lib/apidaysweek/apimonday";
+import { getActivitiesTuesday } from "@/lib/apidaysweek/apituesday";
+import { getActivitiesWednesday } from "@/lib/apidaysweek/apiwednesday";
+import { getActivitiesThursday } from "@/lib/apidaysweek/apithursday";
+import { getActivitiesFriday } from "@/lib/apidaysweek/apifriday";
+import { getActivitiesSaturday } from "@/lib/apidaysweek/apisaturday";
+import { getActivitiesSunday } from "@/lib/apidaysweek/apisunday";
 
 const validation = Yup.object().shape({
   activitieEn: Yup.string()
@@ -34,7 +41,8 @@ const validation = Yup.object().shape({
     .max(22, "La longitud maxima es de 22 letras!"),
 });
 
-const Carousel = ({ activities }) => {
+const Carousel = () => {
+  const [activities, setActivities] = useState();
   const {
     updateActivityMonday,
     postActivityMonday,
@@ -88,15 +96,73 @@ const Carousel = ({ activities }) => {
     : router.includes("flyers")
     ? router.replace("/editar/flyers/", "")
     : null;
+
+  useEffect(() => {
+    (async () => {
+      if (selectedDay == "lunes") {
+        const activitiesResponseMonday = await getActivitiesMonday();
+        setActivities(activitiesResponseMonday.data);
+      }
+      if (selectedDay == "martes") {
+        const activitiesResponseTuesday = await getActivitiesTuesday();
+        setActivities(activitiesResponseTuesday.data);
+      }
+      if (selectedDay == "miercoles") {
+        const activitiesResponseWednesday = await getActivitiesWednesday();
+        setActivities(activitiesResponseWednesday.data);
+      }
+      if (selectedDay == "jueves") {
+        const activitiesResponseThursday = await getActivitiesThursday();
+        setActivities(activitiesResponseThursday.data);
+      }
+      if (selectedDay == "viernes") {
+        const activitiesResponseFriday = await getActivitiesFriday();
+        setActivities(activitiesResponseFriday.data);
+      }
+      if (selectedDay == "sabado") {
+        const activitiesResponseSaturday = await getActivitiesSaturday();
+        setActivities(activitiesResponseSaturday.data);
+      }
+      if (selectedDay == "domingo") {
+        const activitiesResponseSunday = await getActivitiesSunday();
+        setActivities(activitiesResponseSunday.data);
+      }
+    })();
+  }, [
+    selectedDay,
+    updateActivityMonday,
+    postActivityMonday,
+    deleteActivityMonday,
+
+    updateActivityTuesday,
+    postActivityTuesday,
+    deleteActivityTuesday,
+
+    updateActivityWednesday,
+    postActivityWednesday,
+    deleteActivityWednesday,
+
+    updateActivityThursday,
+    postActivityThursday,
+    deleteActivityThursday,
+
+    updateActivityFriday,
+    postActivityFriday,
+    deleteActivityFriday,
+
+    updateActivitySaturday,
+    postActivitySaturday,
+    deleteActivitySaturday,
+
+    updateActivitySunday,
+    postActivitySunday,
+    deleteActivitySunday,
+  ]);
   useEffect(() => {
     const hoursUppercase = [];
     for (let i = 0; i < time.length; i++) {
       for (let j = 0; j < activities?.length; j++) {
-        if (
-          time[i] ===
-          activities[j].attributes.hourStart
-            .toLocaleLowerCase()
-        )
+        if (time[i] === activities[j].attributes.hourStart.toLocaleLowerCase())
           hoursUppercase.push(activities[j]);
       }
     }
@@ -315,19 +381,19 @@ const Carousel = ({ activities }) => {
             onClick={() => {
               handleDescription(desc);
               if (selectedDay == "lunes")
-                updateActivityMonday({ descEn: desc }, id);
+                updateActivityMonday({ descEs: desc }, id);
               if (selectedDay == "martes")
-                updateActivityTuesday({ descEn: desc }, id);
+                updateActivityTuesday({ descEs: desc }, id);
               if (selectedDay == "miercoles")
-                updateActivityWednesday({ descEn: desc }, id);
+                updateActivityWednesday({ descEs: desc }, id);
               if (selectedDay == "jueves")
-                updateActivityThursday({ descEn: desc }, id);
+                updateActivityThursday({ descEs: desc }, id);
               if (selectedDay == "viernes")
-                updateActivityFriday({ descEn: desc }, id);
+                updateActivityFriday({ descEs: desc }, id);
               if (selectedDay == "sabado")
-                updateActivitySaturday({ descEn: desc }, id);
+                updateActivitySaturday({ descEs: desc }, id);
               if (selectedDay == "domingo")
-                updateActivitySunday({ descEn: desc }, id);
+                updateActivitySunday({ descEs: desc }, id);
               closeModalDescEs();
             }}
             disabled={!desc}

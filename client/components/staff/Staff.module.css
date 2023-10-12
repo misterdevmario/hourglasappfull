@@ -22,11 +22,12 @@
   height: 100%;
   width: auto;
   border-radius: var(--border-radius);
+  cursor: pointer;
 }
 
 .form {
-  width: 400px;
-  height: 260px;
+  width: 450px;
+  height: 350px;
   display: flex;
   justify-content: space-between;
   align-items: center;

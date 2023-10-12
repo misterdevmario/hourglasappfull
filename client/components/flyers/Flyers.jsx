@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useInfo } from "@/context/Context";
 import { useModal } from "../modal/useModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../modal/Modal";
 import FlyersGallery from "./gallery/FlyersGallery";
 import { RiImageAddLine } from "react-icons/ri";
@@ -14,6 +14,34 @@ import { useModalDesc } from "../modalDesc/useModalDesc";
 import { usePathname } from "next/navigation";
 import ModalDesc from "../modalDesc/ModalDesc";
 import { time } from "@/lib/language";
+import {
+  getFlyersMonday,
+  getFlyersTitleMonday,
+} from "@/lib/apidaysweek/apimonday";
+import {
+  getFlyersTitleTuesday,
+  getFlyersTuesday,
+} from "@/lib/apidaysweek/apituesday";
+import {
+  getFlyersTitleWednesday,
+  getFlyersWednesday,
+} from "@/lib/apidaysweek/apiwednesday";
+import {
+  getFlyersThursday,
+  getFlyersTitleThursday,
+} from "@/lib/apidaysweek/apithursday";
+import {
+  getFlyersFriday,
+  getFlyersTitleFriday,
+} from "@/lib/apidaysweek/apifriday";
+import {
+  getFlyersSaturday,
+  getFlyersTitleSaturday,
+} from "@/lib/apidaysweek/apisaturday";
+import {
+  getFlyersSunday,
+  getFlyersTitleSunday,
+} from "@/lib/apidaysweek/apisunday";
 
 const validation = Yup.object().shape({
   nameEn: Yup.string()
@@ -44,7 +72,9 @@ const titleValidation = Yup.object().shape({
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
 });
-const Flyers = ({ flyerInfo, flyerTitleInfo }) => {
+const Flyers = () => {
+  const [flyer, setFlyer] = useState();
+  const [flyerTitle, setFlyerTitle] = useState();
   const {
     updateFlyerMonday,
     postFlyerMonday,
@@ -105,14 +135,96 @@ const Flyers = ({ flyerInfo, flyerTitleInfo }) => {
     : router.includes("flyers")
     ? router.replace("/editar/flyers/", "")
     : null;
+  useEffect(() => {
+    (async () => {
+      if (selectedDay == "lunes") {
+        const flyersResponseMonday = await getFlyersMonday();
+        const flyersTitleResponseMonday = await getFlyersTitleMonday();
+        setFlyer(flyersResponseMonday.data);
+        setFlyerTitle(flyersTitleResponseMonday.data);
+      }
+      if (selectedDay == "martes") {
+        const flyersResponseTuesday = await getFlyersTuesday();
+        const flyersTitleResponseTuesday = await getFlyersTitleTuesday();
+        setFlyer(flyersResponseTuesday.data);
+        setFlyerTitle(flyersTitleResponseTuesday.data);
+      }
+      if (selectedDay == "miercoles") {
+        const flyersResponseWednesday = await getFlyersWednesday();
+        const flyersTitleResponseWednesday = await getFlyersTitleWednesday();
+        setFlyer(flyersResponseWednesday.data);
+        setFlyerTitle(flyersTitleResponseWednesday.data);
+      }
+      if (selectedDay == "jueves") {
+        const flyersResponseThursday = await getFlyersThursday();
+        const flyersTitleResponseThursday = await getFlyersTitleThursday();
+        setFlyer(flyersResponseThursday.data);
+        setFlyerTitle(flyersTitleResponseThursday.data);
+      }
+      if (selectedDay == "viernes") {
+        const flyersResponseFriday = await getFlyersFriday();
+        const flyersTitleResponseFriday = await getFlyersTitleFriday();
+        setFlyer(flyersResponseFriday.data);
+        setFlyerTitle(flyersTitleResponseFriday.data);
+      }
+      if (selectedDay == "sabado") {
+        const flyersResponseSaturday = await getFlyersSaturday();
+        const flyersTitleResponseSaturday = await getFlyersTitleSaturday();
+        setFlyer(flyersResponseSaturday.data);
+        setFlyerTitle(flyersTitleResponseSaturday.data);
+      }
+      if (selectedDay == "domingo") {
+        const flyersResponseSunday = await getFlyersSunday();
+        const flyersTitleResponseSunday = await getFlyersTitleSunday();
+        setFlyer(flyersResponseSunday.data);
+        setFlyerTitle(flyersTitleResponseSunday.data);
+      }
+    })();
+  }, [
+    selectedDay,
+    updateFlyerMonday,
+    postFlyerMonday,
+    deleteFlyerMonday,
+
+    updateFlyerTuesday,
+    postFlyerTuesday,
+    deleteFlyerTuesday,
+
+    updateFlyerWednesday,
+    postFlyerWednesday,
+    deleteFlyerWednesday,
+
+    updateFlyerThursday,
+    postFlyerThursday,
+    deleteFlyerThursday,
+
+    updateFlyerFriday,
+    postFlyerFriday,
+    deleteFlyerFriday,
+
+    updateFlyerSaturday,
+    postFlyerSaturday,
+    deleteFlyerSaturday,
+
+    updateFlyerSunday,
+    postFlyerSunday,
+    deleteFlyerSunday,
+    updateFlyerTitleMonday,
+    updateFlyerTitleTuesday,
+    updateFlyerTitleWednesday,
+    updateFlyerTitleThursday,
+    updateFlyerTitleFriday,
+    updateFlyerTitleSaturday,
+    updateFlyerTitleSunday,
+  ]);
   const handleFlyerEn = () => {
-    const description = flyerInfo
+    const description = flyer
       .filter((item) => item.id == id)
       .map((item) => item.attributes.descEn);
     setDesc(description);
   };
   const handleFlyerEs = () => {
-    const description = flyerInfo
+    const description = flyer
       .filter((item) => item.id == id)
       .map((item) => item.attributes.descEs);
     setDesc(description);
@@ -120,7 +232,7 @@ const Flyers = ({ flyerInfo, flyerTitleInfo }) => {
 
   return (
     <div className={styles.container}>
-      {flyerTitleInfo?.map((item) => (
+      {flyerTitle?.map((item) => (
         <Formik
           key={item.id}
           initialValues={{
@@ -165,7 +277,7 @@ const Flyers = ({ flyerInfo, flyerTitleInfo }) => {
         </Formik>
       ))}
       <div className={styles.cards_container}>
-        {flyerInfo?.map((item, i) => (
+        {flyer?.map((item, i) => (
           <Formik
             key={item.id}
             initialValues={{
@@ -271,7 +383,7 @@ const Flyers = ({ flyerInfo, flyerTitleInfo }) => {
                     <button className={styles.save} type="submit">
                       Guardar
                     </button>
-                    {flyerInfo?.length > 1 ? (
+                    {flyer?.length > 1 ? (
                       <button
                         type="button"
                         className={styles.delete}

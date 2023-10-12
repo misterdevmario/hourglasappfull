@@ -13,6 +13,13 @@ import Modal from "@/components/modal/Modal";
 import { useModal } from "@/components/modal/useModal";
 import { useModalDesc } from "@/components/modalDesc/useModalDesc";
 import { usePathname } from "next/navigation";
+import { getStaffsMonday } from "@/lib/apidaysweek/apimonday";
+import { getStaffsTuesday } from "@/lib/apidaysweek/apituesday";
+import { getStaffsWednesday } from "@/lib/apidaysweek/apiwednesday";
+import { getStaffsThursday } from "@/lib/apidaysweek/apithursday";
+import { getStaffsFriday } from "@/lib/apidaysweek/apifriday";
+import { getStaffsSaturday } from "@/lib/apidaysweek/apisaturday";
+import { getStaffsSunday } from "@/lib/apidaysweek/apisunday";
 
 const validation = Yup.object().shape({
   name: Yup.string()
@@ -24,11 +31,10 @@ const validation = Yup.object().shape({
   positionEs: Yup.string()
     .required("*Campo requerido")
     .max(19, "La longitud maxima es de 19 letras!"),
-
-
 });
 
-const Staff = ({ staffInfo }) => {
+const Staff = () => {
+  const [staff, setStaff] = useState();
   const {
     updateStaffMonday,
     postStaffMonday,
@@ -68,7 +74,6 @@ const Staff = ({ staffInfo }) => {
     useModalDesc(true);
   const [isOpenModalBioEs, openModalBioEs, closeModalBioEs] =
     useModalDesc(true);
-  const [staff, setStaff] = useState([]);
   const router = usePathname();
   const selectedDay = router.includes("actividades")
     ? router.replace("/editar/actividades/", "")
@@ -84,17 +89,75 @@ const Staff = ({ staffInfo }) => {
     ? router.replace("/editar/flyers/", "")
     : null;
   useEffect(() => {
-    setStaff(staffInfo);
-  }, [staffInfo, desc]);
+    (async () => {
+      if (selectedDay == "lunes") {
+        const staffResponseMonday = await getStaffsMonday();
+        setStaff(staffResponseMonday.data);
+      }
+      if (selectedDay == "martes") {
+        const staffResponseTuesday = await getStaffsTuesday();
+        setStaff(staffResponseTuesday.data);
+      }
+      if (selectedDay == "miercoles") {
+        const staffResponseWednesday = await getStaffsWednesday();
+        setStaff(staffResponseWednesday.data);
+      }
+      if (selectedDay == "jueves") {
+        const staffResponseThursday = await getStaffsThursday();
+        setStaff(staffResponseThursday.data);
+      }
+      if (selectedDay == "viernes") {
+        const staffResponseFriday = await getStaffsFriday();
+        setStaff(staffResponseFriday.data);
+      }
+      if (selectedDay == "sabado") {
+        const staffResponseSaturday = await getStaffsSaturday();
+        setStaff(staffResponseSaturday.data);
+      }
+      if (selectedDay == "domingo") {
+        const staffResponseSunday = await getStaffsSunday();
+        setStaff(staffResponseSunday.data);
+      }
+    })();
+  }, [
+    selectedDay,
+    updateStaffMonday,
+    postStaffMonday,
+    deleteStaffMonday,
+
+    updateStaffTuesday,
+    postStaffTuesday,
+    deleteStaffTuesday,
+
+    updateStaffWednesday,
+    postStaffWednesday,
+    deleteStaffWednesday,
+
+    updateStaffThursday,
+    postStaffThursday,
+    deleteStaffThursday,
+
+    updateStaffFriday,
+    postStaffFriday,
+    deleteStaffFriday,
+
+    updateStaffSaturday,
+    postStaffSaturday,
+    deleteStaffSaturday,
+
+    updateStaffSunday,
+    postStaffSunday,
+    deleteStaffSunday,
+  ]);
 
   const handleBioEn = () => {
-    const description = staffInfo
+    const description = staff
       .filter((item) => item.id == id)
       .map((item) => item.attributes.bioEn);
     setDesc(description);
   };
   const handleBioEs = () => {
-    const description = staffInfo
+    const description = staff
       .filter((item) => item.id == id)
       .map((item) => item.attributes.bioEs);
     setDesc(description);
@@ -113,12 +176,18 @@ const Staff = ({ staffInfo }) => {
           validationSchema={validation}
           onSubmit={async (data, actions) => {
             if (selectedDay == "lunes") await updateStaffMonday(data, item.id);
-            if (selectedDay == "martes") await updateStaffTuesday(data, item.id);
-            if (selectedDay == "miercoles") await updateStaffThursday(data, item.id);
-            if (selectedDay == "jueves") await updateStaffWednesday(data, item.id);
-            if (selectedDay == "viernes") await updateStaffFriday(data, item.id);
-            if (selectedDay == "sabado") await updateStaffSaturday(data, item.id);
-            if (selectedDay == "domingo") await updateStaffSunday(data, item.id);
+            if (selectedDay == "martes")
+              await updateStaffTuesday(data, item.id);
+            if (selectedDay == "miercoles")
+            await updateStaffWednesday(data, item.id);
+            if (selectedDay == "jueves")
+            await updateStaffThursday(data, item.id);
+            if (selectedDay == "viernes")
+              await updateStaffFriday(data, item.id);
+            if (selectedDay == "sabado")
+              await updateStaffSaturday(data, item.id);
+            if (selectedDay == "domingo")
+              await updateStaffSunday(data, item.id);
           }}
         >
           {({ handlesubmit }) => (
@@ -176,7 +245,7 @@ const Staff = ({ staffInfo }) => {
                   <button className={styles.save} type="submit">
                     Guardar
                   </button>
-                  {staffInfo.length > 1 ? (
+                  {staff.length > 1 ? (
                     <button
                       type="button"
                       className={styles.delete}
@@ -219,7 +288,7 @@ const Staff = ({ staffInfo }) => {
       ))}
       <ModalDesc isOpen={isOpenModalBioEn} En closeModal={closeModalBioEn}>
         <div className={styles.bio}>
-        <div>descripción ingles</div>
+          <div>descripción ingles</div>
 
           <textarea
             type="textarea"
@@ -301,13 +370,13 @@ const Staff = ({ staffInfo }) => {
         validationSchema={validation}
         onSubmit={async (data, { resetForm }) => {
           data.staffImg = staffImage;
-           if (selectedDay == "lunes") await postStaffMonday(data);
-            if (selectedDay == "martes") await postStaffTuesday(data);
-            if (selectedDay == "miercoles") await postStaffThursday(data);
-            if (selectedDay == "jueves") await postStaffWednesday(data);
-            if (selectedDay == "viernes") await postStaffFriday(data);
-            if (selectedDay == "sabado") await postStaffSaturday(data);
-            if (selectedDay == "domingo") await postStaffSunday(data);
+          if (selectedDay == "lunes") await postStaffMonday(data);
+          if (selectedDay == "martes") await postStaffTuesday(data);
+          if (selectedDay == "miercoles") await postStaffThursday(data);
+          if (selectedDay == "jueves") await postStaffWednesday(data);
+          if (selectedDay == "viernes") await postStaffFriday(data);
+          if (selectedDay == "sabado") await postStaffSaturday(data);
+          if (selectedDay == "domingo") await postStaffSunday(data);
           resetForm({ values: "" });
         }}
       >

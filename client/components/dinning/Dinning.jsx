@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -12,6 +12,13 @@ import RestaurantsGallery from "./gallery/DinningGallery";
 import { time } from "@/lib/language";
 import styles from "./Dinning.module.css";
 import { usePathname } from "next/navigation";
+import { getDinningMonday } from "@/lib/apidaysweek/apimonday";
+import { getDinningTuesday } from "@/lib/apidaysweek/apituesday";
+import { getDinningWednesday } from "@/lib/apidaysweek/apiwednesday";
+import { getDinningThursday } from "@/lib/apidaysweek/apithursday";
+import { getDinningSaturday } from "@/lib/apidaysweek/apisaturday";
+import { getDinningSunday } from "@/lib/apidaysweek/apisunday";
+import { getDinningFriday } from "@/lib/apidaysweek/apifriday";
 
 const validation = Yup.object().shape({
   name: Yup.string()
@@ -42,7 +49,8 @@ const validation = Yup.object().shape({
     .max(19, "La longitud maxima es de 19 letras!"),
 });
 
-const Dinning = ({ dinngInfo }) => {
+const Dinning = () => {
+  const [dinner, setDinner] = useState();
   const {
     updateDinningMonday,
     updateDinningTuesday,
@@ -77,26 +85,68 @@ const Dinning = ({ dinngInfo }) => {
     ? router.replace("/editar/flyers/", "")
     : null;
 
+  useEffect(() => {
+    (async () => {
+      if (selectedDay == "lunes") {
+        const dinningResponseMonday = await getDinningMonday();
+        setDinner(dinningResponseMonday.data);
+      }
+      if (selectedDay == "martes") {
+        const dinningResponseTuesday = await getDinningTuesday();
+        setDinner(dinningResponseTuesday.data);
+      }
+      if (selectedDay == "miercoles") {
+        const dinningResponseWednesday = await getDinningWednesday();
+        setDinner(dinningResponseWednesday.data);
+      }
+      if (selectedDay == "jueves") {
+        const dinningResponseThursday = await getDinningThursday();
+        setDinner(dinningResponseThursday.data);
+      }
+      if (selectedDay == "viernes") {
+        const dinningResponseFriday = await getDinningFriday();
+        setDinner(dinningResponseFriday.data);
+      }
+      if (selectedDay == "sabado") {
+        const dinningResponseSaturday = await getDinningSaturday();
+        setDinner(dinningResponseSaturday.data);
+      }
+      if (selectedDay == "domingo") {
+        const dinningResponseSunday = await getDinningSunday();
+        setDinner(dinningResponseSunday.data);
+      }
+    })();
+  }, [
+    selectedDay,
+    updateDinningMonday,
+    updateDinningTuesday,
+    updateDinningWednesday,
+    updateDinningThursday,
+    updateDinningFriday,
+    updateDinningSaturday,
+    updateDinningSunday,
+  ]);
+
   const handleDescEn = () => {
-    const description = dinngInfo
+    const description = dinner
       .filter((item) => item.id == id)
       .map((item) => item.attributes.descEn);
     setDesc(description);
   };
   const handleDescEs = () => {
-    const description = dinngInfo
+    const description = dinner
       .filter((item) => item.id == id)
       .map((item) => item.attributes.descEs);
     setDesc(description);
   };
   const handleMenuLgEn = () => {
-    const description = dinngInfo
+    const description = dinner
       .filter((item) => item.id == id)
       .map((item) => item.attributes?.menuImgEn);
     setMenuLgEn(description.toString());
   };
   const handleMenuLgEs = () => {
-    const description = dinngInfo
+    const description = dinner
       .filter((item) => item.id == id)
       .map((item) => item.attributes?.menuImgEs);
     setMenuLgEs(description.toString());
@@ -104,7 +154,7 @@ const Dinning = ({ dinngInfo }) => {
   return (
     <div className={styles.container}>
       <div className={styles.form_container}>
-        {dinngInfo?.map((item) => (
+        {dinner?.map((item) => (
           <Formik
             key={item.id}
             initialValues={{
@@ -283,7 +333,7 @@ const Dinning = ({ dinngInfo }) => {
           <RestaurantsGallery id={id} closeModal={closeGallery} />
         </Modal>
         <Modal isOpen={isOpenMenuLgEn} closeModal={closeMenuLgEn}>
-          <div className={styles.menuLg} >
+          <div className={styles.menuLg}>
             <h1>Menu ingles</h1>
             <Image
               src={menuLgEn}
@@ -295,7 +345,7 @@ const Dinning = ({ dinngInfo }) => {
           </div>
         </Modal>
         <Modal isOpen={isOpenMenuLgEs} closeModal={closeMenuLgEs}>
-          <div className={styles.menuLg} >
+          <div className={styles.menuLg}>
             <h1> Menu español</h1>
             <Image
               src={menuLgEs}

@@ -1,7 +1,6 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 
-
 import {
   getActivitiesFriday,
   postActivitiesFriday,
@@ -187,13 +186,6 @@ export const Provider = ({ children }) => {
   const [staffImage, setStaffImage] = useState();
   const [desc, setDesc] = useState("");
   const [info, setInfo] = useState({
-    activitiesMonday: [],
-    activitiesTuesday: [],
-    activitiesWednesday: [],
-    activitiesThursday: [],
-    activitiesFriday: [],
-    activitiesSaturday: [],
-    activitiesSunday: [],
     staffMonday: [],
     staffTuesday: [],
     staffWednesday: [],
@@ -246,80 +238,38 @@ export const Provider = ({ children }) => {
     (async () => {
       //Activities
 
-      const activitiesResponseMonday = await getActivitiesMonday();
-      const activitiesResponseTuesday = await getActivitiesTuesday();
-      const activitiesResponseWednesday = await getActivitiesWednesday();
-      const activitiesResponseThursday = await getActivitiesThursday();
-      const activitiesResponseFriday = await getActivitiesFriday();
-      const activitiesResponseSaturday = await getActivitiesSaturday();
-      const activitiesResponseSunday = await getActivitiesSunday();
-
       //Staff
-
-      const staffResponseMonday = await getStaffsMonday();
-      const staffResponseTuesday = await getStaffsTuesday();
-      const staffResponseWednesday = await getStaffsWednesday();
-      const staffResponseThursday = await getStaffsThursday();
-      const staffResponseFriday = await getStaffsFriday();
-      const staffResponseSaturday = await getStaffsSaturday();
-      const staffResponseSunday = await getStaffsSunday();
 
       //RESTAURANTS AND BARS
 
       //Dining
 
-      const dinningResponseMonday = await getDinningMonday();
-      const dinningResponseTuesday = await getDinningTuesday();
-      const dinningResponseWednesday = await getDinningWednesday();
-      const dinningResponseThursday = await getDinningThursday();
-      const dinningResponseFriday = await getDinningFriday();
-      const dinningResponseSaturday = await getDinningSaturday();
-      const dinningResponseSunday = await getDinningSunday();
-
       //Breakfast
 
-      const breakfastResponseMonday = await getBreakfastMonday();
-      const breakfastResponseTuesday = await getBreakfastTuesday();
-      const breakfastResponseWednesday = await getBreakfastWednesday();
-      const breakfastResponseThursday = await getBreakfastThursday();
-      const breakfastResponseFriday = await getBreakfastFriday();
-      const breakfastResponseSaturday = await getBreakfastSaturday();
-      const breakfastResponseSunday = await getBreakfastSunday();
       //Bars
-
-      const barsResponseMonday = await getBarsMonday();
-      const barsResponseTuesday = await getBarsTuesday();
-      const barsResponseWednesday = await getBarsWednesday();
-      const barsResponseThursday = await getBarsThursday();
-      const barsResponseFriday = await getBarsFriday();
-      const barsResponseSaturday = await getBarsSaturday();
-      const barsResponseSunday = await getBarsSunday();
 
       //flyers
 
-      const flyersResponseMonday = await getFlyersMonday();
-      const flyersResponseTuesday = await getFlyersTuesday();
-      const flyersResponseWednesday = await getFlyersWednesday();
-      const flyersResponseThursday = await getFlyersThursday();
-      const flyersResponseFriday = await getFlyersFriday();
-      const flyersResponseSaturday = await getFlyersSaturday();
-      const flyersResponseSunday = await getFlyersSunday();
+      
+      
+      
+      
 
       //flyers titles
 
-      const flyersTitleResponseMonday = await getFlyersTitleMonday();
-      const flyersTitleResponseTuesday = await getFlyersTitleTuesday();
-      const flyersTitleResponseWednesday = await getFlyersTitleWednesday();
-      const flyersTitleResponseThursday = await getFlyersTitleThursday();
-      const flyersTitleResponseFriday = await getFlyersTitleFriday();
-      const flyersTitleResponseSaturday = await getFlyersTitleSaturday();
-      const flyersTitleResponseSunday = await getFlyersTitleSunday();
+      
+      
+      
+      
+      
 
       //GALLERIES
 
       //Activities
       const activitiesGalleryResponse = await getActivtiesGallery();
-      const images = activitiesGalleryResponse.data.map((item) => item.attributes.activity?.data.map(item => item.attributes.url));
+      const images = activitiesGalleryResponse.data.map((item) =>
+        item.attributes.activity?.data.map((item) => item.attributes.url)
+      );
       //Staff
       const staffGalleryResponse = await getStaffGallery();
       const staffImages = staffGalleryResponse.data.map((item) =>
@@ -340,62 +290,6 @@ export const Provider = ({ children }) => {
       );
 
       setInfo({
-        activitiesMonday: activitiesResponseMonday.data,
-        activitiesTuesday: activitiesResponseTuesday.data,
-        activitiesWednesday: activitiesResponseWednesday.data,
-        activitiesThursday: activitiesResponseThursday.data,
-        activitiesFriday: activitiesResponseFriday.data,
-        activitiesSaturday: activitiesResponseSaturday.data,
-        activitiesSunday: activitiesResponseSunday.data,
-
-        staffMonday: staffResponseMonday.data,
-        staffTuesday: staffResponseTuesday.data,
-        staffWednesday: staffResponseWednesday.data,
-        staffThursday: staffResponseThursday.data,
-        staffFriday: staffResponseFriday.data,
-        staffSaturday: staffResponseSaturday.data,
-        staffSunday: staffResponseSunday.data,
-
-        dinningMonday: dinningResponseMonday.data,
-        dinningTuesday: dinningResponseTuesday.data,
-        dinningWednesday: dinningResponseWednesday.data,
-        dinningThursday: dinningResponseThursday.data,
-        dinningFriday: dinningResponseFriday.data,
-        dinningSaturday: dinningResponseSaturday.data,
-        dinningSunday: dinningResponseSunday.data,
-
-        breakfastMonday: breakfastResponseMonday.data,
-        breakfastTuesday: breakfastResponseTuesday.data,
-        breakfastWednesday: breakfastResponseWednesday.data,
-        breakfastThursday: breakfastResponseThursday.data,
-        breakfastFriday: breakfastResponseFriday.data,
-        breakfastSaturday: breakfastResponseSaturday.data,
-        breakfastSunday: breakfastResponseSunday.data,
-
-        barsMonday: barsResponseMonday.data,
-        barsTuesday: barsResponseTuesday.data,
-        barsWednesday: barsResponseWednesday.data,
-        barsThursday: barsResponseThursday.data,
-        barsFriday: barsResponseFriday.data,
-        barsSaturday: barsResponseSaturday.data,
-        barsSunday: barsResponseSunday.data,
-
-        flyersMonday: flyersResponseMonday.data,
-        flyersTuesday: flyersResponseTuesday.data,
-        flyersWednesday: flyersResponseWednesday.data,
-        flyersThursday: flyersResponseThursday.data,
-        flyersFriday: flyersResponseFriday.data,
-        flyersSaturday: flyersResponseSaturday.data,
-        flyersSunday: flyersResponseSunday.data,
-
-        flyersTitleMonday: flyersTitleResponseMonday.data,
-        flyersTitleTuesday: flyersTitleResponseTuesday.data,
-        flyersTitleWednesday: flyersTitleResponseWednesday.data,
-        flyersTitleThursday: flyersTitleResponseThursday.data,
-        flyersTitleFriday: flyersTitleResponseFriday.data,
-        flyersTitleSaturday: flyersTitleResponseSaturday.data,
-        flyersTitleSunday: flyersTitleResponseSunday.data,
-
         activitiesGallery: images.toString().split(","),
         staffGallery: staffImages.toString().split(","),
         barsrestaurantsGallery: restaurantsBarsImages.toString().split(","),
@@ -860,36 +754,36 @@ export const Provider = ({ children }) => {
     const res = await putFlyersTitleMonday({ data }, id);
     setActivityGallery(res.data);
   };
-//tuesday
-const updateFlyerTitleTuesday = async (data, id) => {
-  const res = await putFlyersTitleTuesday({ data }, id);
-  setActivityGallery(res.data);
-};
-//wednesday
-const updateFlyerTitleWednesday = async (data, id) => {
-  const res = await putFlyersTitleWednesday({ data }, id);
-  setActivityGallery(res.data);
-};
-//thursday
-const updateFlyerTitleThursday = async (data, id) => {
-  const res = await putFlyersTitleThursday({ data }, id);
-  setActivityGallery(res.data);
-};
-//friday
-const updateFlyerTitleFriday = async (data, id) => {
-  const res = await putFlyersTitleFriday({ data }, id);
-  setActivityGallery(res.data);
-};
-//saturday
-const updateFlyerTitleSaturday = async (data, id) => {
-  const res = await putFlyersTitleSaturday({ data }, id);
-  setActivityGallery(res.data);
-};
-//sunday
-const updateFlyerTitleSunday = async (data, id) => {
-  const res = await putFlyersTitleSunday({ data }, id);
-  setActivityGallery(res.data);
-};
+  //tuesday
+  const updateFlyerTitleTuesday = async (data, id) => {
+    const res = await putFlyersTitleTuesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //wednesday
+  const updateFlyerTitleWednesday = async (data, id) => {
+    const res = await putFlyersTitleWednesday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //thursday
+  const updateFlyerTitleThursday = async (data, id) => {
+    const res = await putFlyersTitleThursday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //friday
+  const updateFlyerTitleFriday = async (data, id) => {
+    const res = await putFlyersTitleFriday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //saturday
+  const updateFlyerTitleSaturday = async (data, id) => {
+    const res = await putFlyersTitleSaturday({ data }, id);
+    setActivityGallery(res.data);
+  };
+  //sunday
+  const updateFlyerTitleSunday = async (data, id) => {
+    const res = await putFlyersTitleSunday({ data }, id);
+    setActivityGallery(res.data);
+  };
   return (
     <infoContext.Provider
       value={{
