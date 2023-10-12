@@ -7,10 +7,15 @@ import Transition from "@/home/transition/Transition";
 import { useEffect, useState } from "react";
 import Activities from "@/home/activities/Activities";
 import { usePathname, useRouter } from "next/navigation";
-
+import { getActivitiesSunday, getBarsSunday, getBreakfastSunday, getDinningSunday, getFlyersSunday, getFlyersTitleSunday, getStaffsSunday } from "@/lib/apidaysweek/apisunday";
+import { getActivitiesMonday, getBarsMonday, getBreakfastMonday, getDinningMonday, getFlyersMonday, getFlyersTitleMonday, getStaffsMonday } from "@/lib/apidaysweek/apimonday";
+import { getActivitiesTuesday, getBarsTuesday, getBreakfastTuesday, getDinningTuesday, getFlyersTitleTuesday, getFlyersTuesday, getStaffsTuesday } from "@/lib/apidaysweek/apituesday";
+import { getActivitiesWednesday, getBarsWednesday, getBreakfastWednesday, getDinningWednesday, getFlyersTitleWednesday, getFlyersWednesday, getStaffsWednesday } from "@/lib/apidaysweek/apiwednesday";
+import { getActivitiesThursday, getBarsThursday, getBreakfastThursday, getDinningThursday, getFlyersThursday, getFlyersTitleThursday, getStaffsThursday } from "@/lib/apidaysweek/apithursday";
+import { getActivitiesFriday, getBarsFriday, getBreakfastFriday, getDinningFriday, getFlyersFriday, getFlyersTitleFriday, getStaffsFriday } from "@/lib/apidaysweek/apifriday";
+import { getActivitiesSaturday, getBarsSaturday, getBreakfastSaturday, getDinningSaturday, getFlyersSaturday, getFlyersTitleSaturday, getStaffsSaturday } from "@/lib/apidaysweek/apisaturday";
 
 export default function Page() {
-  const { info } = useInfo();
   const [show, setShow] = useState("hide");
   const [dayInfo, setDayInfo] = useState({
     activities: [],
@@ -19,149 +24,162 @@ export default function Page() {
     breakfast: [],
     bars: [],
     flyers: [],
+    flyersTitle: [],
   });
-  const router = usePathname();
-  const [day, setDay] = useState();
-  const [display, setDisplay] = useState("hide")
+  const [day, setDay] = useState(new Date().getDay());
+  const [display, setDisplay] = useState("hide");
 
-  useEffect(()=>{
-info.activitiesMonday.length == 0? setDisplay("hide") : setDisplay("show")
-  },[info.activitiesMonday])
+  useEffect(() => {
+    dayInfo.activities.length == 0 ? setDisplay("hide") : setDisplay("show");
+  }, [dayInfo.activities]);
 
   useEffect(() => {
     setDay(new Date().getDay());
-    if (day == 0)
+   ( async () => {
+    if (day == 0) {
+      const activitiesResponseSunday = await getActivitiesSunday();
+      const staffResponseSunday = await getStaffsSunday();
+      const dinningResponseSunday = await getDinningSunday();
+      const breakfastResponseSunday = await getBreakfastSunday();
+      const barsResponseSunday = await getBarsSunday();
+      const flyersResponseSunday = await getFlyersSunday();
+      const flyersTitleResponseSunday = await getFlyersTitleSunday();
       setDayInfo({
-        activities: info?.activitiesSunday,
-        staff: info?.staffSunday,
-        breakfast: info?.breakfastSunday,
-        dining: info?.dinningSunday,
-        bars: info?.barsSunday,
-        flyers: info?.flyersSunday,
-        flyersTitle: info?.flyersTitleSunday,
+        activities: activitiesResponseSunday.data,
+        staff: staffResponseSunday.data,
+        dining: dinningResponseSunday.data,
+        breakfast: breakfastResponseSunday.data,
+        bars: barsResponseSunday.data,
+        flyers: flyersResponseSunday.data,
+        flyersTitle: flyersTitleResponseSunday.data,
       });
-    if (day == 1)
+    }
+
+    if (day == 1) {
+      const activitiesResponseMonday = await getActivitiesMonday();
+      const staffResponseMonday = await getStaffsMonday();
+      const dinningResponseMonday = await getDinningMonday();
+      const breakfastResponseMonday = await getBreakfastMonday();
+      const barsResponseMonday = await getBarsMonday();
+      const flyersResponseMonday = await getFlyersMonday();
+      const flyersTitleResponseMonday = await getFlyersTitleMonday();
       setDayInfo({
-        activities: info?.activitiesMonday,
-        staff: info?.staffMonday,
-        breakfast: info?.breakfastMonday,
-        dining: info?.dinningMonday,
-        bars: info?.barsMonday,
-        flyers: info?.flyersMonday,
-        flyersTitle: info?.flyersTitleMonday,
+        activities: activitiesResponseMonday.data,
+        staff: staffResponseMonday.data,
+        dining: dinningResponseMonday.data,
+        breakfast: breakfastResponseMonday.data,
+        bars: barsResponseMonday.data,
+        flyers: flyersResponseMonday.data,
+        flyersTitle: flyersTitleResponseMonday.data,
       });
-    if (day == 2)
+    }
+
+    if (day == 2) {
+      const activitiesResponseTuesday = await getActivitiesTuesday();
+      const staffResponseTuesday = await getStaffsTuesday();
+      const dinningResponseTuesday = await getDinningTuesday();
+      const breakfastResponseTuesday = await getBreakfastTuesday();
+      const barsResponseTuesday = await getBarsTuesday();
+      const flyersResponseTuesday = await getFlyersTuesday();
+      const flyersTitleResponseTuesday = await getFlyersTitleTuesday();
       setDayInfo({
-        activities: info?.activitiesTuesday,
-        staff: info?.staffTuesday,
-        breakfast: info?.breakfastTuesday,
-        dining: info?.dinningTuesday,
-        bars: info?.barsTuesday,
-        flyers: info?.flyersTuesday,
-        flyersTitle: info?.flyersTitleTuesday,
+        activities: activitiesResponseTuesday.data,
+        staff: staffResponseTuesday.data,
+        dining: dinningResponseTuesday.data,
+        breakfast: breakfastResponseTuesday.data,
+        bars: barsResponseTuesday.data,
+        flyers: flyersResponseTuesday.data,
+        flyersTitle: flyersTitleResponseTuesday.data,
       });
-    if (day == 3)
+    }
+
+    if (day == 3) {
+      const activitiesResponseWednesday = await getActivitiesWednesday();
+      const staffResponseWednesday = await getStaffsWednesday();
+      const dinningResponseWednesday = await getDinningWednesday();
+      const breakfastResponseWednesday = await getBreakfastWednesday();
+      const barsResponseWednesday = await getBarsWednesday();
+      const flyersResponseWednesday = await getFlyersWednesday();
+      const flyersTitleResponseWednesday = await getFlyersTitleWednesday();
       setDayInfo({
-        activities: info?.activitiesWednesday,
-        staff: info?.staffWednesday,
-        breakfast: info?.breakfastWednesday,
-        dining: info?.dinningWednesday,
-        bars: info?.barsWednesday,
-        flyers: info?.flyersWednesday,
-        flyersTitle: info?.flyersTitlWednesday,
+        activities: await activitiesResponseWednesday.data,
+        staff: staffResponseWednesday.data,
+        dining: dinningResponseWednesday.data,
+        breakfast: breakfastResponseWednesday.data,
+        bars: barsResponseWednesday.data,
+        flyers: flyersResponseWednesday.data,
+        flyersTitle: flyersTitleResponseWednesday.data,
       });
-    if (day == 4)
+    }
+
+    if (day == 4) {
+      const activitiesResponseThursday = await getActivitiesThursday();
+      const staffResponseThursday = await getStaffsThursday();
+      const dinningResponseThursday = await getDinningThursday();
+      const breakfastResponseThursday = await getBreakfastThursday();
+      const barsResponseThursday = await getBarsThursday();
+      const flyersResponseThursday = await getFlyersThursday();
+      const flyersTitleResponseThursday = await getFlyersTitleThursday();
       setDayInfo({
-        activities: info?.activitiesThursday,
-        staff: info?.staffThursday,
-        breakfast: info?.breakfastThursday,
-        dining: info?.dinningThursday,
-        bars: info?.barsThursday,
-        flyers: info?.flyersThursday,
-        flyersTitle: info?.flyersTitleThursday,
+        activities: activitiesResponseThursday.data,
+        staff: staffResponseThursday.data,
+        dining: dinningResponseThursday.data,
+        breakfast: breakfastResponseThursday.data,
+        bars: barsResponseThursday.data,
+        flyers: flyersResponseThursday.data,
+        flyersTitle: flyersTitleResponseThursday.data,
       });
-    if (day == 5)
+    }
+
+    if (day == 5) {
+      const activitiesResponseFriday = await getActivitiesFriday();
+      const staffResponseFriday = await getStaffsFriday();
+      const dinningResponseFriday = await getDinningFriday();
+      const breakfastResponseFriday = await getBreakfastFriday();
+      const barsResponseFriday = await getBarsFriday();
+      const flyersResponseFriday = await getFlyersFriday();
+      const flyersTitleResponseFriday = await getFlyersTitleFriday();
       setDayInfo({
-        activities: info?.activitiesFriday,
-        staff: info?.staffFriday,
-        breakfast: info?.breakfastFriday,
-        dining: info?.dinningFriday,
-        bars: info?.barsFriday,
-        flyers: info?.flyersFriday,
-        flyersTitle: info?.flyersTitleFriday,
+        activities: activitiesResponseFriday.data,
+        staff: staffResponseFriday.data,
+        dining: dinningResponseFriday.data,
+        breakfast: breakfastResponseFriday.data,
+        bars: barsResponseFriday.data,
+        flyers: flyersResponseFriday.data,
+        flyersTitle: flyersTitleResponseFriday.data,
       });
-    if (day == 6)
+    }
+
+    if (day == 6) {
+      const activitiesResponseSaturday = await getActivitiesSaturday();
+      const staffResponseSaturday = await getStaffsSaturday();
+      const dinningResponseSaturday = await getDinningSaturday();
+      const breakfastResponseSaturday = await getBreakfastSaturday();
+      const barsResponseSaturday = await getBarsSaturday();
+      const flyersResponseSaturday = await getFlyersSaturday();
+      const flyersTitleResponseSaturday = await getFlyersTitleSaturday();
       setDayInfo({
-        activities: info?.activitiesSaturday,
-        staff: info?.staffSaturday,
-        breakfast: info?.breakfastSaturday,
-        dining: info?.dinningSaturday,
-        bars: info?.barsSaturday,
-        flyers: info?.flyersSaturday,
-        flyersTitle: info?.flyersTitleSaturday,
+        activities: activitiesResponseSaturday.data,
+        staff: staffResponseSaturday.data,
+        dining: dinningResponseSaturday.data,
+        breakfast: breakfastResponseSaturday.data,
+        bars: barsResponseSaturday.data,
+        flyers: flyersResponseSaturday.data,
+        flyersTitle: flyersTitleResponseSaturday.data,
       });
-  }, [
-    day,
-    info?.activitiesFriday,
-    info?.activitiesMonday,
-    info?.activitiesSaturday,
-    info?.activitiesSunday,
-    info?.activitiesThursday,
-    info?.activitiesTuesday,
-    info?.activitiesWednesday,
-    info?.barsFriday,
-    info?.barsMonday,
-    info?.barsSaturday,
-    info?.barsSunday,
-    info?.barsThursday,
-    info?.barsTuesday,
-    info?.barsWednesday,
-    info?.breakfastFriday,
-    info?.breakfastMonday,
-    info?.breakfastSaturday,
-    info?.breakfastSunday,
-    info?.breakfastThursday,
-    info?.breakfastTuesday,
-    info?.breakfastWednesday,
-    info?.dinningFriday,
-    info?.dinningMonday,
-    info?.dinningSaturday,
-    info?.dinningSunday,
-    info?.dinningThursday,
-    info?.dinningTuesday,
-    info?.dinningWednesday,
-    info?.flyersFriday,
-    info?.flyersMonday,
-    info?.flyersSaturday,
-    info?.flyersSunday,
-    info?.flyersThursday,
-    info?.flyersTitlWednesday,
-    info?.flyersTitleFriday,
-    info?.flyersTitleMonday,
-    info?.flyersTitleSaturday,
-    info?.flyersTitleSunday,
-    info?.flyersTitleThursday,
-    info?.flyersTitleTuesday,
-    info?.flyersTuesday,
-    info?.flyersWednesday,
-    info?.staffFriday,
-    info?.staffMonday,
-    info?.staffSaturday,
-    info?.staffSunday,
-    info?.staffThursday,
-    info?.staffTuesday,
-    info?.staffWednesday,
-  ]);
+    }
+  })()
+  }, [day]);
+
   useEffect(() => {
     setTimeout(() => {
       setShow("show");
-      setDay(new Date().getDay())
+      setDay(new Date().getDay());
     }, 3000);
   });
- 
   return (
     <main>
-      <Transition/>
+      <Transition />
       <div className={display}>
         <HeaderRender />
         <Activities info={dayInfo} />

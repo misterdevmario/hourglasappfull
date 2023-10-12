@@ -1,218 +1,64 @@
-     <Modal isOpen={isOpenDining} closeModal={closeDining}>
-        <div className={styles.modal_img}>
-          <Image
-            src={language == "en" ? infoDesc?.map((item) => item.menuEn).toString(): infoDesc?.map((item) => item.menuEs).toString()}
-            alt="menu"
-            width={600}
-            height={800}
-          />
-          <div className={styles.modaldesc}>
-            <div className={styles.modaldesc_item}>
-              <div className={styles.modaldesc_desc}>
-                {language == "en"
-                  ? descriptions.descEn
-                  : descriptions.descEs
-                  ? "hola"
-                  : null}
-              </div>
-              <div>
-                {language == "en"
-                  ? infoDesc?.map((item) => item.descEn).toString()
-                  : infoDesc?.map((item) => item.descEs).toString()}
-              </div>
-            </div>
-          </div>
-        </div>
-      </Modal>
-      <div className={styles.container}>
-        <div className={styles.title}>
-          {language == "en" ? sectionTitles.en.dining : sectionTitles.es.dining}
-        </div>
-        <div className={styles.card_container} onClick={() => openDining()}>
-  
-          {info?.dining.map((item) => (
-            <div className={styles.card} key={item.id}>
-              <div className={styles.name}>{item.attributes.name}</div>
-              <div className={styles.restaurants_info_container}>
-                <div className={styles.logo}>
-                  <Image
-                    src={item.attributes.diningImg}
-                    width={80}
-                    height={80}
-                    alt="restaurant logo"
-                  />
-                </div>
-                <div className={styles.iconsinfo}>
-                  <div className={styles.icons_container}>
-                    <div className={styles.icon}>
-                      <Image
-                        src="/Icons/clock.svg"
-                        width={21}
-                        height={21}
-                        alt="restaurant logo"
-                      />
-                    </div>
-                    <div className={styles.icon}>
-                      <Image
-                        src="/Icons/menu.svg"
-                        width={21}
-                        height={21}
-                        alt="restaurant logo"
-                      />
-                    </div>
-                    <div className={styles.icon}>
-                      <Image
-                        src="/Icons/buffet.svg"
-                        width={21}
-                        height={21}
-                        alt="restaurant logo"
-                      />
-                    </div>
-                    <div className={styles.icon}>
-                      <Image
-                        src="/Icons/members.svg"
-                        width={21}
-                        height={21}
-                        alt="restaurant logo"
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.info_container}>
-                    <div className={styles.info}>{item.attributes.hours}</div>
-                    <div className={styles.info}>
-                      {language == "en"
-                        ? item.attributes.typeEn
-                        : item.attributes.typeEn}
-                    </div>
-                    <div className={styles.info}>
-                      {language == "en"
-                        ? item.attributes.serviceEn
-                        : item.attributes.serviceEn}
-                    </div>
-                    <div className={styles.info}>
-                      {language == "en"
-                        ? item.attributes.membersEn
-                        : item.attributes.membersEn}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      {/* 768px */}
-      <div className={styles.container_sm}>
-        <div className={styles.title}>
-          {languageMobile == "en"
-            ? sectionTitles.en.dining
-            : sectionTitles.es.dining}
-        </div>
-        <div className={styles.card_container} onClick={() => openDining()}>
-          <Modal isOpen={isOpenDining} closeModal={closeDining}>
-            <div className={styles.modal_img}>
-              <Image
-                src="/menu/menu1.jpg"
-                alt="menu"
-                width={1000}
-                height={1500}
-              />
-            </div>
-          </Modal>
-          {info?.dining.map((item) => (
-            <div className={styles.card} key={item.id} onClick={openDiningMobile()}>
-              <div className={styles.name}>{item.attributes.name}</div>
-              <div className={styles.restaurants_info_container}>
-                <div className={styles.logo}>
-                  <Image
-                    src={item.attributes.diningImg}
-                    width={80}
-                    height={80}
-                    alt="restaurant logo"
-                  />
-                </div>
-                <div className={styles.iconsinfo}>
-                  <div className={styles.icons_container}>
-                    <div className={styles.icon}>
-                      <Image
-                        src="/Icons/clock.svg"
-                        width={21}
-                        height={21}
-                        alt="restaurant logo"
-                      />
-                    </div>
-                    <div className={styles.icon}>
-                      <Image
-                        src="/Icons/menu.svg"
-                        width={21}
-                        height={21}
-                        alt="restaurant logo"
-                      />
-                    </div>
-                    <div className={styles.icon}>
-                      <Image
-                        src="/Icons/buffet.svg"
-                        width={21}
-                        height={21}
-                        alt="restaurant logo"
-                      />
-                    </div>
-                    <div className={styles.icon}>
-                      <Image
-                        src="/Icons/members.svg"
-                        width={21}
-                        height={21}
-                        alt="restaurant logo"
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.info_container}>
-                    <div className={styles.info}>{item.attributes.hours}</div>
-                    <div className={styles.info}>
-                      {languageMobile == "en"
-                        ? item.attributes.typeEn
-                        : item.attributes.typeEn}
-                    </div>
-                    <div className={styles.info}>
-                      {languageMobile == "en"
-                        ? item.attributes.serviceEn
-                        : item.attributes.serviceEn}
-                    </div>
-                    <div className={styles.info}>
-                      {languageMobile == "en"
-                        ? item.attributes.membersEn
-                        : item.attributes.membersEn}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <Modal isOpen={isOpenDiningMobile} closeModal={closeDiningMobile}>
-        <div className={styles.modal_img}>
-          <Image
-            src={languageMobile == "en" ? infoDesc?.map((item) => item.menuEn).toString(): infoDesc?.map((item) => item.menuEs).toString()}
-            alt="menu"
-            width={600}
-            height={800}
-          />
-          <div className={styles.modaldesc}>
-            <div className={styles.modaldesc_item}>
-              <div className={styles.modaldesc_desc}>
-                {languageMobile == "en"
-                  ? descriptions.descEn
-                  : descriptions.descEs
-                  ? "hola"
-                  : null}
-              </div>
-              <div>
-                {languageMobile == "en"
-                  ? infoDesc?.map((item) => item.descEn).toString()
-                  : infoDesc?.map((item) => item.descEs).toString()}
-              </div>
-            </div>
-          </div>
-        </div>
-      </Modal>
+
+      const activitiesResponseMonday = await getActivitiesMonday();
+      const staffResponseMonday = await getStaffsMonday();
+      const dinningResponseMonday = await getDinningMonday();
+      const breakfastResponseMonday = await getBreakfastMonday();
+      const barsResponseMonday = await getBarsMonday();
+      const flyersResponseMonday = await getFlyersMonday();
+      const flyersTitleResponseMonday = await getFlyersTitleMonday();
+
+      
+      const activitiesResponseTuesday = await getActivitiesTuesday();
+      const staffResponseTuesday = await getStaffsTuesday();
+      const dinningResponseTuesday = await getDinningTuesday();
+      const breakfastResponseTuesday = await getBreakfastTuesday();
+      const barsResponseTuesday = await getBarsTuesday();
+      const flyersResponseTuesday = await getFlyersTuesday();
+      const flyersTitleResponseTuesday = await getFlyersTitleTuesday();
+      
+      const activitiesResponseWednesday = await getActivitiesWednesday();
+      const staffResponseWednesday = await getStaffsWednesday();
+      const dinningResponseWednesday = await getDinningWednesday();
+      const breakfastResponseWednesday = await getBreakfastWednesday();
+      const barsResponseWednesday = await getBarsWednesday();
+      const flyersResponseWednesday = await getFlyersWednesday();
+      const flyersTitleResponseWednesday = await getFlyersTitleWednesday();
+      
+      const activitiesResponseThursday = await getActivitiesThursday();
+      const staffResponseThursday = await getStaffsThursday();
+      const dinningResponseThursday = await getDinningThursday();
+      const breakfastResponseThursday = await getBreakfastThursday();
+      const barsResponseThursday = await getBarsThursday();
+      const flyersResponseThursday = await getFlyersThursday();
+      const flyersTitleResponseThursday = await getFlyersTitleThursday();
+      
+      const activitiesResponseFriday = await getActivitiesFriday();
+      const staffResponseFriday = await getStaffsFriday();
+      const dinningResponseFriday = await getDinningFriday();
+      const breakfastResponseFriday = await getBreakfastFriday();
+      const barsResponseFriday = await getBarsFriday();
+      const flyersResponseFriday = await getFlyersFriday();
+      const flyersTitleResponseFriday = await getFlyersTitleFriday();
+      
+      const activitiesResponseSaturday = await getActivitiesSaturday();
+      const staffResponseSaturday = await getStaffsSaturday();
+      const dinningResponseSaturday = await getDinningSaturday();
+      const breakfastResponseSaturday = await getBreakfastSaturday();
+      const barsResponseSaturday = await getBarsSaturday();
+      const flyersResponseSaturday = await getFlyersSaturday();
+      const flyersTitleResponseSaturday = await getFlyersTitleSaturday();
+      
+      const activitiesResponseSunday = await getActivitiesSunday();
+      const staffResponseSunday = await getStaffsSunday();
+      const dinningResponseSunday = await getDinningSunday();
+      const breakfastResponseSunday = await getBreakfastSunday();
+      const barsResponseSunday = await getBarsSunday();
+      const flyersResponseSunday = await getFlyersSunday();
+      const flyersTitleResponseSunday = await getFlyersTitleSunday();
+
+    
+
+      //flyers titles
+
+
+    

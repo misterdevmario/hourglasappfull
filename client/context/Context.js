@@ -186,48 +186,6 @@ export const Provider = ({ children }) => {
   const [staffImage, setStaffImage] = useState();
   const [desc, setDesc] = useState("");
   const [info, setInfo] = useState({
-    staffMonday: [],
-    staffTuesday: [],
-    staffWednesday: [],
-    staffThursday: [],
-    staffFriday: [],
-    staffSaturday: [],
-    staffSunday: [],
-    dinningMonday: [],
-    dinningTuesday: [],
-    dinningWednesday: [],
-    dinningThursday: [],
-    dinningFriday: [],
-    dinningSaturday: [],
-    dinningSunday: [],
-    breakfastMonday: [],
-    breakfastTuesday: [],
-    breakfastWednesday: [],
-    breakfastThursday: [],
-    breakfastFriday: [],
-    breakfastSaturday: [],
-    breakfastSunday: [],
-    barsMonday: [],
-    barsTuesday: [],
-    barsWednesday: [],
-    barsThursday: [],
-    barsFriday: [],
-    barsSaturday: [],
-    barsSunday: [],
-    flyersMonday: [],
-    flyersTuesday: [],
-    flyersWednesday: [],
-    flyersThursday: [],
-    flyersFriday: [],
-    flyersSaturday: [],
-    flyersSunday: [],
-    flyersTitleMonday: [],
-    flyersTitleTuesday: [],
-    flyersTitleWednesday: [],
-    flyersTitleThursday: [],
-    flyersTitleFriday: [],
-    flyersTitleSaturday: [],
-    flyersTitleSunday: [],
     activitiesGallery: [],
     staffGallery: [],
     barsrestaurantsGallery: [],
@@ -236,35 +194,6 @@ export const Provider = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      //Activities
-
-      //Staff
-
-      //RESTAURANTS AND BARS
-
-      //Dining
-
-      //Breakfast
-
-      //Bars
-
-      //flyers
-
-      
-      
-      
-      
-
-      //flyers titles
-
-      
-      
-      
-      
-      
-
-      //GALLERIES
-
       //Activities
       const activitiesGalleryResponse = await getActivtiesGallery();
       const images = activitiesGalleryResponse.data.map((item) =>

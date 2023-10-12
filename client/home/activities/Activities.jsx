@@ -60,7 +60,7 @@ const Activities = ({ info }) => {
                   : descriptions.descEs
                  }
               </div>
-              <div>
+              <div className={styles.modal_desc_text}>
                 {language == "en"
                   ? infoDesc?.map((item) => item.descEn).toString()
                   : infoDesc?.map((item) => item.descEs).toString()}
