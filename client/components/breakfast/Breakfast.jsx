@@ -89,6 +89,8 @@ const Breakfast = () => {
     : router.includes("flyers")
     ? router.replace("/editar/flyers/", "")
     : null;
+  useEffect(() => {}, []);
+  console.log(menuLgEn);
   useEffect(() => {
     (async () => {
       if (selectedDay == "lunes") {
@@ -178,9 +180,9 @@ const Breakfast = () => {
               if (selectedDay == "martes")
                 await updateBreakfastTuesday(data, item.id);
               if (selectedDay == "miercoles")
-                await updateBreakfastThursday(data, item.id);
-              if (selectedDay == "jueves")
                 await updateBreakfastWednesday(data, item.id);
+              if (selectedDay == "jueves")
+                await updateBreakfastThursday(data, item.id);
               if (selectedDay == "viernes")
                 await updateBreakfastFriday(data, item.id);
               if (selectedDay == "sabado")
@@ -285,7 +287,7 @@ const Breakfast = () => {
                 <div className={styles.images}>
                   <div className={styles.diningimg}>
                     <Image
-                      src={item.attributes.breakfastImg}
+                      src={item.attributes?.breakfastImg}
                       alt="bar"
                       width={200}
                       height={250}
@@ -300,7 +302,7 @@ const Breakfast = () => {
                     <div className={styles.menuitem}>
                       <label htmlFor="">Menu ingles</label>
                       <Image
-                        src={item.attributes.menuImgEn}
+                        src={item.attributes?.menuImgEn}
                         alt="bar"
                         width={200}
                         height={250}
@@ -310,12 +312,13 @@ const Breakfast = () => {
                           handleMenuLgEn();
                           openMenuLgEn();
                         }}
+                        onMouseEnter={() => setId(item.id)}
                       />{" "}
                     </div>
                     <div className={styles.menuitem}>
                       <label htmlFor="">menu español</label>
                       <Image
-                        src={item.attributes.menuImgEs}
+                        src={item.attributes?.menuImgEs}
                         alt="bar"
                         width={200}
                         height={250}
@@ -325,6 +328,7 @@ const Breakfast = () => {
                           handleMenuLgEs();
                           openMenuLgEs();
                         }}
+                        onMouseEnter={() => setId(item.id)}
                       />
                     </div>
                   </div>
@@ -340,7 +344,7 @@ const Breakfast = () => {
           <div className={styles.menuLg}>
             <h1>Menu ingles</h1>
             <Image
-              src={menuLgEn}
+              src={!menuLgEn ? "/breathless.png" : menuLgEn}
               alt="Menu"
               width={600}
               height={800}
@@ -352,7 +356,7 @@ const Breakfast = () => {
           <div className={styles.menuLg}>
             <h1> Menu español</h1>
             <Image
-              src={menuLgEs}
+              src={!menuLgEs ? "/breathless.png" : menuLgEs}
               alt="Menu"
               width={600}
               height={800}
@@ -380,9 +384,9 @@ const Breakfast = () => {
                 if (selectedDay == "martes")
                   updateBreakfastTuesday({ descEn: desc }, id);
                 if (selectedDay == "miercoles")
-                  updateBreakfastThursday({ descEn: desc }, id);
-                if (selectedDay == "jueves")
                   updateBreakfastWednesday({ descEn: desc }, id);
+                if (selectedDay == "jueves")
+                  updateBreakfastThursday({ descEn: desc }, id);
                 if (selectedDay == "viernes")
                   updateBreakfastFriday({ descEn: desc }, id);
                 if (selectedDay == "sabado")
@@ -417,9 +421,9 @@ const Breakfast = () => {
                 if (selectedDay == "martes")
                   updateBreakfastTuesday({ descEs: desc }, id);
                 if (selectedDay == "miercoles")
-                  updateBreakfastThursday({ descEs: desc }, id);
-                if (selectedDay == "jueves")
                   updateBreakfastWednesday({ descEs: desc }, id);
+                if (selectedDay == "jueves")
+                  updateBreakfastThursday({ descEs: desc }, id);
                 if (selectedDay == "viernes")
                   updateBreakfastFriday({ descEs: desc }, id);
                 if (selectedDay == "sabado")

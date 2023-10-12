@@ -306,6 +306,7 @@ const Dinning = () => {
                           handleMenuLgEn();
                           openMenuLgEn();
                         }}
+                        onMouseEnter={() => setId(item.id)}
                       />{" "}
                     </div>
                     <div className={styles.menuitem}>
@@ -321,6 +322,7 @@ const Dinning = () => {
                           handleMenuLgEs();
                           openMenuLgEs();
                         }}
+                        onMouseEnter={() => setId(item.id)}
                       />
                     </div>
                   </div>

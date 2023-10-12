@@ -197,6 +197,7 @@ const Bars = () => {
                         handleMenuLgEn();
                         openMenuLgEn();
                       }}
+                      onMouseEnter={() => setId(item.id)}
                     />{" "}
                   </div>
                   <div className={styles.menuitem}>
@@ -212,6 +213,7 @@ const Bars = () => {
                         handleMenuLgEs();
                         openMenuLgEs();
                       }}
+                      onMouseEnter={() => setId(item.id)}
                     />
                   </div>
                 </div>

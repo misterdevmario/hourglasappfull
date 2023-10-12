@@ -55,12 +55,12 @@ const BreakfastGallery = ({ id, closeModal }) => {
                 handleImage(item);
               }
               if (selectedDay == "miercoles" && id !== null) {
-                updateBreakfastThursday({ breakfastImg: item }, id);
+                updateBreakfastWednesday({ breakfastImg: item }, id);
               } else {
                 handleImage(item);
               }
               if (selectedDay == "jueves" && id !== null) {
-                updateBreakfastWednesday({ breakfastImg: item }, id);
+                updateBreakfastThursday({ breakfastImg: item }, id);
               } else {
                 handleImage(item);
               }
