@@ -6,7 +6,6 @@ import FooterRender from "@/home/footer/FooterRender";
 import Transition from "@/home/transition/Transition";
 import { useEffect, useState } from "react";
 import Activities from "@/home/activities/Activities";
-import { usePathname, useRouter } from "next/navigation";
 import { getActivitiesSunday, getBarsSunday, getBreakfastSunday, getDinningSunday, getFlyersSunday, getFlyersTitleSunday, getStaffsSunday } from "@/lib/apidaysweek/apisunday";
 import { getActivitiesMonday, getBarsMonday, getBreakfastMonday, getDinningMonday, getFlyersMonday, getFlyersTitleMonday, getStaffsMonday } from "@/lib/apidaysweek/apimonday";
 import { getActivitiesTuesday, getBarsTuesday, getBreakfastTuesday, getDinningTuesday, getFlyersTitleTuesday, getFlyersTuesday, getStaffsTuesday } from "@/lib/apidaysweek/apituesday";

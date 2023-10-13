@@ -14,11 +14,11 @@ import Modal from "@/components/modal/Modal";
 import { useState } from "react";
 
 const Activities = ({ info }) => {
-  const { language, languageMobile } = useInfo();
+  const {languageMobile } = useInfo();
   const [isOpenActivity, openActivity, closeActivity] = useModal(true);
   const [isOpenActivityMobile, openActivityMobile, closeActivityMobile] = useModal(true);
   const [infoDesc, setInfoDesc] = useState();
-
+  console.log(languageMobile)
   const sortedHours = [];
   for (let i = 0; i < time.length; i++) {
     for (let j = 0; j < info?.activities.length; j++) {
@@ -55,13 +55,13 @@ const Activities = ({ info }) => {
           <div className={styles.modaldesc}>
             <div className={styles.modaldesc_item}>
               <div className={styles.modaldesc_desc}>
-                {language == "en"
+                {languageMobile == "en"
                   ? descriptions.descEn
                   : descriptions.descEs
                  }
               </div>
-              <div>
-                {language == "en"
+              <div className={styles.modal_desc_text}>
+                {languageMobile == "en"
                   ? infoDesc?.map((item) => item.descEn).toString()
                   : infoDesc?.map((item) => item.descEs).toString()}
               </div>
@@ -94,7 +94,7 @@ const Activities = ({ info }) => {
                 <Image
                   src={item.attributes.activitieImage}
                   alt={
-                    language?.lang == "en"
+                    languageMobile?.lang == "en"
                       ? item.attributes.activitieEn
                       : item.attributes.activitieEs
                   }
@@ -110,7 +110,7 @@ const Activities = ({ info }) => {
                   </div>
                   <div className={styles.locationactivity}>
                     <div className={styles.activity}>
-                      {language == "en"
+                      {languageMobile == "en"
                         ? item.attributes.activitieEn
                         : item.attributes.activitieEs}
                     </div>
@@ -119,7 +119,7 @@ const Activities = ({ info }) => {
                         <CiLocationOn size={25} />
                       </div>
                       <div>
-                        {language == "en"
+                        {languageMobile == "en"
                           ? item.attributes.spotEn
                           : item.attributes.spotEs}
                       </div>
@@ -178,7 +178,7 @@ const Activities = ({ info }) => {
                         <CiLocationOn />
                       </div>
                       <div>
-                        {language == "en"
+                        {languageMobile == "en"
                           ? item.attributes.spotEn
                           : item.attributes.spotEs}
                       </div>

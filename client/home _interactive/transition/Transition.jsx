@@ -15,7 +15,6 @@ const Transition = () => {
       setClassName("none");
     }, 3000);
   }, [language, info]);
-
   return (
     <div className={className}>
       <Image src="/logo.svg" width={500} height={500} alt="hourglass logo" />

@@ -11,7 +11,7 @@ let url = `https://api.openweathermap.org/data/2.5/weather?lat=${22.89088}&lon=$
 
 const Weather = () => {
   const [weather, setWeather] = useState();
-  const { language } = useInfo();
+  const { languageMobile } = useInfo();
   const getWeather = async () => {
     const fetchWeather = await axios.get(url);
     setWeather({
@@ -55,7 +55,7 @@ const Weather = () => {
       <div className={styles.temp}>
         <div className={styles.tempmain}>
         <div className={styles.location}>{weather?.location}</div>
-          {language == "en" ? weather?.tempEn : weather?.tempEs}
+          {languageMobile == "en" ? weather?.tempEn : weather?.tempEs}
         </div>
         <div className={styles.tempinfo}>
           <div className={styles.temp_img}>
@@ -70,13 +70,13 @@ const Weather = () => {
           <div className={styles.temmaxmin}>
             {" "}
             MAX-
-            {language == "en" ? weather?.maxTempEn : weather?.maxTempEs} MIN-
-            {language == "en" ? weather?.minTempEn : weather?.minTempEs}
+            {languageMobile == "en" ? weather?.maxTempEn : weather?.maxTempEs} MIN-
+            {languageMobile == "en" ? weather?.minTempEn : weather?.minTempEs}
           </div>
         </div>
       </div>
       <div className={styles.desc}>
-        {language == "en" ? weather?.descEn : weather?.descEs}
+        {languageMobile == "en" ? weather?.descEn : weather?.descEs}
       </div>
     </div>
   );

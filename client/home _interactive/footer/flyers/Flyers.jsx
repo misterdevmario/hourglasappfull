@@ -11,7 +11,7 @@ import { useModal } from "@/components/modal/useModal";
 import Modal from "@/components/modal/Modal";
 
 const Staff = ({ info }) => {
-  const { language, languageMobile } = useInfo();
+  const {languageMobile } = useInfo();
   const [isOpenFlyer, openFlyer, closeFlyer] = useModal(true);
   const [isOpenFlyerMobile, openFlyerMobile, closeFlyerMobile] = useModal(true);
   const [infoFlyer, setInfoFlyer] = useState();
@@ -40,10 +40,10 @@ const Staff = ({ info }) => {
           <div className={styles.modaldesc}>
             <div className={styles.modaldesc_item}>
               <div className={styles.modaldesc_desc}>
-                {language == "en" ? descriptions.flyerEn : descriptions.flyerEs}
+                {languageMobile == "en" ? descriptions.flyerEn : descriptions.flyerEs}
               </div>
               <div>
-                {language == "en"
+                {languageMobile == "en"
                   ? infoFlyer?.map((item) => item.descEn).toString()
                   : infoFlyer?.map((item) => item.descEs).toString()}
               </div>
@@ -53,7 +53,7 @@ const Staff = ({ info }) => {
       </Modal>
       <div className={styles.staffcontainer}>
         <div className={styles.stafftitle}>
-          {language == "en"
+          {languageMobile == "en"
             ? info?.flyersTitle
                 ?.map((item) => item.attributes.nameEn)
                 .toString()
@@ -93,12 +93,12 @@ const Staff = ({ info }) => {
                     <div className={styles.hours}>
                       {item.attributes.hourStart} - {item.attributes.hourEnd}
                     </div>
-                    {language == "en"
+                    {languageMobile == "en"
                       ? item.attributes.nameEn
                       : item.attributes.nameEs}
                   </div>
                   <div className={styles.position}>
-                    {language == "en"
+                    {languageMobile == "en"
                       ? item.attributes.spotEn
                       : item.attributes.spotEs}
                   </div>

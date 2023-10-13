@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
   const [navbar, setNavbar] = useState(false)
 
   useEffect(()=>{
-    pathname == "/login" || pathname == '/'? setNavbar(false) : setNavbar(true)
+    pathname == "/login" || pathname == '/' || pathname == "/interactive"? setNavbar(false) : setNavbar(true)
   },[pathname])
 
   return (

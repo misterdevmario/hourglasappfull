@@ -10,7 +10,7 @@ import { useState } from "react";
 //import Pdfviewer from "@/home/PDF/PdfViewer";
 
 const Bars = ({ info }) => {
-  const { language, languageMobile } = useInfo();
+  const { languageMobile } = useInfo();
 
   const [isOpenBar, openBreakfast, closeBar] = useModal(true);
   const [isOpenBarMobile, openBreakfastMobile, closeBarMobile] =
@@ -32,7 +32,7 @@ const Bars = ({ info }) => {
         <div className={styles.modal_img}>
           <Image
             src={
-              language == "en"
+              languageMobile == "en"
                 ? infoDesc?.map((item) => item.menuImgEn).toString()
                 : infoDesc?.map((item) => item.menuImgEs).toString()
             }
@@ -44,7 +44,7 @@ const Bars = ({ info }) => {
       </Modal>
       <div className={styles.container}>
         <div className={styles.title}>
-          {language == "en" ? sectionTitles?.en.bars : sectionTitles?.es.bars}
+          {languageMobile == "en" ? sectionTitles?.en.bars : sectionTitles?.es.bars}
         </div>
 
         <div className={styles.card_container} >
@@ -68,7 +68,7 @@ const Bars = ({ info }) => {
 
         <div className={styles.qr}>
           <Image src="/qr.png" width={240} height={240} alt="qr" />
-          <div className={styles.scan}>{language == "en" ? qr.en : qr.es}</div>
+          <div className={styles.scan}>{languageMobile == "en" ? qr.en : qr.es}</div>
         </div>
       </div>
       {/* 768px */}

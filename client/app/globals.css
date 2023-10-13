@@ -70,3 +70,18 @@ body{
   display: block;
 }
 
+.lang
+{
+  position: absolute;
+  left: 60vw;
+  top: 3vh;
+  width: 70px;
+  height: auto;
+  cursor: pointer;
+}
+
+@media screen  and (max-width: 768px) {
+  .lang{
+    display: none;
+  }
+}

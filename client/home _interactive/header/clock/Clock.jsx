@@ -9,7 +9,7 @@ import styles from "./Clock.module.css"
 let zero = "0";
 
 const Clock = () => {
-  const { language, languageMobile } = useInfo();
+  const { languageMobile } = useInfo();
   const [timeDate, setTimeDate] = useState();
 
   useEffect(() => {
@@ -72,10 +72,10 @@ const Clock = () => {
           {timeDate?.hour < 12 ? "AM" : "PM"}
         </div>
         <div className={styles.date}>
-          {language == "en" ? timeDate?.monthEn : timeDate?.monthEs},{" "}
+          {languageMobile == "en" ? timeDate?.monthEn : timeDate?.monthEs},{" "}
           {timeDate?.dayNumber}, {timeDate?.year}
           <div className={styles.day}>
-            {language == "en" ? timeDate?.dayEn : timeDate?.dayEs}
+            {languageMobile == "en" ? timeDate?.dayEn : timeDate?.dayEs}
           </div>
         </div>
       </div>
