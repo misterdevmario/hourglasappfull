@@ -372,8 +372,8 @@ const Staff = () => {
           data.staffImg = staffImage;
           if (selectedDay == "lunes") await postStaffMonday(data);
           if (selectedDay == "martes") await postStaffTuesday(data);
-          if (selectedDay == "miercoles") await postStaffThursday(data);
-          if (selectedDay == "jueves") await postStaffWednesday(data);
+          if (selectedDay == "miercoles") await postStaffWednesday(data);
+          if (selectedDay == "jueves") await postStaffThursday(data);
           if (selectedDay == "viernes") await postStaffFriday(data);
           if (selectedDay == "sabado") await postStaffSaturday(data);
           if (selectedDay == "domingo") await postStaffSunday(data);

@@ -71,7 +71,7 @@ export async function getActivitiesThursday() {
         body: JSON.stringify(data),
       }
     );
-    res.ok ? alert("Actividad agregada exitosamente") : null;
+    res.ok ? alert("Staff agregado exitosamente") : null;
     if (!res.ok) throw new Error("Failed to update data");
     return res.json();
   }
@@ -85,7 +85,7 @@ export async function getActivitiesThursday() {
         body: JSON.stringify(data),
       }
     );
-    res.ok ? alert("Actividad actualizada exitosamente") : null;
+    res.ok ? alert("Staff actualizado exitosamente") : null;
     if (!res.ok) throw new Error("Failed to update data");
     return res.json();
   }
@@ -93,12 +93,12 @@ export async function getActivitiesThursday() {
   //Method DELETE
   export async function deleteStaffsThursday(id) {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/staffthuesdays/${id}`,
+      `${process.env.NEXT_PUBLIC_STRAPI_URL2}/staffthuesdays/${id}`,
       {
         method: "DELETE",
       }
     );
-    res.ok ? alert("Actividad eliminada exitosamente") : null;
+    res.ok ? alert("Staff eliminada exitosamente") : null;
     if (!res.ok) throw new Error("Failed to update data");
     return res.json();
   }
