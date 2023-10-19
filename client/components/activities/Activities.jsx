@@ -168,13 +168,13 @@ const Carousel = () => {
     }
     sethoursUppercase(hoursUppercase);
   }, [activities, desc]);
-  const handleDescEn = () => {
+  const handleDescEn = (id) => {
     const description = hoursUppercase
       .filter((item) => item.id == id)
       .map((item) => item.attributes.descEn);
     setDesc(description);
   };
-  const handleDescEs = () => {
+  const handleDescEs = (id) => {
     const description = hoursUppercase
       .filter((item) => item.id == id)
       .map((item) => item.attributes.descEs);
@@ -261,27 +261,34 @@ const Carousel = () => {
                     className={styles.error}
                     name="spotEs"
                   />
-                  <Field
-                    value={item.attributes.descEn}
-                    name="descEn"
-                    placeholder="Descripcion Ingles"
+                  <div className={styles.input_desc}
                     onClick={() => {
-                      handleDescEn();
+                      handleDescEn(item.id);
+                      setId(item.id);
                       openModalDescEn();
                     }}
-                    onMouseEnter={() => setId(item.id)}
-                  />
-
-                  <Field
-                    value={item.attributes.descEs}
-                    id={item.id}
-                    placeholder="Descripcion Español"
+                  >
+                    <Field
+                      value={item.attributes.descEn}
+                      name="descEn"
+                      placeholder="Descripcion Ingles"
+                      
+                    />
+                  </div>
+                  <div className={styles.input_desc}
                     onClick={() => {
-                      handleDescEs();
+                      handleDescEs(item.id);
+                      setId(item.id);
                       openModalDescEs();
                     }}
-                    onMouseEnter={() => setId(item.id)}
-                  />
+                  >
+                    <Field
+                      value={item.attributes.descEs}
+                      id={item.id}
+                      placeholder="Descripcion Español"
+                      
+                    />
+                  </div>
 
                   <button className={styles.save} type="submit">
                     Guardar
