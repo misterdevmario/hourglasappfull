@@ -272,8 +272,11 @@ pointer-events: none;
 @media screen and (max-width: 425px) {
   .form {
     width: 370px;
-    height: 290px;
+    height: 307px;
     font-size: var(--font-sm);
+  }
+  .hours select{
+    font-size: 9px;
   }
   .save {
     height: 3vh;
